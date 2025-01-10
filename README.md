@@ -173,4 +173,16 @@ nx serve myProject
 
 Donde myProject es el nombre de la carpeta de tu proyecto
 
+### ¿Problemas al levantar el servidor de desarrollo?
+
+Puede que llegues a presenciar algunos problemas a la hora de ejecutar el comando para servir los proyectos, en caso de tener estos problemas debes ejecutar los siguientes comandos para solucionarlo:
+
+```
+nx reset
+npm update
+npm audit fix
+```
+
+Estos tres comandos `deberían` ser suficientes para solucionar ese error.
+
 <h3 align="center">¡Listo! Has terminado de configurar el proyecto 🥳</h3>
