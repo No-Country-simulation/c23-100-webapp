@@ -82,5 +82,9 @@
       "style": "css",
       "unitTestRunner": "jest"
     }
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
   }
 }
