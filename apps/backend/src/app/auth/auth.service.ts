@@ -1,12 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import * as admin from 'firebase-admin';
 
 @Injectable()
 export class AuthService {
-  login(): string {
-    return 'Login endpoint';
-  }
-
-  signup(): string {
-    return 'Signup endpoint';
+  async verifyToken(token: string) {
+    return await admin.auth().verifyIdToken(token);
   }
 }

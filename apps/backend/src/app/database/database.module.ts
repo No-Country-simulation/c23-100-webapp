@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { FirestoreService } from './firestore.service';
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 
+@Global()
 @Module({
   providers: [
     FirestoreService,
