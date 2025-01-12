@@ -1,14 +1,16 @@
-import { IsNotEmpty } from 'class-validator';
-import { IsPhoneNumber } from 'class-validator';
-import { IsEnum } from 'class-validator';
-import { IsOptional } from 'class-validator';
-import { MinLength } from 'class-validator';
-import { IsString, IsEmail } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsPhoneNumber,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsEmail,
+} from 'class-validator';
 
 export enum Role {
-  PATIENT = 'patient',
-  ADMIN = 'admin',
-  DOCTOR = 'doctor',
+  PATIENT = 'Patient',
+  ADMIN = 'Admin',
+  DOCTOR = 'Doctor',
 }
 
 export enum DoctorSpecialization {
@@ -31,18 +33,7 @@ export enum DoctorSpecialization {
   PUBLIC_HEALTH_SPECIALIST = 'Public Health Specialist',
 }
 
-export class LoginDto {
-  @IsString()
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
-}
-
-export class SignupDto {
+export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -50,11 +41,6 @@ export class SignupDto {
   @IsString()
   @IsEmail()
   email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
 
   @IsEnum(Role)
   @IsOptional()

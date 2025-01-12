@@ -1,5 +1,5 @@
 // Dtos
-export * from './dtos/auth.dto';
+export * from './dtos/create-user.dto';
 
 // Interfaces
 export * from './interfaces/user';
