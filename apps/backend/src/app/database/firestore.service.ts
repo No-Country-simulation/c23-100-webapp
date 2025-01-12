@@ -32,10 +32,18 @@ export class FirestoreService {
     return doc.data() as T;
   }
 
-  async createDocument<T>(collectionName: string, data: T): Promise<T> {
-    const docRef = await this.firestore.collection(collectionName).add(data);
-    const doc = await docRef.get();
+  async createDocument<T>(
+    collectionName: string,
+    data: T,
+    id?: string
+  ): Promise<T> {
+    const docRef = id
+      ? this.firestore.collection(collectionName).doc(id)
+      : this.firestore.collection(collectionName).doc(); // Genera un ID si no se proporciona
 
+    await docRef.set(data);
+
+    const doc = await docRef.get();
     return doc.data() as T;
   }
 
