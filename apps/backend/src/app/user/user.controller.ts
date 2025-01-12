@@ -1,8 +1,8 @@
-import { Controller, Post, Req, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from '@org/shared';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { CreateUserDto, PaginationDto } from '@org/shared';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserService } from './user.service';
-import { Request } from 'express';
+import { User } from '../common/decorators/user.decorator';
 
 @Controller('user')
 @UseGuards(AuthGuard)
@@ -10,7 +10,17 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Req() req: Request, createUserDto: CreateUserDto) {
-    return this.userService.create(req['user'], createUserDto);
+  create(@User('uid') userId: string, createUserDto: CreateUserDto) {
+    return this.userService.create(userId, createUserDto);
+  }
+
+  @Get('doctors')
+  getDoctors(@Query() paginationDto: PaginationDto) {
+    return this.userService.getDoctors(paginationDto);
+  }
+
+  @Get('profile')
+  getProfile(@User('uid') userId: string) {
+    return this.userService.getProfile(userId);
   }
 }
