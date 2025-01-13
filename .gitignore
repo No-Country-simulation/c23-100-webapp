@@ -17,6 +17,10 @@ node_modules
 .settings/
 *.sublime-workspace
 
+# Firebase
+.firebase
+firebase-debug.log
+
 # IDE - VSCode
 .vscode
 .vscode/*
