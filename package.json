@@ -2,7 +2,13 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev:back": "npx nx serve backend",
+    "dev:front": "npx nx serve frontend",
+    "start:back": "node dist/apps/backend/main.js",
+    "build:back": "npx nx build backend --prod",
+    "build:front": "npx nx build frontend --prod"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~19.0.0",
