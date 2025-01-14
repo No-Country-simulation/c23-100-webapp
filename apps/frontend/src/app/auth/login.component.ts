@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +14,26 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).then(
+        (user) => {
+          console.log('Login exitoso:', user);
+          // Aquí puedes redirigir o almacenar el token
+        },
+        (error) => {
+          console.error('Error al iniciar sesión:', error);
+        }
+      );
     }
   }
 }
-
 

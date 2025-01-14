@@ -1,15 +1,28 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label>
-      Username:
-      <input formControlName="username" type="text" />
-    </label>
-    <label>
-      Email:
-      <input formControlName="email" type="email" />
-    </label>
-    <label>
-      Password:
-      <input formControlName="password" type="password" />
-    </label>
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
-  </form>
+<div class="register-container">
+  <div class="register-card">
+    <img
+      src="/imagenes/medico-bienvenida.png"
+      class="register-image"
+      alt="Médico"
+    />
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <h2>Crear Cuenta</h2>
+      
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        formControlName="email"
+        type="email"
+        placeholder="Ingresa tu email"
+      />
+      <label for="password">Password:</label>
+      <input
+        id="password"
+        formControlName="password"
+        type="password"
+        placeholder="Ingresa tu contraseña"
+      />
+      <button type="submit" [disabled]="">Regístrate</button>
+    </form>
+  </div>
+</div>
