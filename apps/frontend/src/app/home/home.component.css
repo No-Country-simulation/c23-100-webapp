@@ -1,0 +1,187 @@
+html {
+    height: 100%;
+    scroll-padding-top: calc(4.5rem - 1px);
+  }
+  
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 245, 245, 0.8);
+  }
+  
+  /*Logo del NAV*/
+  .logo {
+    margin-right: -4px;
+  }
+  
+  /* Estilos para el menú de navegación */
+  .navbar {
+    background: linear-gradient(to bottom, rgb(151, 181, 218) 0%, rgba(177, 205, 240, 0.877) 100%);
+    z-index: 1000;
+  }
+  
+  .navbar-brand,
+  .nav-link {
+    color: rgb(10, 47, 167);
+  }
+  
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  /*Bienvenida*/
+  
+  
+  header.masthead {
+    background: linear-gradient(to bottom, rgba(151, 181, 218, 0.8) 0%, rgba(245, 245, 245, 0.8) 100%);
+  
+  }
+  
+  .texto-inicio {
+    color: rgba(3, 19, 90, 0.75) !important;
+  }
+  
+  .text-white-75 {
+    color: rgba(3, 19, 90, 0.75) !important;
+  }
+  
+  /**Estilos para el input del buscador***/
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group-prepend {
+    display: flex;
+  }
+  
+  .input-group-text {
+    background-color: white;
+    border: none;
+  }
+  
+  .form-control {
+    border-left: none;
+    height: 100%;
+    /* Aumenta la altura del input */
+  }
+  
+  /*Footer*/
+  
+  .fondo-footer {
+    background: linear-gradient(to bottom, rgba(245, 245, 245, 0.8) 0%, rgb(30, 100, 187) 100%);
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  /* Estilos adicionales para el contenido del footer */
+  .fondo-footer .container .row .col-md-6 ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fondo-footer .container .row .col-md-6 ul li {
+    margin-right: 15px;
+    /* Ajusta el espaciado según sea necesario */
+  }
+  
+  .fondo-footer .container .row .col-md-6 ul li:last-child {
+    margin-right: 0;
+    /* Elimina el margen del último elemento */
+  }
+  
+  
+  /* Media Queries para Responsividad para diferentes tipos de pantallas */
+  
+  /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
+  
+  @media (max-width: 768px) {
+    .navbar-nav {
+      flex-direction: column;
+    }
+  
+    .navbar-brand {
+      margin: 5px 0;
+      /* Espaciado entre enlaces en móviles */
+    }
+    /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
+    .texto-inicio {
+      font-size: 1.5rem;
+    }
+  
+    /*Aqui le digo al codigo que el boton buscar se queda en la parte de abajo
+    del input del buscador para que se vea mas bacano*/
+    .search-button {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+    }
+    /* Tamaño del texto del carusel*/
+    .card-body h5.card-title {
+      font-size: 0.7rem;
+    }
+  
+    /*Tamaño de la imagen de la imagen del carrusel*/
+    .align-self-baseline img {
+  
+      width: 100%;
+    }
+  
+  
+    .card {
+      width: 100%;
+      /* Asegúrate de que las tarjetas ocupen el 100% del ancho en móviles */
+    }
+  
+  
+    .fondo-footer .container .row .col-md-6 ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .fondo-footer .container .row .col-md-6 ul li {
+      margin-bottom: 10px;
+    }
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
+  @media (min-width: 992px) {
+  
+     /*Esta es la separacion entre  la pagina de bienvenida y el nav*/
+    header.masthead {
+      padding-top: 2.5rem;
+      margin-top: 50px;
+    }
+    
+    header.masthead p {
+      font-size: 1.15rem;
+    }
+  
+    header.masthead h1,
+    header.masthead .h1 {
+      font-size: 3rem;
+    }
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
+  @media (min-width: 1200px) {
+  
+    header.masthead h1,
+    header.masthead .h1 {
+      font-size: 3.5rem;
+    }
+  }
