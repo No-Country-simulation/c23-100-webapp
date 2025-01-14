@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
-
-
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule,ReactiveFormsModule],
-  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
-  
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -26,12 +26,12 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const {  email, password } = this.registerForm.value;
+      const { email, password } = this.registerForm.value;
       this.authService.register(email, password).then(
         (userCredential) => {
           const user = userCredential.user;
           const createUserDto = { email, password };
-  
+
           this.authService.createUser(createUserDto).then(
             (response) => {
               console.log('Usuario creado en el backend:', response);
@@ -47,10 +47,4 @@ export class RegisterComponent {
       );
     }
   }
-  
-    }
-  
-  
-
-
-
+}
