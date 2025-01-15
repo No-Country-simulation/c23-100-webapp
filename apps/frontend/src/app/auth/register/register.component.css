@@ -70,3 +70,7 @@
 .register-form button:hover:not(:disabled) {
   background-color: rgb(15, 103, 255);
 }
+
+.register-form small {
+  color: rgb(136, 44, 44);
+}

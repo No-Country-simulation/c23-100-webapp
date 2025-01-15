@@ -31,6 +31,25 @@
         type="password"
         placeholder="Ingresa tu contraseña"
       />
+      @if (hasErrors("password", 'required')) {
+      <small>El password es obligatorio.</small>
+      } @if (hasErrors('password', 'minlength')) {
+      <small>Debe tener un mínimo de 6 caracteres.</small>
+      }
+      <label for="confirm-password">Password:</label>
+      <input
+        id="confirm-password"
+        formControlName="confirmPassword"
+        type="password"
+        placeholder="Confirma tu contraseña"
+      />
+      @if (hasErrors("confirmPassword", 'required')) {
+      <small>Debe confirmar su password.</small>
+      } @if (registerForm.hasError('mismatch') &&
+      registerForm.get('confirmPassword')?.touched &&
+      !hasErrors('confirmPassword', 'required')) {
+      <small>Los passwords deben de coincidir.</small>
+      }
       <button type="submit" [disabled]="">Regístrate</button>
     </form>
   </div>
