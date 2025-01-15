@@ -24,17 +24,6 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).then(
-        (user) => {
-          console.log('Login exitoso:', user);
-          // Aquí puedes redirigir o almacenar el token
-        },
-        (error) => {
-          console.error('Error al iniciar sesión:', error);
-        }
-      );
-    }
+    console.log('enviado');
   }
 }
