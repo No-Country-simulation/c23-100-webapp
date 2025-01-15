@@ -66,4 +66,8 @@
   .register-form button:hover:not(:disabled) {
     background-color: rgb(120, 150, 200);
   }
+  small {
+    color: red;
+    font-size: 12px;
+  }
   
