@@ -45,9 +45,7 @@
       />
       @if (hasErrors("confirmPassword", 'required')) {
       <small>Debe confirmar su password.</small>
-      } @if (registerForm.hasError('mismatch') &&
-      registerForm.get('confirmPassword')?.touched &&
-      !hasErrors('confirmPassword', 'required')) {
+      } @if (hasErrors('confirmPassword', 'mismatch')) {
       <small>Los passwords deben de coincidir.</small>
       }
       <button type="submit" [disabled]="">Regístrate</button>

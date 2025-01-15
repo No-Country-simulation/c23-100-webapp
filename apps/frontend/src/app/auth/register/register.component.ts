@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
-  FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -14,36 +16,41 @@ import { AuthService } from '../auth.service';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.registerForm = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
-      },
-      {
-        validator: this.passwordMismatchValidator,
-      }
-    );
-  }
+  protected registerForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: [
+      '',
+      [Validators.required, this.passwordMismatchValidator()],
+    ],
+  });
 
-  private passwordMismatchValidator(
-    group: FormGroup
-  ): { [key: string]: boolean } | null {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { mismatch: true };
+  private passwordMismatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      /* 
+      Para evitar errores al acceder al método get se comprueba 
+      si el formulario ya fue actualizado por Angular luego de la inyección de dependencias
+       */
+      const currentPassword = this.registerForm
+        ? this.registerForm.get('password')
+        : { value: '' };
+
+      return currentPassword?.value !== control.value
+        ? { mismatch: true }
+        : null;
+    };
   }
 
   onSubmit(): void {
-    console.log('Enviado');
+    /*  if (this.registerForm.valid) {
+    } */
   }
 
   hasErrors(fieldName: string, errorType: string): boolean {
     const field = this.registerForm.get(fieldName);
-    console.log(field?.errors);
 
     if (!field) {
       throw new Error(
