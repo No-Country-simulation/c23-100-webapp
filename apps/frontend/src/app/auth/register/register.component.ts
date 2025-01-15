@@ -26,4 +26,16 @@ export class RegisterComponent {
   onSubmit(): void {
     console.log('Enviado');
   }
+
+  hasErrors(fieldName: string, errorType: string): boolean {
+    const field = this.registerForm.get(fieldName);
+
+    if (!field) {
+      throw new Error(
+        `El campo: ${fieldName} no existe en el formulario de registro.`
+      );
+    }
+
+    return field.hasError(errorType) && field.touched;
+  }
 }

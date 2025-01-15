@@ -19,6 +19,11 @@
         type="email"
         placeholder="Ingresa tu email"
       />
+      @if (hasErrors("email", 'required')) {
+      <small>El email es obligatorio.</small>
+      } @if (hasErrors('email', 'email')) {
+      <small>Debe ser un email válido.</small>
+      }
       <label for="password">Password:</label>
       <input
         id="password"
@@ -26,7 +31,7 @@
         type="password"
         placeholder="Ingresa tu contraseña"
       />
-      <button type="submit">Regístrate</button>
+      <button type="submit" [disabled]="">Regístrate</button>
     </form>
   </div>
 </div>
