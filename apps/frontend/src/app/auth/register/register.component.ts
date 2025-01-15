@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -45,8 +46,21 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    /*  if (this.registerForm.valid) {
-    } */
+    if (this.registerForm.valid) {
+      const { email, password } = this.registerForm.value;
+
+      this.authService
+        .signup({
+          email: email!,
+          password: password!,
+        })
+        .then(() => {
+          // Redirigir al user
+        })
+        .catch((err) => {
+          // Manejar error
+        });
+    }
   }
 
   hasErrors(fieldName: string, errorType: string): boolean {
