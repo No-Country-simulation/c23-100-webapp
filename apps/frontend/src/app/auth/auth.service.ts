@@ -10,12 +10,17 @@ import {
 } from 'firebase/auth';
 import { firebaseApp } from '../core/config/firebase';
 // Este DTO es que se debe de usar para registrar por ahora se usa el SignUpFormValues para probar
-//import { CreateUserDto } from '@org/shared';
+import { CreateUserDto, Role, DoctorSpecialization } from '@org/shared';
 import { User as UserDto } from '@org/shared';
+import { lastValueFrom } from 'rxjs';
 
 interface SignUpFormValues {
+  name: string;
   email: string;
   password: string;
+  phone: string;
+  role?: Role; // Rol del usuario
+  specialization?: ''; // Especialización (solo si es un doctor)
 }
 
 @Injectable({
@@ -34,31 +39,44 @@ export class AuthService {
   }
 
   async signup(data: SignUpFormValues): Promise<User> {
-    const userCredential = await createUserWithEmailAndPassword(
-      this.auth,
-      data.email,
-      data.password
-    );
-    const userToken = await userCredential.user.getIdToken();
+    try {
+      // Crear usuario en Firebase
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
+        data.email,
+        data.password
+      );
 
-    this.http
-      .post<UserDto>(`${this.baseUrl}/user`, data, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .subscribe({
-        next: (user) => {
-          console.log(user);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+      // Obtener el token de Firebase
+      const firebaseToken = await userCredential.user.getIdToken(true);
 
-    return userCredential.user;
+      // Construir el DTO para el backend
+      const backendData: CreateUserDto = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        role: data.role || Role.PATIENT,
+        
+        specialization: data.specialization || DoctorSpecialization.GENERAL_PRACTITIONER,
+      };
+
+      console.log('Firebase Token:', firebaseToken);
+      // Enviar datos al backend
+      const createdUser = await lastValueFrom(
+        this.http.post<CreateUserDto>(`${this.baseUrl}/user`, backendData, {
+          headers: { Authorization: `Bearer ${firebaseToken}` },
+        })
+      );
+      
+
+      console.log('Usuario registrado exitosamente en el backend:', createdUser);
+
+      return userCredential.user;
+    } catch (error) {
+      console.error('Error durante el registro:', error);
+      throw error;
+    }
   }
-
   async login(email: string, password: string): Promise<User> {
     const userCredential = await signInWithEmailAndPassword(
       this.auth,

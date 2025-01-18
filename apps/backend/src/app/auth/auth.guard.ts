@@ -15,6 +15,10 @@ export class AuthGuard implements CanActivate {
     const request: Request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
 
+    // Depuración: Verificar si el token fue recibido
+    console.log('Token recibido:', token);
+
+
     if (!token) {
       throw new UnauthorizedException(
         'Token de autenticación no proporcionado'
@@ -25,13 +29,19 @@ export class AuthGuard implements CanActivate {
       const decodedToken = await this.authService.verifyToken(token);
       request['user'] = decodedToken;
       return true;
-    } catch {
+    } catch (error) {
+      // Depuración: Imprimir el error si la verificación falla
+      console.error('Error al verificar el token:', error);
       throw new UnauthorizedException('Token inválido o expirado');
     }
+    
   }
 
   private extractTokenFromHeader(request: Request): string | null {
     const authHeader = request.headers.authorization;
+
+    // Depuración: Verificar si el encabezado de autorización está presente
+    console.log('Encabezado de autorización:', authHeader);
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
       return authHeader.split(' ')[1];

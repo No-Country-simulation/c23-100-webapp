@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Role} from '@org/shared';
 
 @Component({
   selector: 'app-register',
@@ -21,12 +22,16 @@ export class RegisterComponent {
   private readonly authService = inject(AuthService);
 
   protected registerForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: [
       '',
       [Validators.required, this.passwordMismatchValidator()],
     ],
+    phone: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+    role: [Role.PATIENT, [Validators.required]],
+    specialization: [''],
   });
 
   private passwordMismatchValidator(): ValidatorFn {
@@ -47,19 +52,26 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const { email, password } = this.registerForm.value;
+      const formValues = this.registerForm.value;
+      const createUserDto = {
+        name: formValues.name!,
+        email: formValues.email!,
+        phone: formValues.phone!,
+        role: formValues.role!,
+        //specialization: formValues.specialization as DoctorSpecialization || undefined,
+      };
 
       this.authService
         .signup({
-          email: email!,
-          password: password!,
+          name: formValues.name!,
+          email: formValues.email!,
+          password: formValues.password!,
+          phone: formValues.phone!,
+          role: formValues.role!,
+          specialization: '',
         })
-        .then(() => {
-          // Redirigir al user
-        })
-        .catch((err) => {
-          // Manejar error
-        });
+        
+        .catch((err) => console.error('Error al registrarse:', err));
     }
   }
 
@@ -75,3 +87,4 @@ export class RegisterComponent {
     return field.hasError(errorType) && field.touched;
   }
 }
+
