@@ -69,7 +69,8 @@
           />
           @if (hasErrors("confirmPassword", 'required')) {
           <span>Debe confirmar su password.</span>
-          } @if (hasErrors('confirmPassword', 'mismatch')) {
+          } @if (hasErrors('confirmPassword', 'mismatch') &&
+          !hasErrors('confirmPassword', 'required')) {
           <span>Los passwords deben de coincidir.</span>
           }
         </div>

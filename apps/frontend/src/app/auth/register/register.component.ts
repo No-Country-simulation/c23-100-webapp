@@ -40,8 +40,8 @@ export class RegisterComponent {
 
   private passwordMismatchValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const currentPassword = this.registerForm.value
-        ? this.registerForm.get('password')
+      const currentPassword = this.registerForm
+        ? this.registerForm.get('password').value
         : '';
 
       return currentPassword !== control.value ? { mismatch: true } : null;
