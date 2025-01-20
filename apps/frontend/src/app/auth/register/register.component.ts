@@ -89,21 +89,14 @@ export class RegisterComponent {
     }
 
     if (this.registerForm.valid) {
-      this.authService
-        .signup({
-          name,
-          email,
-          password,
-          role: role as Role,
-          specialization: specialization as DoctorSpecialization,
-          phone,
-        })
-        .then((user) => {
-          console.log(user);
-
-          //this.router.navigate(['/dashboard']);
-        })
-        .catch((err) => console.log('Error al registrarse: ', err));
+      this.authService.signup({
+        name,
+        email,
+        password,
+        role: role as Role,
+        specialization: specialization as DoctorSpecialization,
+        phone,
+      });
     }
   }
 
