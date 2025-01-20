@@ -14,11 +14,15 @@ export class UserService {
         `El usuario con id: ${userId} ya se encuentra registrado.`
       );
     } catch {
-      return await this.firestoreService.createDocument<User>(
-        'user',
-        createUserDto,
-        userId
-      );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...userData } =
+        await this.firestoreService.createDocument(
+          'user',
+          createUserDto,
+          userId
+        );
+
+      return userData;
     }
   }
 
