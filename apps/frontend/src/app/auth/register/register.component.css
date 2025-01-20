@@ -16,7 +16,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  max-width: 400px;
+  max-width: 640px;
   width: 100%;
   text-align: center;
 }
@@ -41,13 +41,17 @@
   color: #555;
 }
 
-.register-form input {
+.register-form :is(input, select) {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 9px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 0.9rem;
+}
+
+.register-form :is(input, select):focus {
+  outline-color: rgb(15, 103, 255);
 }
 
 .register-form button {
@@ -71,6 +75,7 @@
   background-color: rgb(15, 103, 255);
 }
 
-.register-form small {
+.register-form span {
+  font-size: 14px;
   color: rgb(136, 44, 44);
 }

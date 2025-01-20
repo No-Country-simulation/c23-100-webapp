@@ -12,57 +12,70 @@
     >
       <h2>Crear Cuenta</h2>
 
-      <label for="name">Nombre:</label>
-      <input
-        id="name"
-        formControlName="name"
-        type="name"
-        placeholder="Ingresa tu nombre"
-      />
-      @if (hasErrors("name", 'required')) {
-      <small>El nombre es obligatorio.</small>
-      }@if (hasErrors('name', 'minlength')) {
-        <small>Debe tener un mínimo de 3 caracteres.</small>
-      }
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="name">Nombre</label>
+          <input
+            id="name"
+            formControlName="name"
+            type="name"
+            placeholder="Ingresa tu nombre"
+          />
+          @if (hasErrors("name", 'required')) {
+          <span>El nombre es obligatorio.</span>
+          }@if (hasErrors('name', 'minlength')) {
+          <span>Debe tener un mínimo de 3 caracteres.</span>
+          }
+        </div>
 
-      <label for="email">Email:</label>
-      <input
-        id="email"
-        formControlName="email"
-        type="email"
-        placeholder="Ingresa tu email"
-      />
-      @if (hasErrors("email", 'required')) {
-      <small>El email es obligatorio.</small>
-      } @if (hasErrors('email', 'email')) {
-      <small>Debe ser un email válido.</small>
-      }
-      <label for="password">Password:</label>
-      <input
-        id="password"
-        formControlName="password"
-        type="password"
-        placeholder="Ingresa tu contraseña"
-      />
-      @if (hasErrors("password", 'required')) {
-      <small>El password es obligatorio.</small>
-      } @if (hasErrors('password', 'minlength')) {
-      <small>Debe tener un mínimo de 6 caracteres.</small>
-      }
-      <label for="confirm-password">Password:</label>
-      <input
-        id="confirm-password"
-        formControlName="confirmPassword"
-        type="password"
-        placeholder="Confirma tu contraseña"
-      />
-      @if (hasErrors("confirmPassword", 'required')) {
-      <small>Debe confirmar su password.</small>
-      } @if (hasErrors('confirmPassword', 'mismatch')) {
-      <small>Los passwords deben de coincidir.</small>
-      }
+        <div class="w-100">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            formControlName="email"
+            type="email"
+            placeholder="Ingresa tu email"
+          />
+          @if (hasErrors("email", 'required')) {
+          <span>El email es obligatorio.</span>
+          } @if (hasErrors('email', 'email')) {
+          <span>Debe ser un email válido.</span>
+          }
+        </div>
+      </div>
 
-       <label for="phone">Teléfono:</label>
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            formControlName="password"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+          />
+          @if (hasErrors("password", 'required')) {
+          <span>El password es obligatorio.</span>
+          } @if (hasErrors('password', 'minlength')) {
+          <span>Debe tener un mínimo de 6 caracteres.</span>
+          }
+        </div>
+        <div class="w-100">
+          <label for="confirm-password">Confirmar contraseña</label>
+          <input
+            id="confirm-password"
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Confirma tu contraseña"
+          />
+          @if (hasErrors("confirmPassword", 'required')) {
+          <span>Debe confirmar su password.</span>
+          } @if (hasErrors('confirmPassword', 'mismatch')) {
+          <span>Los passwords deben de coincidir.</span>
+          }
+        </div>
+      </div>
+
+      <label for="phone">Teléfono:</label>
       <input
         id="phone"
         formControlName="phone"
@@ -70,22 +83,47 @@
         placeholder="Ingresa tu número de teléfono"
       />
       @if (hasErrors("phone", 'required')) {
-      <small>El nombre es obligatorio.</small>
+      <span>El teléfono es obligatorio.</span>
       }@if (hasErrors('phone', 'pattern')) {
-        <small>Debe tener sólo números.</small>
+      <span>Número de teléfono inválido.</span>
       }
 
-      <label for="role">Rol:</label>
-      <input
-        id="role"
-        formControlName="role"
-        type="role"
-        placeholder="Ingresa tu rol"
-      />
-      @if (hasErrors("role", 'required')) {
-      <small>El rol es obligatorio.</small>
-      }
-
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="role">Rol:</label>
+          <select formControlName="role" name="role" id="role">
+            <option [defaultSelected]="true" value="Patient">Patient</option>
+            <option value="Doctor">Doctor</option>
+          </select>
+          @if (hasErrors("role", 'required')) {
+          <span>El rol es obligatorio.</span>
+          } @if (hasErrors('role','specializationNotAllowed')) {
+          <span>No se permite una especialidad</span>
+          }
+        </div>
+        <div class="w-100">
+          <label for="specialization">Especialización (Doctor)</label>
+          <select
+            formControlName="specialization"
+            name="specialization"
+            id="specialization"
+          >
+            <option [defaultSelected]="true" value="">Ninguna</option>
+            <option value="Médico General">Médico General</option>
+            <option value="Cardiólogo">Cardiólogo</option>
+            <option value="Neurólogo">Neurólogo</option>
+            <option value="Dermatólogo">Dermatólogo</option>
+            <option value="Oftalmólogo">Oftalmólogo</option>
+            <option value="Endocrinólogo">Endocrinólogo</option>
+            <option value="Especialista en Salud Pública">
+              Especialista en Salud Pública
+            </option>
+          </select>
+          @if (hasErrors("specialization", 'specializationRequired')) {
+          <span>Debe de elegir una especialización</span>
+          }
+        </div>
+      </div>
 
       <button type="submit" [disabled]="">Regístrate</button>
     </form>

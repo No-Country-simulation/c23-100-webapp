@@ -9,19 +9,7 @@ import {
   User,
 } from 'firebase/auth';
 import { firebaseApp } from '../core/config/firebase';
-// Este DTO es que se debe de usar para registrar por ahora se usa el SignUpFormValues para probar
-import { CreateUserDto, Role, DoctorSpecialization } from '@org/shared';
-import { User as UserDto } from '@org/shared';
-import { lastValueFrom } from 'rxjs';
-
-interface SignUpFormValues {
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  role?: Role; // Rol del usuario
-  specialization?: ''; // Especialización (solo si es un doctor)
-}
+import { CreateUserDto } from '@org/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +26,7 @@ export class AuthService {
     });
   }
 
-  async signup(data: SignUpFormValues): Promise<User> {
+  async signup(data: CreateUserDto): Promise<User> {
     try {
       // Crear usuario en Firebase
       const userCredential = await createUserWithEmailAndPassword(
@@ -50,26 +38,14 @@ export class AuthService {
       // Obtener el token de Firebase
       const firebaseToken = await userCredential.user.getIdToken(true);
 
-      // Construir el DTO para el backend
-      const backendData: CreateUserDto = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        role: data.role || Role.PATIENT,
-        
-        specialization: data.specialization || DoctorSpecialization.GENERAL_PRACTITIONER,
-      };
-
-      console.log('Firebase Token:', firebaseToken);
-      // Enviar datos al backend
-      const createdUser = await lastValueFrom(
-        this.http.post<CreateUserDto>(`${this.baseUrl}/user`, backendData, {
+      this.http
+        .post<CreateUserDto>(`${this.baseUrl}/user`, data, {
           headers: { Authorization: `Bearer ${firebaseToken}` },
         })
-      );
-      
-
-      console.log('Usuario registrado exitosamente en el backend:', createdUser);
+        .subscribe({
+          next: (user) => console.log(user),
+          error: (err) => console.log(err),
+        });
 
       return userCredential.user;
     } catch (error) {

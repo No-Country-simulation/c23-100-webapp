@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -9,7 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Role} from '@org/shared';
+import { DoctorSpecialization, Role } from '@org/shared';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +20,7 @@ import { Role} from '@org/shared';
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   protected registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -29,49 +30,80 @@ export class RegisterComponent {
       '',
       [Validators.required, this.passwordMismatchValidator()],
     ],
-    phone: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
-    role: [Role.PATIENT, [Validators.required]],
-    specialization: [''],
+    phone: [
+      '',
+      [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)],
+    ],
+    role: [Role.PATIENT, this.specializationNotAllowedValidator()],
+    specialization: ['', this.specializationRequiredValidator()],
   });
 
   private passwordMismatchValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      /* 
-      Para evitar errores al acceder al método get se comprueba 
-      si el formulario ya fue actualizado por Angular luego de la inyección de dependencias
-       */
-      const currentPassword = this.registerForm
+      const currentPassword = this.registerForm.value
         ? this.registerForm.get('password')
-        : { value: '' };
+        : '';
 
-      return currentPassword?.value !== control.value
-        ? { mismatch: true }
+      return currentPassword !== control.value ? { mismatch: true } : null;
+    };
+  }
+
+  private specializationRequiredValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currentRole = this.registerForm
+        ? this.registerForm.get('role').value
+        : '';
+
+      return currentRole === Role.DOCTOR && !control.value
+        ? { specializationRequired: true }
+        : null;
+    };
+  }
+
+  private specializationNotAllowedValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const specialization = this.registerForm
+        ? this.registerForm.get('specialization').value
+        : '';
+
+      return control.value === Role.PATIENT && specialization
+        ? { specializationNotAllowed: true }
         : null;
     };
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      const formValues = this.registerForm.value;
-      const createUserDto = {
-        name: formValues.name!,
-        email: formValues.email!,
-        phone: formValues.phone!,
-        role: formValues.role!,
-        //specialization: formValues.specialization as DoctorSpecialization || undefined,
-      };
+    const { name, email, password, role, specialization, phone } =
+      this.registerForm.value;
 
+    if (role == Role.PATIENT && specialization) {
+      this.registerForm.setErrors({
+        specializationNotAllowed: true,
+      });
+      return;
+    } else if (role == Role.DOCTOR && !specialization) {
+      this.registerForm.setErrors({
+        specializationRequired: true,
+      });
+      return;
+    }
+
+    if (this.registerForm.valid) {
       this.authService
         .signup({
-          name: formValues.name!,
-          email: formValues.email!,
-          password: formValues.password!,
-          phone: formValues.phone!,
-          role: formValues.role!,
-          specialization: '',
+          name,
+          email,
+          password,
+          role: role as Role,
+          specialization: specialization as DoctorSpecialization,
+          phone,
         })
-        
-        .catch((err) => console.error('Error al registrarse:', err));
+        .then((user) => {
+          console.log(user);
+
+          //this.router.navigate(['/dashboard']);
+        })
+        .catch((err) => console.log('Error al registrarse: ', err));
     }
   }
 
@@ -87,4 +119,3 @@ export class RegisterComponent {
     return field.hasError(errorType) && field.touched;
   }
 }
-
