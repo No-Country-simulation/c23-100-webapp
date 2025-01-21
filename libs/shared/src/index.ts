@@ -7,6 +7,7 @@ export * from './dtos/pagination.dto';
 // Interfaces
 export * from './interfaces/user';
 export * from './interfaces/appointment';
+export * from './interfaces/mails';
 
 // Enums
 export * from './enums/doctor-specialization';

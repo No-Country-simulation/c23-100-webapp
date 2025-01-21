@@ -1,0 +1,59 @@
+<table
+  style='font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9;'
+>
+  <tr>
+    <td style='text-align: center; padding: 10px 0;'>
+      <h2 style='color: #4CAF50;'>¡Tu cita médica está confirmada!</h2>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p style='font-size: 16px; color: #333;'>Hola
+        <strong>{{patient.name}}</strong>,</p>
+      <p style='font-size: 16px; color: #333;'>Nos complace informarte que tu
+        cita médica ha sido programada con éxito. Aquí tienes los detalles:</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table style='width: 100%; border-collapse: collapse; margin-top: 15px;'>
+        <tr>
+          <td style='font-weight: bold; padding: 8px; color: #555;'>Doctor:</td>
+          <td style='padding: 8px; color: #333;'>{{doctor.name}}</td>
+        </tr>
+        <tr style='background-color: #f1f1f1;'>
+          <td style='font-weight: bold; padding: 8px; color: #555;'>Fecha:</td>
+          <td style='padding: 8px; color: #333;'>{{date}}</td>
+        </tr>
+        <tr>
+          <td style='font-weight: bold; padding: 8px; color: #555;'>Hora:</td>
+          <td style='padding: 8px; color: #333;'>{{hour}}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p style='font-size: 16px; color: #333; margin-top: 20px;'>Por favor,
+        asegúrate de llegar a tiempo para evitar contratiempos. Si necesitas
+        volver a agendar o cancelar tu cita, puedes hacerlo a través de nuestro
+        sistema o contactando a nuestro equipo de atención.</p>
+      <p style='font-size: 16px; color: #333;'>Gracias por confiar en nosotros.
+        ¡Nos vemos pronto!</p>
+    </td>
+  </tr>
+  <tr>
+    <td
+      style='text-align: center; padding: 15px 0; color: #aaa; font-size: 12px;'
+    >
+      <p>Si tienes preguntas, contáctenos al
+        <a
+          href='tel:123456789'
+          style='color: #4CAF50; text-decoration: none;'
+        >{{org.phone}}</a>
+        o responde este correo.</p>
+      <p style='margin: 0;'>© 2025 NoCountry Medical. Todos los derechos
+        reservados.</p>
+    </td>
+  </tr>
+</table>
