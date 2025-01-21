@@ -1,4 +1,4 @@
-import { Role } from '../dtos/create-user.dto';
+import { Role } from '../dtos/user/create-user.dto';
 
 export interface User {
   name: string;
