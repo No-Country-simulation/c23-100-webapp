@@ -1,6 +1,14 @@
 // Dtos
-export * from './dtos/create-user.dto';
+export * from './dtos/user/create-user.dto';
+export * from './dtos/appointments/create-appointment.dto';
+export * from './dtos/appointments/update-appointment.dto';
 export * from './dtos/pagination.dto';
 
 // Interfaces
 export * from './interfaces/user';
+export * from './interfaces/appointment';
+
+// Enums
+export * from './enums/doctor-specialization';
+export * from './enums/user-role';
+export * from './enums/appointment-status';

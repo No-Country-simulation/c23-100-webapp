@@ -1,17 +1,30 @@
-import { Controller, Get, Post, Param, Body, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  Delete,
+  UseGuards,
+  Patch,
+} from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
-import { Appointment } from './appointment.entity';
+import { CreateAppointmentDto, UpdateAppointmentDto } from '@org/shared';
+import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../common/guards/admin.guard';
 
 @Controller('appointments')
+@UseGuards(AuthGuard)
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
   @Post()
-  create(@Body() appointment: Appointment) {
+  create(@Body() appointment: CreateAppointmentDto) {
     return this.appointmentService.create(appointment);
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   findAll() {
     return this.appointmentService.findAll();
   }
@@ -21,8 +34,8 @@ export class AppointmentController {
     return this.appointmentService.findOne(id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() appointment: Partial<Appointment>) {
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() appointment: UpdateAppointmentDto) {
     return this.appointmentService.update(id, appointment);
   }
 

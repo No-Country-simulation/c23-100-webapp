@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { FirestoreService } from '../database/firestore.service';
-import { Appointment } from './appointment.entity';
+import {
+  Appointment,
+  CreateAppointmentDto,
+  UpdateAppointmentDto,
+} from '@org/shared';
 
 @Injectable()
 export class AppointmentService {
@@ -8,31 +12,43 @@ export class AppointmentService {
 
   constructor(private readonly firestoreService: FirestoreService) {}
 
-  async create(appointment: Appointment): Promise<Appointment> {
+  async create(
+    createAppointmentDto: CreateAppointmentDto
+  ): Promise<Appointment> {
     return this.firestoreService.createDocument<Appointment>(
       this.collectionName,
-      appointment,
-      appointment.id,
+      createAppointmentDto
     );
   }
 
   async findAll(): Promise<Appointment[]> {
-    return this.firestoreService.getCollection<Appointment>(this.collectionName);
+    return this.firestoreService.getCollection<Appointment>(
+      this.collectionName
+    );
   }
 
   async findOne(id: string): Promise<Appointment> {
-    return this.firestoreService.getDocument<Appointment>(this.collectionName, id);
+    return this.firestoreService.getDocument<Appointment>(
+      this.collectionName,
+      id
+    );
   }
 
-  async update(id: string, appointment: Partial<Appointment>): Promise<Appointment> {
+  async update(
+    id: string,
+    updateAppointmentDto: UpdateAppointmentDto
+  ): Promise<Appointment> {
     return this.firestoreService.updateDocument<Appointment>(
       this.collectionName,
       id,
-      appointment,
+      updateAppointmentDto
     );
   }
 
   async delete(id: string): Promise<Appointment> {
-    return this.firestoreService.deleteDocument<Appointment>(this.collectionName, id);
+    return this.firestoreService.deleteDocument<Appointment>(
+      this.collectionName,
+      id
+    );
   }
 }
