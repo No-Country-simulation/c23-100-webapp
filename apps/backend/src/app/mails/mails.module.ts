@@ -11,7 +11,10 @@ import { envs } from '../../config/envs';
     MailerModule.forRoot({
       transport: {
         host: envs.mails.host,
-        secure: false,
+        tls: {
+          rejectUnauthorized: false,
+        },
+        secure: true,
         auth: {
           user: envs.mails.auth.user,
           pass: envs.mails.auth.password,
