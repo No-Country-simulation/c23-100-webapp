@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import Swal from 'sweetalert2';
+
 import {
   FormBuilder,
   FormGroup,
@@ -25,5 +27,12 @@ export class LoginComponent {
 
   onSubmit(): void {
     console.log('enviado');
+    Swal.fire({
+      title: 'Éxito!',
+      text: 'Has iniciado sesión correctamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+    });
   }
+  
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, inject } from '@angular/core';
+import Swal from 'sweetalert2';
 import {
   AbstractControl,
   FormBuilder,
@@ -29,7 +30,7 @@ export class RegisterComponent {
       '',
       [Validators.required, this.passwordMismatchValidator()],
     ],
-    phone: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)]],
+    phone: ['', [Validators.required, Validators.pattern(/^\+\d{1,4}\d{7,10}$/)]],
     role: [Role.PATIENT, [Validators.required]],
     specialization: [''],
   });
@@ -69,9 +70,21 @@ export class RegisterComponent {
           phone: formValues.phone!,
           role: formValues.role!,
           specialization: '',
-        })
+          })
         
-        .catch((err) => console.error('Error al registrarse:', err));
+        .catch((err) => console.error('Error al registrarse:', err,Swal.fire({
+          title: 'Error al registrarse!',
+          text: 'Hubo un problema durante el registro.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        })));
+
+        Swal.fire({
+          title: 'Registro Exitoso!',
+          text: 'Te has registrado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        })
     }
   }
 

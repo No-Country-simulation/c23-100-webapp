@@ -68,6 +68,7 @@
         formControlName="phone"
         type="phone"
         placeholder="Ingresa tu número de teléfono"
+        [value]="'+'"
       />
       @if (hasErrors("phone", 'required')) {
       <small>El nombre es obligatorio.</small>
