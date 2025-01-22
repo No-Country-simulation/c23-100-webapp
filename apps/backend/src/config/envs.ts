@@ -17,6 +17,10 @@ interface EnvVars {
   FIREBASE_UNIVERSE_DOMAIN: string;
 
   FRONTEND_URL: string;
+
+  SMTP_HOST: string;
+  SMTP_USER: string;
+  SMTP_PASSWORD: string;
 }
 
 const envsSchema = joi
@@ -36,6 +40,10 @@ const envsSchema = joi
     FIREBASE_UNIVERSE_DOMAIN: joi.string().required(),
 
     FRONTEND_URL: joi.string().required(),
+
+    SMTP_HOST: joi.string().required(),
+    SMTP_USER: joi.string().required(),
+    SMTP_PASSWORD: joi.string().required(),
   })
   .unknown(true);
 
@@ -63,4 +71,11 @@ export const envs = {
     universe_domain: envVars.FIREBASE_UNIVERSE_DOMAIN,
   },
   frontend_url: envVars.FRONTEND_URL,
+  mails: {
+    host: envVars.SMTP_HOST,
+    auth: {
+      user: envVars.SMTP_USER,
+      password: envVars.SMTP_PASSWORD,
+    },
+  },
 };
