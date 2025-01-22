@@ -94,7 +94,7 @@ phone: ['', [Validators.required, Validators.pattern(/^\+\d{1,4}\d{7,10}$/)]],
         email,
         password,
         role: role as Role,
-        specialization: specialization as DoctorSpecialization,
+        specialization: specialization as DoctorSpecialization || undefined, //para evitar enviar un string vacio y que ocurra un error de validacion
         phone,
       
       }).catch((err) => console.error('Error al registrarse:', err,Swal.fire({
