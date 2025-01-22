@@ -26,6 +26,7 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+
     console.log('enviado');
     Swal.fire({
       title: 'Éxito!',
@@ -33,6 +34,13 @@ export class LoginComponent {
       icon: 'success',
       confirmButtonText: 'Aceptar',
     });
+
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+
+      this.authService.login(email, password);
+    }
+
   }
   
 }

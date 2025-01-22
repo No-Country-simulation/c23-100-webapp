@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   createUserWithEmailAndPassword,
@@ -9,19 +9,8 @@ import {
   User,
 } from 'firebase/auth';
 import { firebaseApp } from '../core/config/firebase';
-// Este DTO es que se debe de usar para registrar por ahora se usa el SignUpFormValues para probar
-import { CreateUserDto, Role, DoctorSpecialization } from '@org/shared';
-import { User as UserDto } from '@org/shared';
-import { lastValueFrom } from 'rxjs';
-
-interface SignUpFormValues {
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  role?: Role; // Rol del usuario
-  specialization?: ''; // Especialización (solo si es un doctor)
-}
+import { CreateUserDto } from '@org/shared';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +18,7 @@ interface SignUpFormValues {
 export class AuthService {
   private readonly baseUrl = 'http://localhost:3000/api';
   private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
   private readonly auth = getAuth(firebaseApp);
   private currentUser: User | null = null;
 
@@ -38,53 +28,42 @@ export class AuthService {
     });
   }
 
-  async signup(data: SignUpFormValues): Promise<User> {
+  async signup(data: CreateUserDto) {
     try {
-      // Crear usuario en Firebase
       const userCredential = await createUserWithEmailAndPassword(
         this.auth,
         data.email,
         data.password
       );
+      const userToken = await userCredential.user.getIdToken(true);
 
-      // Obtener el token de Firebase
-      const firebaseToken = await userCredential.user.getIdToken(true);
-
-      // Construir el DTO para el backend
-      const backendData: CreateUserDto = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        role: data.role || Role.PATIENT,
-        
-        specialization: data.specialization || DoctorSpecialization.GENERAL_PRACTITIONER,
-      };
-
-      console.log('Firebase Token:', firebaseToken);
-      // Enviar datos al backend
-      const createdUser = await lastValueFrom(
-        this.http.post<CreateUserDto>(`${this.baseUrl}/user`, backendData, {
-          headers: { Authorization: `Bearer ${firebaseToken}` },
+      this.http
+        .post<CreateUserDto>(`${this.baseUrl}/user`, data, {
+          headers: { Authorization: `Bearer ${userToken}` },
         })
-      );
-      
-
-      console.log('Usuario registrado exitosamente en el backend:', createdUser);
-
-      return userCredential.user;
+        .subscribe({
+          next: () => {
+            sessionStorage.setItem('userToken', userToken);
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.status === 401) this.router.navigate(['/login']);
+          },
+        });
     } catch (error) {
       console.error('Error durante el registro:', error);
-      throw error;
     }
   }
-  async login(email: string, password: string): Promise<User> {
+  async login(email: string, password: string) {
     const userCredential = await signInWithEmailAndPassword(
       this.auth,
       email,
       password
     );
+    const userToken = await userCredential.user.getIdToken(true);
 
-    return userCredential.user;
+    sessionStorage.setItem('userToken', userToken);
+    this.router.navigate(['/dashboard']);
   }
 
   async logout(): Promise<void> {

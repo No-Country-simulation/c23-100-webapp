@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsString,
   IsEmail,
+  MinLength,
 } from 'class-validator';
 
 export enum Role {
@@ -14,23 +15,13 @@ export enum Role {
 }
 
 export enum DoctorSpecialization {
-  GENERAL_PRACTITIONER = 'General Practitioner',
-  CARDIOLOGIST = 'Cardiologist',
-  NEUROLOGIST = 'Neurologist',
-  OBSTETRICIAN = 'Obstetrician',
-  PEDIATRICIAN = 'Pediatrician',
-  DERMATOLOGIST = 'Dermatologist',
-  PSYCHIATRIST = 'Psychiatrist',
-  CLINICAL_PSYCHOLOGIST = 'Clinical Psychologist',
-  OPHTHALMOLOGIST = 'Ophthalmologist',
-  AUDIOLOGIST = 'Audiologist',
-  ORTHOPEDIST = 'Orthopedist',
-  PLASTIC_SURGEON = 'Plastic Surgeon',
-  ENDOCRINOLOGIST = 'Endocrinologist',
-  IMMUNOLOGIST = 'Immunologist',
-  ALLERGIST = 'Allergist',
-  PATHOLOGIST = 'Pathologist',
-  PUBLIC_HEALTH_SPECIALIST = 'Public Health Specialist',
+  GENERAL_PRACTITIONER = 'Médico General',
+  CARDIOLOGIST = 'Cardiólogo',
+  NEUROLOGIST = 'Neurólogo',
+  DERMATOLOGIST = 'Dermatólogo',
+  OPHTHALMOLOGIST = 'Oftalmólogo',
+  ENDOCRINOLOGIST = 'Endocrinólogo',
+  PUBLIC_HEALTH_SPECIALIST = 'Especialista en Salud Pública',
 }
 
 export class CreateUserDto {
@@ -41,6 +32,10 @@ export class CreateUserDto {
   @IsString()
   @IsEmail()
   email: string;
+
+  @IsString()
+  @MinLength(6)
+  password: string;
 
   @IsEnum(Role)
   @IsOptional()
