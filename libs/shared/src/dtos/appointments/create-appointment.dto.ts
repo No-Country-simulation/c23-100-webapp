@@ -4,9 +4,6 @@ import { AppointmentStatus } from '../../enums/appointment-status';
 
 export class CreateAppointmentDto {
   @IsUUID()
-  id: string;
-
-  @IsUUID()
   patientId: string;
 
   @IsUUID()
