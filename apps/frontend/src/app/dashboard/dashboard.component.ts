@@ -1,12 +1,12 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { User } from '@org/shared';
 import { UserService } from '../core/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DoctorPanelComponent } from "./components/doctor-panel/doctor-panel.component";
-import { AdminPanelComponent } from "./components/admin-panel/admin-panel.component";
-import { UserPanelComponent } from "./components/user-panel/user-panel.component";
+import { DoctorPanelComponent } from './components/doctor-panel/doctor-panel.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { UserPanelComponent } from './components/user-panel/user-panel.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,13 +17,13 @@ import { UserPanelComponent } from "./components/user-panel/user-panel.component
 export class DashboardComponent implements OnInit {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
-  protected user = signal<User | null>(null);
+  protected user?: User;
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
-      next: (user) => this.user.set(user),
+      next: (user) => (this.user = user),
       error: (err: HttpErrorResponse) => {
-        if (err.status == 404) {
+        if (err.status == 401) {
           Swal.fire({
             title: '¡Sesión expirada!',
             text: 'Parece que su sesión ha expirado, por favor inicie sesión.',
