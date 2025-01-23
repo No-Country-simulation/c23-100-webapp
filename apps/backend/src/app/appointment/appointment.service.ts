@@ -15,10 +15,10 @@ export class AppointmentService {
   async create(
     createAppointmentDto: CreateAppointmentDto
   ): Promise<Appointment> {
-    return this.firestoreService.createDocument<Appointment>(
+    return this.firestoreService.createDocument<CreateAppointmentDto>(
       this.collectionName,
       createAppointmentDto
-    );
+    ) as Promise<Appointment>;
   }
 
   async findAll(): Promise<Appointment[]> {

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, inject } from '@angular/core';
+import Swal from 'sweetalert2';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DoctorSpecialization, Role } from '@org/shared';
 
 @Component({
   selector: 'app-register',
@@ -19,46 +22,112 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   protected registerForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: [
       '',
       [Validators.required, this.passwordMismatchValidator()],
     ],
+
+    phone: [
+      '',
+      [Validators.required, Validators.pattern(/^\+\d{1,4}\d{7,10}$/)],
+    ],
+    role: [Role.PATIENT, this.specializationNotAllowedValidator()],
+    specialization: ['', this.specializationRequiredValidator()],
   });
 
   private passwordMismatchValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      /* 
-      Para evitar errores al acceder al método get se comprueba 
-      si el formulario ya fue actualizado por Angular luego de la inyección de dependencias
-       */
       const currentPassword = this.registerForm
-        ? this.registerForm.get('password')
-        : { value: '' };
+        ? this.registerForm.get('password').value
+        : '';
 
-      return currentPassword?.value !== control.value
-        ? { mismatch: true }
+      return currentPassword !== control.value ? { mismatch: true } : null;
+    };
+  }
+
+  private specializationRequiredValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currentRole = this.registerForm
+        ? this.registerForm.get('role').value
+        : '';
+
+      return currentRole === Role.DOCTOR && !control.value
+        ? { specializationRequired: true }
+        : null;
+    };
+  }
+
+  private specializationNotAllowedValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const specialization = this.registerForm
+        ? this.registerForm.get('specialization').value
+        : '';
+
+      return control.value === Role.PATIENT && specialization
+        ? { specializationNotAllowed: true }
         : null;
     };
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      const { email, password } = this.registerForm.value;
+    const { name, email, password, role, specialization, phone } =
+      this.registerForm.value;
 
+    if (role == Role.PATIENT && specialization) {
+      this.registerForm.setErrors({
+        specializationNotAllowed: true,
+      });
+      return;
+    } else if (role == Role.DOCTOR && !specialization) {
+      this.registerForm.setErrors({
+        specializationRequired: true,
+      });
+      return;
+    }
+
+    if (this.registerForm.valid) {
       this.authService
-        .signup({
-          email: email!,
-          password: password!,
+        .signup(
+          {
+            name,
+            email,
+            role: role as Role,
+            specialization:
+              (specialization as DoctorSpecialization) || undefined, // Para evitar enviar un string vacío y que ocurra un error de validación
+            phone,
+          },
+          password
+        )
+        .then((userToken) => {
+          sessionStorage.setItem('userToken', userToken);
+
+          Swal.fire({
+            title: 'Registro Exitoso!',
+            text: 'Te has registrado correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            didClose: () => {
+              this.router.navigate(['/dashboard']);
+            },
+          });
         })
-        .then(() => {
-          // Redirigir al user
-        })
-        .catch((err) => {
-          // Manejar error
+        .catch((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.router.navigate(['/login']);
+          }
+
+          Swal.fire({
+            title: 'Error al registrarse!',
+            text: 'Hubo un problema durante el registro.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
         });
     }
   }
