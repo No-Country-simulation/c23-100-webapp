@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { UserPanelComponent } from './user-panel/user-panel.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
