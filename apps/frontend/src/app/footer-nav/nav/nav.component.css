@@ -1,0 +1,75 @@
+
+/*Logo del NAV*/
+.logo {
+    margin-right: -4px;
+  }
+  
+  /* Estilos para el menú de navegación */
+  
+  
+  .icon-container {
+    margin-right: 10px;
+  }
+  .icon-container:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  .navbar {
+    background: #127F2F;
+  
+  }
+  
+  .navbar-brand,
+  .nav-link {
+    color: #E8E407;
+  
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link:hover {
+    color: #07e825;
+  }
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  
+  
+  /*Separacion entre el boton de iniciar sesion y registro*/
+  .button-group {
+    display: flex;
+    /* Para alinear los botones horizontalmente */
+    gap: 10px;
+    /* Espacio entre los botones */
+  }
+  
+  .boton1:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  .boton2:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  @media (max-width: 768px) {
+   
+    .navbar-nav {
+      flex-direction: column;
+    }
+  
+    .navbar-brand {
+      margin: 5px 0;
+      /* Espaciado entre enlaces en móviles */
+    }
+  
+    .icon-container {
+      margin-right: 20px;
+    }
+  
+    
+  }
+    

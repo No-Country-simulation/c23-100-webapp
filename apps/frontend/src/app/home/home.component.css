@@ -9,63 +9,6 @@ body {
   background-color: rgba(245, 245, 245, 0.8);
 }
 
-/*Logo del NAV*/
-.logo {
-  margin-right: -4px;
-}
-
-/* Estilos para el menú de navegación */
-
-
-.icon-container {
-  margin-right: 10px;
-}
-.icon-container:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-.navbar {
-  background: #127F2F;
-
-}
-
-.navbar-brand,
-.nav-link {
-  color: #E8E407;
-
-  display: flex;
-  align-items: center;
-}
-
-.nav-link:hover {
-  color: #07e825;
-}
-.navbar-nav {
-  align-items: center;
-}
-
-.navbar-nav {
-  display: flex;
-  align-items: center;
-}
-
-
-
-
-/*Separacion entre el boton de iniciar sesion y registro*/
-.button-group {
-  display: flex;
-  /* Para alinear los botones horizontalmente */
-  gap: 10px;
-  /* Espacio entre los botones */
-}
-
-.boton1:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-.boton2:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-
 
 /*SideBar o Barra Vertical*/
 
@@ -213,83 +156,13 @@ header.especialidad {
   height: auto; /* Mantiene la proporción de la imagen */
   margin: 0 auto; /* Centra la imagen horizontalmente */
 }
-/*Footer*/
-
-.fondo-footer {
-  background: #1D1832;
-  text-align: center;
-  padding: 20px 0;
-}
-/* Estilos adicionales para el contenido del footer */
-.fondo-footer .container .row .col-md-6 ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fondo-footer .container .row .col-md-6 ul li {
-  margin-right: 15px;
-  /* Ajusta el espaciado según sea necesario */
-}
-
-.fondo-footer .container .row .col-md-6 ul li:last-child {
-  margin-right: 0;
-  /* Elimina el margen del último elemento */
-}
-
-.contact-item {
-  display: flex;
-  /* Eliminamos align-items: center; para tener más control sobre la alineación vertical */
-}
-
-.icon-container-footer1, .icon-container-footer2 {
-  margin-right: 20px;
-}
-
-/* Añadimos esta regla para alinear el texto verticalmente a la línea base */
-.contact-item p {
-  vertical-align: baseline;
-}
-.col-md-4 .contact-item {
-  display: flex;
-  align-items: center; /* This centers the content vertically */
-}
-
-.fondo-footer h6, .fondo-footer p,  .fondo-footer a {
-  color: white; /* Cambia el color a blanco */
-}
-/* Media Queries para Responsividad para diferentes tipos de pantallas */
-
-.boton-facebook:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-
-.boton-instagram:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-
-.boton-linkedin:hover {
-  transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-
 /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
 
 @media (max-width: 768px) {
   .sidebar {
     left: -160px; /* Oculta el sidebar */
   }
-  .navbar-nav {
-    flex-direction: column;
-  }
-
-  .navbar-brand {
-    margin: 5px 0;
-    /* Espaciado entre enlaces en móviles */
-  }
-
-  .icon-container {
-    margin-right: 20px;
-  }
+ 
   /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
   .texto-inicio {
     font-size: 1.5rem;
@@ -317,17 +190,6 @@ header.especialidad {
     width: 60%; /* Cambia el tamaño según lo que desees */
     margin: 0 auto; /* Centra la imagen */
 }
-  .fondo-footer .container .row .col-md-6 ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .fondo-footer .container .row .col-md-6 ul li {
-    margin-bottom: 10px;
-  }
-  .col-md-4 {
-    text-align: center; /* This centers the content horizontally */
-  }
   
 }
 

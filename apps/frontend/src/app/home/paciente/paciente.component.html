@@ -14,7 +14,53 @@
 <body>
 
 
-   <app-nav></app-nav>
+    <!-- Nav-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-4 px-lg-5">
+            <div class="navbar-nav d-flex align-items-center">
+                <img class="logo" src="imagenes/icono.png" height="70" width="70" alt="Logo">
+                <a class="navbar-brand text-center">Hospital <br> No Country</a>
+            </div>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-paciente.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Paciente
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-doctor.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Doctor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-administrador.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Administrador
+                        </a>
+                    </li>
+                    <div class="button-group">
+                        <a class="boton1 btn btn-warning" href="/login">Iniciar sesión</a>
+                        <a class="boton2 btn btn-warning" href="/register">Registro</a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- Sidebar -->
     <div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
         <div class="sidebar-content">
@@ -289,4 +335,57 @@
     </header>
 
     <!-- Footer -->
-   <app-footer></app-footer>
+    <footer class="fondo-footer">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!-- Grid column -->
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
+                        <div class="contact-item">
+                            <span class="icon-container-footer1">
+                                <img src="/imagenes/gmail.png" height="40" width="40">
+                            </span>
+                            <p>drgaleno97&#64;gmail.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <span class="icon-container-footer2">
+                                <img src="/imagenes/whatsapp.png" height="60" width="40">
+                            </span>
+                            <p>+54 9 11-8548-1291</p>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Redes Sociales</h6>
+                        <a class="boton-facebook btn text-white btn-floating m-1" style="background-color: #3b5998;"
+                            href="https://www.facebook.com/nocountrytech" role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="boton-instagram btn text-white btn-floating m-1" style="background-color: #ac2bac;"
+                            href="https://www.instagram.com/nocountry.tech/" role="button">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="boton-linkedin btn text-white btn-floating m-1" style="background-color: #0082ca;"
+                            href="https://www.linkedin.com/company/nocountrytalent/" role="button">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <a> © 2025 Copyright: NoCountry Medical</a>
+        </div>
+        <!-- Copyright -->
+    </footer>

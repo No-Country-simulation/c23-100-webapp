@@ -3,16 +3,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../footer-nav/footer/footer.component';
-import { NavComponent } from '../footer-nav/nav/nav.component';
 
 @Component({
-  selector: 'app-home',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-paciente',
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './paciente.component.html',
+  styleUrl: './paciente.component.css',
 })
-export class HomeComponent {
+export class PacienteComponent {
   isSidebarOpen = true;
   isSidebarHalfOpen = false;
 
@@ -59,5 +57,4 @@ export class HomeComponent {
       this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
     }
   }
-
 }
