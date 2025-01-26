@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-citas',
   imports: [CommonModule],
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css',
+  templateUrl: './citas.component.html',
+  styleUrl: './citas.component.css',
 })
-export class AdminComponent {}
+export class CitasComponent {}
