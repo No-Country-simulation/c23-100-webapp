@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Icono del Buscador -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+
+
+
+<body>
+
+
+    <!-- Nav-->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-4 px-lg-5">
+            <div class="navbar-nav d-flex align-items-center">
+                <img class="logo" src="imagenes/icono.png" height="70" width="70" alt="Logo">
+                <a class="navbar-brand text-center">Hospital <br> No Country</a>
+            </div>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-paciente.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Paciente
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-doctor.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Doctor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="icon-container">
+                                <img src="/imagenes/icono-administrador.png" height="70" width="70" alt="Logo">
+                            </span>
+                            Administrador
+                        </a>
+                    </li>
+                    <div class="button-group">
+                        <a class="boton1 btn btn-warning" href="/login">Iniciar sesión</a>
+                        <a class="boton2 btn btn-warning" href="/register">Registro</a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
+        <div class="sidebar-content">
+            <div class="container">
+                <!-- Section: Links -->
+                    <!--Grid row-->
+                    <div class="row">
+                        <!-- Grid column -->
+
+                        <div class="col">
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <div style="display: flex; align-items: center;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                                fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                                                <path
+                                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                                            </svg>
+                                            <span style="margin-left: 10px;">Inicio</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <div style="display: flex; align-items: center;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                                fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                            </svg>
+                                            <span style="margin-left: 10px;">Citas <br> Pendientes </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Grid column -->
+
+                        <div class="col">
+
+                            <div class="sidebar-button-container" (click)="toggleSidebar()">
+                                <button class="btn btn-primary">
+                                    <span *ngIf="!isSidebarOpen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </span>
+                                    <span *ngIf="isSidebarOpen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Section: Links -->
+            </div>
+
+        </div>
+    </div>
+    <!-- Botón para abrir el sidebar -->
+    <!-- Bienvenida -->
+    <header class="bienvenida" id="bienvenida">
+        <div class="container text-center"> <!-- Agregamos text-center aquí -->
+            <div class="row">
+                <div class="col-lg-6 align-self-baseline">
+                    <img src="/imagenes/medico-bienvenida2.png" class="img-fluid" alt="Médico">
+                </div>
+
+                <div class="col">
+                    <br><br><br><br>
+                    <h1 class="texto-inicio font-weight-bold">Citas medicas online,
+                        <br>
+                        accesibles y seguras para tu bienestar.
+                    </h1>
+                    <br>
+                    <p class="text-white-75 mb-5">Sabemos que tu tiempo es valioso
+                        <br>
+                        por eso hemos creado una plataforma sencilla y eficiente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+    <!--Formulario-->
+
+    <section class="page-section full-screen" id="about">
+        <div class="container px-4 px-lg-5 text-center">
+            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
+                <div class="text-white col-lg-6">
+                    <br>
+                    <h1 class="font-weight-bold">Solicita turno ahora
+                        <br><br>
+                        Por favor complete la siguiente información para facilitar su atención médica
+                    </h1>
+                </div>
+                <div class="col-lg-6 align-self-baseline">
+                    <br><br>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
+                        <div class="row">
+                            <div class="">
+                                <label for="name" class="formbold-form-label">Nombre y Apellido</label>
+                                <input type="text" formControlName="name" id="name" class="form-control">
+                                <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger">
+                                    El nombre es obligatorio y debe tener al menos 4 caracteres.
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="">
+                                <label for="email" class="formbold-form-label">Email o Número telefónico</label>
+                                <input type="email" formControlName="email" id="email" class="form-control">
+                                <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+                                    class="text-danger">
+                                    Debe ingresar un email válido.
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="provincias">Provincia</label>
+                                <select class="form-control" formControlName="provincia" id="provincias">
+                                    <option value="">Seleccione una provincia</option>
+                                    <option>Buenos Aires</option>
+                                    <option>Ciudad Autonoma de Buenos Aires</option>
+                                    <option>Catamarca</option>
+                                    <option>Chaco</option>
+                                    <option>Chubut</option>
+                                    <option>Cordoba</option>
+                                    <option>Corrientes</option>
+                                    <option>Entre Rios</option>
+                                    <option>Formosa</option>
+                                    <option>Jujuy</option>
+                                    <option>La Pampa</option>
+                                    <option>La Rioja</option>
+                                    <option>Mendoza</option>
+                                    <option>Misiones</option>
+                                    <option>Neuquen</option>
+                                    <option>Rio Negro</option>
+                                    <option>Salta</option>
+                                    <option>San Juan</option>
+                                    <option>San Luis</option>
+                                    <option>Santa Cruz</option>
+                                    <option>Santa Fe</option>
+                                    <option>Santiago del Estero</option>
+                                    <option>Tierra del Fuego, Antartida e Islas del Atlantico Sur</option>
+                                    <option>Tucuman</option>
+                                </select>
+                                <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched"
+                                    class="text-danger">
+                                    Debe seleccionar una provincia.
+                                </div>
+                            </div>
+                            <div class="">
+                                <label for="address" class="formbold-form-label">Dirección</label>
+                                <input type="text" formControlName="direccion" id="address" class="form-control">
+                                <div *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched"
+                                    class="text-danger">
+                                    La dirección es obligatoria y debe tener al menos 8 caracteres.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="especialidad">Especialidad</label>
+                                <select class="form-control" formControlName="especialidad" id="especialidad">
+                                    <option value="">Seleccione una especialidad</option>
+                                    <option>Odontologia</option>
+                                    <option>Cardiologia</option>
+                                    <option>Neumologia</option>
+                                    <option>Dermatologia</option>
+                                    <option>Oftamologia</option>
+                                    <option>Neurologia</option>
+                                    <option>Pediatria</option>
+                                    <option>Podologia</option>
+                                </select>
+                                <div *ngIf="form.get('especialidad')?.invalid && form.get('especialidad')?.touched"
+                                    class="text-danger">
+                                    Debe seleccionar una especialidad.
+                                </div>
+                            </div>
+                            <br> <br> <br> <br>
+                            <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Especialidades medicas -->
+    <header class="especialidad" id="Especialidades">
+        <div class="container text-center"> <!-- Agregamos text-center aquí -->
+            <div class="row">
+                <div class="col-lg-6 align-self-baseline">
+                    <img src="/imagenes/fondo-especialidad.jpeg" class="img-fluid">
+                </div>
+
+                <div class="col">
+                    <br><br><br><br>
+                    <h1 class="texto-inicio font-weight-bold">Especialidades Medicas.
+                    </h1>
+                    <br>
+                    <p class="text-white-75 mb-5">Contamos con una amplia gama de especialistas en diverseas
+                        areas como Cardiologia, Oncologia, Pediatria, Neurologia, Ginecologia y mas.
+                        <br><br>
+                        Nuestra prioridad es tu salud y bienestar.
+                        <br>
+                        Nos aseguramos de que cada paso de tu tratamiento sea lo mas comodo y eficaz posible.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </header>
+
+
+    <!-- Cards de  Planes de alimentacion, salud y enfermedades -->
+    <header class="especialidad" id="Especialidades">
+        <div class="container text-center"> <!-- Agregamos text-center aquí -->
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col ">
+                    <div class="card h-100 especialidad">
+                        <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Planes de alimentacion y dieta</h5>
+                            <br>
+                            <p class="card-text">Implementacion y seguimiento de una alimentacion saludable y estable
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 especialidad">
+                        <img src="/imagenes/card-salud.png" class="card-img-top imagen-card ">
+                        <div class="card-body">
+                            <h5 class="card-title">Planes de salud compatibles</h5>
+                            <br>
+                            <p class="card-text">Informacion sobre seguros medicos y planes de salud compatibles con el
+                                sitio web.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 especialidad">
+                        <img src="/imagenes/card-enfermedades.png" class="card-img-top imagen-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Enfermedades</h5>
+                            <br>
+                            <p class="card-text">Las enfermedades son mortales para la sociedad, por eso debemos
+                                informarnos mas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </header>
+
+    <!-- Footer -->
+    <footer class="fondo-footer">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!-- Grid column -->
+
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
+                        <div class="contact-item">
+                            <span class="icon-container-footer1">
+                                <img src="/imagenes/gmail.png" height="40" width="40">
+                            </span>
+                            <p>drgaleno97&#64;gmail.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <span class="icon-container-footer2">
+                                <img src="/imagenes/whatsapp.png" height="60" width="40">
+                            </span>
+                            <p>+54 9 11-8548-1291</p>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Redes Sociales</h6>
+                        <a class="boton-facebook btn text-white btn-floating m-1" style="background-color: #3b5998;"
+                            href="https://www.facebook.com/nocountrytech" role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="boton-instagram btn text-white btn-floating m-1" style="background-color: #ac2bac;"
+                            href="https://www.instagram.com/nocountry.tech/" role="button">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="boton-linkedin btn text-white btn-floating m-1" style="background-color: #0082ca;"
+                            href="https://www.linkedin.com/company/nocountrytalent/" role="button">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <a> © 2025 Copyright: NoCountry Medical</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
