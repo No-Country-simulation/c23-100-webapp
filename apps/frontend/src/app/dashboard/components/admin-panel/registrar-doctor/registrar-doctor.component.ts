@@ -3,16 +3,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../footer-nav/footer/footer.component';
-import { NavComponent } from '../../footer-nav/nav/nav.component';
-
+import { FooterComponent } from 'apps/frontend/src/app/footer-nav/footer/footer.component';
+import { NavComponent } from 'apps/frontend/src/app/footer-nav/nav/nav.component';
 @Component({
-  selector: 'app-cita-doctor',
+  selector: 'app-registrar-doctor',
   imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
-  templateUrl: './cita-doctor.component.html',
-  styleUrl: './cita-doctor.component.css',
+  templateUrl: './registrar-doctor.component.html',
+  styleUrl: './registrar-doctor.component.css',
 })
-export class CitaDoctorComponent { 
+export class RegistrarDoctorComponent {
+  
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
 
@@ -57,12 +57,14 @@ export class CitaDoctorComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
+  
   form = new FormGroup({
     id: new FormControl(''),
-    horario_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    direccion_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    pasillo_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    numero_de_puerta: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    provincia: new FormControl(null, [Validators.required]),
+    direccion: new FormControl('', [Validators.required, Validators.min(8)]),
+    especialidad: new FormControl(null, [Validators.required]),
   });
 
   constructor() { }
@@ -75,4 +77,3 @@ export class CitaDoctorComponent {
     }
   }
 }
-
