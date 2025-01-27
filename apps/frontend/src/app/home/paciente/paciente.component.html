@@ -15,51 +15,7 @@
 
 
     <!-- Nav-->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container px-4 px-lg-5">
-            <div class="navbar-nav d-flex align-items-center">
-                <img class="logo" src="imagenes/icono.png" height="70" width="70" alt="Logo">
-                <a class="navbar-brand text-center">Hospital <br> No Country</a>
-            </div>
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon-container">
-                                <img src="/imagenes/icono-paciente.png" height="70" width="70" alt="Logo">
-                            </span>
-                            Paciente
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon-container">
-                                <img src="/imagenes/icono-doctor.png" height="70" width="70" alt="Logo">
-                            </span>
-                            Doctor
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="icon-container">
-                                <img src="/imagenes/icono-administrador.png" height="70" width="70" alt="Logo">
-                            </span>
-                            Administrador
-                        </a>
-                    </li>
-                    <div class="button-group">
-                        <a class="boton1 btn btn-warning" href="/login">Iniciar sesión</a>
-                        <a class="boton2 btn btn-warning" href="/register">Registro</a>
-                    </div>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   <app-nav></app-nav>
 
     <!-- Sidebar -->
     <div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
@@ -75,7 +31,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">
                                         <div style="display: flex; align-items: center;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                 fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                                                 <path
                                                     d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
@@ -87,9 +43,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="/cita-paciente">
                                         <div style="display: flex; align-items: center;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
                                                 fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
                                                 <path
                                                     d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
@@ -129,7 +85,6 @@
 
         </div>
     </div>
-    <!-- Botón para abrir el sidebar -->
     <!-- Bienvenida -->
     <header class="bienvenida" id="bienvenida">
         <div class="container text-center"> <!-- Agregamos text-center aquí -->
@@ -165,7 +120,7 @@
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
                 <div class="text-white col-lg-6">
                     <br>
-                    <h1 class="font-weight-bold">Solicita turno ahora
+                    <h1 class="font-weight-bold">Agenda tu cita
                         <br><br>
                         Por favor complete la siguiente información para facilitar su atención médica
                     </h1>
@@ -183,7 +138,15 @@
                             </div>
                             <br><br>
                             <div class="">
-                                <label for="email" class="formbold-form-label">Email o Número telefónico</label>
+                                <label for="email" class="formbold-form-label">Email</label>
+                                <input type="email" formControlName="email" id="email" class="form-control">
+                                <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+                                    class="text-danger">
+                                    Debe ingresar un email válido.
+                                </div>
+                            </div>
+                            <div class="">
+                                <label for="email" class="formbold-form-label">Número telefónico</label>
                                 <input type="email" formControlName="email" id="email" class="form-control">
                                 <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
                                     class="text-danger">
@@ -191,48 +154,6 @@
                                 </div>
                             </div>
                             <br><br>
-                            <div class="form-group">
-                                <label for="provincias">Provincia</label>
-                                <select class="form-control" formControlName="provincia" id="provincias">
-                                    <option value="">Seleccione una provincia</option>
-                                    <option>Buenos Aires</option>
-                                    <option>Ciudad Autonoma de Buenos Aires</option>
-                                    <option>Catamarca</option>
-                                    <option>Chaco</option>
-                                    <option>Chubut</option>
-                                    <option>Cordoba</option>
-                                    <option>Corrientes</option>
-                                    <option>Entre Rios</option>
-                                    <option>Formosa</option>
-                                    <option>Jujuy</option>
-                                    <option>La Pampa</option>
-                                    <option>La Rioja</option>
-                                    <option>Mendoza</option>
-                                    <option>Misiones</option>
-                                    <option>Neuquen</option>
-                                    <option>Rio Negro</option>
-                                    <option>Salta</option>
-                                    <option>San Juan</option>
-                                    <option>San Luis</option>
-                                    <option>Santa Cruz</option>
-                                    <option>Santa Fe</option>
-                                    <option>Santiago del Estero</option>
-                                    <option>Tierra del Fuego, Antartida e Islas del Atlantico Sur</option>
-                                    <option>Tucuman</option>
-                                </select>
-                                <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched"
-                                    class="text-danger">
-                                    Debe seleccionar una provincia.
-                                </div>
-                            </div>
-                            <div class="">
-                                <label for="address" class="formbold-form-label">Dirección</label>
-                                <input type="text" formControlName="direccion" id="address" class="form-control">
-                                <div *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched"
-                                    class="text-danger">
-                                    La dirección es obligatoria y debe tener al menos 8 caracteres.
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="especialidad">Especialidad</label>
                                 <select class="form-control" formControlName="especialidad" id="especialidad">
@@ -250,6 +171,10 @@
                                     class="text-danger">
                                     Debe seleccionar una especialidad.
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="indicacion" class="form-label">Motivo de la consulta:</label>
+                                <textarea class="form-control" id="indicacion" rows="3"></textarea>
                             </div>
                             <br> <br> <br> <br>
                             <button class="btn btn-success" type="submit" [disabled]="form.invalid">
@@ -335,57 +260,4 @@
     </header>
 
     <!-- Footer -->
-    <footer class="fondo-footer">
-        <!-- Grid container -->
-        <div class="container p-4 pb-0">
-            <!-- Section: Links -->
-            <section class="">
-                <!--Grid row-->
-                <div class="row">
-                    <!-- Grid column -->
-
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
-                        <div class="contact-item">
-                            <span class="icon-container-footer1">
-                                <img src="/imagenes/gmail.png" height="40" width="40">
-                            </span>
-                            <p>drgaleno97&#64;gmail.com</p>
-                        </div>
-                        <div class="contact-item">
-                            <span class="icon-container-footer2">
-                                <img src="/imagenes/whatsapp.png" height="60" width="40">
-                            </span>
-                            <p>+54 9 11-8548-1291</p>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Redes Sociales</h6>
-                        <a class="boton-facebook btn text-white btn-floating m-1" style="background-color: #3b5998;"
-                            href="https://www.facebook.com/nocountrytech" role="button">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="boton-instagram btn text-white btn-floating m-1" style="background-color: #ac2bac;"
-                            href="https://www.instagram.com/nocountry.tech/" role="button">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a class="boton-linkedin btn text-white btn-floating m-1" style="background-color: #0082ca;"
-                            href="https://www.linkedin.com/company/nocountrytalent/" role="button">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                <!--Grid row-->
-            </section>
-            <!-- Section: Links -->
-        </div>
-        <!-- Grid container -->
-
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            <a> © 2025 Copyright: NoCountry Medical</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+    <app-footer></app-footer>

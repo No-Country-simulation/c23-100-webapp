@@ -3,19 +3,35 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../../footer-nav/footer/footer.component';
+import { NavComponent } from '../../footer-nav/nav/nav.component';
 
 @Component({
   selector: 'app-paciente',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
   templateUrl: './paciente.component.html',
   styleUrl: './paciente.component.css',
 })
 export class PacienteComponent {
-  isSidebarOpen = true;
+  isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
 
   ngOnInit() {
     this.checkScreenWidth();
+    this.loadSidebarState(); // Cargar el estado del sidebar al iniciar
+  }
+
+
+
+  loadSidebarState() {
+    const sidebarState = localStorage.getItem('sidebarState');
+    if (sidebarState === 'open') {
+      this.isSidebarOpen = true;
+      this.isSidebarHalfOpen = false;
+    } else if (sidebarState === 'closed') {
+      this.isSidebarOpen = false;
+      this.isSidebarHalfOpen = true;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -34,11 +50,14 @@ export class PacienteComponent {
     if (this.isSidebarOpen) {
       this.isSidebarOpen = false;
       this.isSidebarHalfOpen = true;
+      localStorage.setItem('sidebarState', 'closed'); // Guardar estado cerrado
     } else {
       this.isSidebarOpen = true;
       this.isSidebarHalfOpen = false;
+      localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
+  
   form = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
