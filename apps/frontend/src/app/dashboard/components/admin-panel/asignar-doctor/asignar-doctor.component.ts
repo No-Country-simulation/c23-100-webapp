@@ -3,8 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../../footer-nav/footer/footer.component';
-import { NavComponent } from '../../../footer-nav/nav/nav.component';
+import { FooterComponent } from 'apps/frontend/src/app/footer-nav/footer/footer.component';
+import { NavComponent } from 'apps/frontend/src/app/footer-nav/nav/nav.component';
 
 @Component({
   selector: 'app-asignar-doctor',
