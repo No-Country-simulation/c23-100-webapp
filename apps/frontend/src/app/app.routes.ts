@@ -23,24 +23,24 @@ export const appRoutes: Routes = [
       ),
   },
   {
-    path: 'cita-paciente',
+    path: 'dashboard-admin',
     loadComponent: () =>
-      import('./home/paciente/cita-paciente.component').then(
-        (c) => c.CitaPacienteComponent
-      ),
+    import('./dashboard/components/admin-panel/admin-panel.component').then(
+      (c) => c.AdminPanelComponent
+    ),
   },
   {
-    path: 'cita-doctor',
+    path: 'dashboard-doctor',
     loadComponent: () =>
-      import('./home/doctor/cita-doctor.component').then(
-        (c) => c.CitaDoctorComponent
-      ),
+    import('./dashboard/components/doctor-panel/doctor-panel.component').then(
+      (c) => c.DoctorPanelComponent
+    ),
   },
   {
-    path: 'cita-admin',
+    path: 'dashboard-user',
     loadComponent: () =>
-      import('./home/admin/cita-admin.component').then(
-        (c) => c.CitaAdminComponent
+    import('./dashboard/components/user-panel/user-panel.component').then(
+        (c) => c.UserPanelComponent
       ),
   },
   {
