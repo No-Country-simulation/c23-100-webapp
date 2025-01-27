@@ -1,0 +1,213 @@
+html {
+    height: 100%;
+    scroll-padding-top: calc(4.5rem - 1px);
+  }
+  
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 245, 245, 0.8);
+  }
+  
+  /*Logo del NAV*/
+  .logo {
+    margin-right: -4px;
+  }
+  
+  /* Estilos para el menú de navegación */
+  
+  
+  .icon-container {
+    margin-right: 10px;
+  }
+  .icon-container:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  .navbar {
+    background: #127F2F;
+  
+  }
+  
+  .navbar-brand,
+  .nav-link {
+    color: #E8E407;
+  
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link:hover {
+    color: #07e825;
+  }
+  .navbar-nav {
+    align-items: center;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  
+  
+  /*Separacion entre el boton de iniciar sesion y registro*/
+  .button-group {
+    display: flex;
+    /* Para alinear los botones horizontalmente */
+    gap: 10px;
+    /* Espacio entre los botones */
+  }
+  
+  .boton1:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  .boton2:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente al pasar el mouse */
+  }
+  
+  
+  /*SideBar o Barra Vertical*/
+  
+  .sidebar {
+    position: fixed;
+    top: 200px;
+    width: 200px;
+    background: #1D1832;
+    overflow-y: auto;
+    z-index: 1;
+    transition: left 0.3s ease-in-out; /* Agrega una transición suave */
+  }
+  
+  .sidebar.half-open {
+    left: -160px; /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
+  }
+  
+  .sidebar.full-open {
+    left: 0; /* This positions the sidebar fully open */
+  }
+  
+  .sidebar ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding */
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #ffffff; /* Color del texto */
+    display: block; /* Hace que el área del enlace sea más grande */
+    padding: 5px; /* Espaciado interno del enlace */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  .sidebar ul li a:hover {
+    background: #127F2F;
+    color: white; /* Color del texto al pasar el ratón */
+  }
+  
+  .sidebar-button {
+    /* Add your button styles here */
+    background-color: #127F2F; /* Example button style */
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidebar-content {
+    flex: 1; /* Permite que esta sección ocupe el espacio disponible */
+    display: flex; /* Usar flexbox para las columnas internas */
+  }
+  .sidebar-content ul {
+    flex: 1; /* Esta columna ocupa el espacio restante */
+  }
+  
+  .sidebar-button-container {
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    padding: 0; /* Elimina el padding */
+    position: absolute; /* Posiciona el contenedor de manera absoluta */
+    bottom: 40px; /* Alinea el contenedor al fondo */
+    right: 0; /* Alinea el contenedor a la derecha */
+  }
+  /*Bienvenida*/
+  
+  
+  header.bienvenida {
+    background: #127F2F;
+  
+  }
+  
+  .texto-inicio {
+    color: #E8E407;
+  }
+  
+  .text-white-75 {
+    color: #E8E407;
+  }
+  
+  /*Especialides*/
+  
+  
+  header.especialidad {
+    background: #127F2F;
+  
+  }
+  
+  .especialidad {
+    background:  #E8E407;
+  
+  }
+  .imagen-card {
+    width: 70%; /* Asegúrate de que las imágenes ocupen el 100% del ancho de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      left: -160px; /* Oculta el sidebar */
+    }
+    .navbar-nav {
+      flex-direction: column;
+    }
+  
+    .navbar-brand {
+      margin: 5px 0;
+      /* Espaciado entre enlaces en móviles */
+    }
+  
+    .icon-container {
+      margin-right: 20px;
+    }
+    /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
+    .texto-inicio {
+      font-size: 1.5rem;
+    }
+  
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
+  @media (min-width: 992px) {
+  
+    header.bienvenida p {
+      font-size: 1.5rem;
+    }
+  
+    header.especialidad p {
+      font-size: 1.5rem;
+    }
+  
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
+  @media (min-width: 1200px) {
+  
+    header.bienvenida h1,
+    header.bienvenida .h1 {
+      font-size: 3.0rem;
+    }
+  
+    header.especialidad h1,
+    header.especialidad .h1 {
+      font-size: 3.0rem;
+    }
+  }

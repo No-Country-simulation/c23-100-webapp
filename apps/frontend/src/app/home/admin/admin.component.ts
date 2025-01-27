@@ -1,18 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms'; 
+import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../footer-nav/footer/footer.component';
 import { NavComponent } from '../../footer-nav/nav/nav.component';
-
 @Component({
-  selector: 'app-doctor',
+  selector: 'app-admin',
   imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
-  templateUrl: './doctor.component.html',
-  styleUrl: './doctor.component.css',
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.css',
 })
-export class DoctorComponent {
+export class AdminComponent {
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
 
@@ -62,12 +61,12 @@ export class DoctorComponent {
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    provincia: new FormControl(null, [Validators.required]),  
-    direccion: new FormControl('', [Validators.required, Validators.min(8)]),      
-    especialidad: new FormControl(null, [Validators.required]),      
+    provincia: new FormControl(null, [Validators.required]),
+    direccion: new FormControl('', [Validators.required, Validators.min(8)]),
+    especialidad: new FormControl(null, [Validators.required]),
   });
 
-  constructor() {}
+  constructor() { }
 
   onSubmit() {
     if (this.form.valid) {

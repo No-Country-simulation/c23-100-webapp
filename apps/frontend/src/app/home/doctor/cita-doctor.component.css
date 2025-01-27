@@ -1,0 +1,228 @@
+html {
+    height: 100%;
+    scroll-padding-top: calc(4.5rem - 1px);
+  }
+  
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 245, 245, 0.8);
+  }
+  
+  .texto-amarillo{
+    color:  #E8E407;
+    background-color: #127F2F;
+    width: 750px;
+  }
+  
+  /*SideBar o Barra Vertical*/
+  
+  .sidebar {
+    position: fixed;
+    top: 200px;
+    width: 200px;
+    background: #1D1832;
+    overflow-y: auto;
+    z-index: 1;
+    transition: left 0.3s ease-in-out; /* Agrega una transición suave */
+  }
+  
+  .sidebar.half-open {
+    left: -160px; /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
+  }
+  
+  .sidebar.full-open {
+    left: 0; /* This positions the sidebar fully open */
+  }
+  
+  .sidebar ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding */
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #ffffff; /* Color del texto */
+    display: block; /* Hace que el área del enlace sea más grande */
+    padding: 5px; /* Espaciado interno del enlace */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  .sidebar ul li a:hover {
+    background: #127F2F;
+    color: white; /* Color del texto al pasar el ratón */
+  }
+  
+  .sidebar-button {
+    /* Add your button styles here */
+    background-color: #127F2F; /* Example button style */
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidebar-content {
+    flex: 1; /* Permite que esta sección ocupe el espacio disponible */
+    display: flex; /* Usar flexbox para las columnas internas */
+  }
+  .sidebar-content ul {
+    flex: 1; /* Esta columna ocupa el espacio restante */
+  }
+  
+  .sidebar-button-container {
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    padding: 0; /* Elimina el padding */
+    position: absolute; /* Posiciona el contenedor de manera absoluta */
+    bottom: 40px; /* Alinea el contenedor al fondo */
+    right: 0; /* Alinea el contenedor a la derecha */
+  }
+  /**Estilos para el formulario***/
+  
+  form#contactForm {
+    width: 100%; /* Haz que ocupe todo el ancho del contenedor */
+    max-width: 600px; /* Tamaño máximo para formularios más estrechos */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 20px; /* Espaciado interno para mejor presentación */
+  
+    background-color: #E8E407;
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para un diseño más limpio */
+  }
+  
+  form#contactForm .form-control {
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    padding: 10px; /* Espaciado interno */
+    height: auto; /* Permite que el campo se ajuste al contenido */
+    
+  }
+  /* ... (tu código CSS existente) */
+  
+  .form-group select {
+    /* ... (tus estilos existentes) */
+    /* Agregar un icono de flecha a la derecha */
+    appearance: none; /* Ocultar la flecha por defecto del navegador */
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="currentColor" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Ajusta la posición del icono */
+    background-size: 16px 12px; /* Ajusta el tamaño del icono */
+  }
+  
+  .col-lg-6.align-self-baseline {
+    margin-top: 30px; /* Ajusta según sea necesario */
+    margin-bottom: 30px;
+  }
+  .text-white col-lg-6.align-self-end {
+    margin-top: 100px; /* Aumenta el margen superior para subir el texto */
+  }
+  
+  .background-modal {
+    /* Add your button styles here */
+    background-color: #127F2F; /* Example button style */
+  }
+  
+  .page-section {
+    background: url("/imagenes/fondo-citas.jpg");
+    background-size: cover;
+    /* Ajusta la imagen para que cubra toda la sección */
+    background-position: 50%;
+    /* El primer porcentaje indica que tanto a la izquierda o derecha
+      pero no funciona por el background-size, solamente  */
+    /* Altura de la sección */
+  }
+
+  .fondo-card1 {
+    background: url("/imagenes/fondo-estetoscopio.png");
+    background-size: cover;
+    /* Ajusta la imagen para que cubra toda la sección */
+    background-position: 50%;
+    /* El primer porcentaje indica que tanto a la izquierda o derecha
+      pero no funciona por el background-size, solamente  */
+    height: 400px;
+    /* Altura de la sección */
+  }
+  
+  /*Especialides*/
+  
+  
+  header.especialidad {
+    background: #127F2F;
+  
+  }
+  
+  .especialidad {
+    background:  #E8E407;
+  
+  }
+  .imagen-card {
+    width: 30%; /* Asegúrate de que las imágenes ocupen el 100% del ancho de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  
+  /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      left: -160px; /* Oculta el sidebar */
+    }
+    /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
+    .texto-inicio {
+      font-size: 1.5rem;
+    }
+  
+    /*Formularios*/
+    
+    form#contactForm {
+      max-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+      padding: 15px;
+    }
+  
+    /*Aqui extiendo la imagen del fondo o en tal caso la seccion*/
+    .page-section {
+      height: 1000px;
+      /* Altura de la sección */
+    }
+  
+    /*Aqui subo el texto para que este mas cerca de la imagen*/
+    .especialidad .col-lg-6 {
+      margin-bottom: -75px; /* Add margin to separate image and text */
+    }
+    
+    .imagen-card {
+      width: 60%; /* Cambia el tamaño según lo que desees */
+      margin: 0 auto; /* Centra la imagen */
+  }
+  
+    .col-md-4 {
+      text-align: center; /* This centers the content horizontally */
+    }
+    
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
+  @media (min-width: 992px) {
+  
+    header.bienvenida p {
+      font-size: 1.5rem;
+    }
+  
+    header.especialidad p {
+      font-size: 1.5rem;
+    }
+  
+  }
+  
+  /*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
+  @media (min-width: 1200px) {
+  
+    header.bienvenida h1,
+    header.bienvenida .h1 {
+      font-size: 3.0rem;
+    }
+  
+    header.especialidad h1,
+    header.especialidad .h1 {
+      font-size: 3.0rem;
+    }
+  }
