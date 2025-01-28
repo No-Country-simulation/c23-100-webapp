@@ -8,7 +8,7 @@ import { NavComponent } from 'apps/frontend/src/app/footer-nav/nav/nav.component
 
 @Component({
   selector: 'app-asignar-doctor',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './asignar-doctor.component.html',
   styleUrl: './asignar-doctor.component.css',
 })

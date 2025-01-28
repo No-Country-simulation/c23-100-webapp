@@ -92,91 +92,80 @@
   height: 100px;
 }
 
-/*Bienvenida*/
+/* Citas */
 
-header.bienvenida {
-  background: #127F2F;
-
+.quotes {
+  background-image: url('../../../../../public/imagenes/fondo-verde.jpg');
+  background-size: cover;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.cont-cuadro {
+  width: 60%;
+  margin: auto;
+  background-color: yellow;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.formCuadro {
+  width: 50%;
+  padding: 40px;
+}
+.cuadroFoto {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  background-image: url('../../../../../public/imagenes/fondo-azul.jpg');
+}
+input:disabled, textarea:disabled {
+  background-color: white;
+}
+input[type='text'], textarea {
+  width: 100%;
+  padding: 6px;
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid #cecece;
+  border-radius: 5px;
+  color: #404040;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+textarea {
+  margin: 0px;
+  height: 150px;
+}
+#cuadroFoto {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  align-self: center;
+}
+.cuadroFoto h2 {
+  text-align: center;
 }
 
-.texto-inicio {
-  color: #E8E407;
+/*------------------------------------------RESPONSIVE----------------------------------*/
+@media (max-width: 1250px) {
+  .quotes {
+    width: 90%;
+  }
 }
 
-.text-white-75 {
-  color: #E8E407;
-}
-
-/*Especialides*/
-
-header.especialidad {
-  background: #127F2F;
-
-}
-
-.especialidad {
-  background: #E8E407;
-
-}
-
-.imagen-card {
-  width: 70%;
-  /* Asegúrate de que las imágenes ocupen el 100% del ancho de su contenedor */
-  height: auto;
-  /* Mantiene la proporción de la imagen */
-  margin: 0 auto;
-  /* Centra la imagen horizontalmente */
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    left: -160px;
-    /* Oculta el sidebar */
+@media (max-width: 880px) {
+  .cont-cuadro {
+    flex-direction: column-reverse;
   }
-
-  .navbar-nav {
-    flex-direction: column;
+  .formCuadro {
+    width: 100%;
   }
-
-  .navbar-brand {
-    margin: 5px 0;
-    /* Espaciado entre enlaces en móviles */
-  }
-
-  .icon-container {
-    margin-right: 20px;
-  }
-
-  /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
-  .texto-inicio {
-    font-size: 1.5rem;
-  }
-
-}
-
-/*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
-@media (min-width: 992px) {
-
-  header.bienvenida p {
-    font-size: 1.5rem;
-  }
-
-  header.especialidad p {
-    font-size: 1.5rem;
-  }
-
-}
-
-/*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
-@media (min-width: 1200px) {
-
-  header.bienvenida h1,
-  header.bienvenida .h1 {
-    font-size: 3.0rem;
-  }
-
-  header.especialidad h1,
-  header.especialidad .h1 {
-    font-size: 3.0rem;
+  .cuadroFoto {
+    width: 100%;
+    margin-bottom: 60px;
   }
 }

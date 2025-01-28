@@ -8,7 +8,7 @@ import { NavComponent } from '../../../footer-nav/nav/nav.component';
 
 @Component({
   selector: 'app-admin-panel',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
 })

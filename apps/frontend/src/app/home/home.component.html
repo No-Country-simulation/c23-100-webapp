@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Icono del Buscador -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-</head>
-
-
-
-<body>
-
-
-   
-
-    <app-admin></app-admin>
-<!--
-
-
-    <app-no-auth></app-no-auth>
-
-    <app-paciente></app-paciente>
-
-
-    <app-doctor></app-doctor>
-
-    <app-admin></app-admin>
--->
-
+<section>
+    @switch (user?.role) {
+        @case ('Patient') {
+            <home-paciente [user]="user" />
+        }
+        @case ('Doctor') {
+            <home-doctor [user]="user" />
+        }
+        @case ('Admin') {
+            <home-admin [user]="user" />
+        }
+        @default {
+            <app-no-auth></app-no-auth>
+        }
+    }
+</section>

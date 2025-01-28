@@ -1,8 +1,8 @@
-<!-- Aquí definirán una estructura base para el panel -->
+<!-- Estructura base para el panel -->
 <section>
   @switch (user?.role) { @case ('Patient') {
-  <app-user-panel [user]="user" />
-  } @case ("Doctor") {
+  <app-paciente-panel [user]="user" />
+  } @case ('Doctor') {
   <app-doctor-panel [user]="user" />
   } @case ('Admin') {
   <app-admin-panel [user]="user" />

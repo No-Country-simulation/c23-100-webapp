@@ -1,16 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { User } from '@org/shared';
+import { User,Role } from '@org/shared';
 import { UserService } from '../core/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DoctorPanelComponent } from './components/doctor-panel/doctor-panel.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-import { UserPanelComponent } from './components/user-panel/user-panel.component';
+import { PacientePanelComponent } from './components/paciente-panel/paciente-panel.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DoctorPanelComponent, AdminPanelComponent, UserPanelComponent],
+  imports: [DoctorPanelComponent, AdminPanelComponent, PacientePanelComponent ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })

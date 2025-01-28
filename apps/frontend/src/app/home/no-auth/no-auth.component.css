@@ -1,113 +1,102 @@
-html {
-    height: 100%;
-    scroll-padding-top: calc(4.5rem - 1px);
-  }
-  
-  body {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(245, 245, 245, 0.8);
-  }
-  
-  /*Bienvenida*/
-  
-  .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  header.bienvenida {
-    background: #127F2F;
-  }
-  
-  .texto-inicio {
-    color: #E8E407;
-  }
-  
-  .text-white-75 {
-    color: #E8E407;
-  }
-  
-  #servicios {
-    background: #127F2F;
-  }
-  
-  /*Carrusel*/
-  
-  .card {
-    background: #127F2F;
-  }
-  
-  .texto-amarillo {
-    color: #E8E407;
-  }
-  
-  /*Especialides*/
-  
-  header.especialidad {
-    background: #127F2F;
-  }
-  
-  .servicio-card {
-    background: #E8E407;
-  }
-  
-  .imagen-card {
-    width: 70%;
-    height: auto;
-    margin: 0 auto;
-  }
-  
-  /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
-  
-  @media (max-width: 768px) {
-    .sidebar {
+/*Bienvenida*/
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+header.bienvenida {
+  background: #127F2F;
+}
+
+.texto-inicio {
+  color: #E8E407;
+}
+
+.text-white-75 {
+  color: #E8E407;
+}
+
+#servicios {
+  background: #127F2F;
+}
+
+/*Carrusel*/
+
+.card {
+  background: #127F2F;
+}
+
+.texto-amarillo {
+  color: #E8E407;
+}
+
+/*Especialides*/
+
+header.especialidad {
+  background: #127F2F;
+}
+
+.servicio-card {
+  background: #E8E407;
+}
+
+.imagen-card {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
+
+@media (max-width: 768px) {
+  .sidebar {
       left: -160px;
       /* Oculta el sidebar */
-    }
-  
-    .texto-inicio {
+  }
+
+  .texto-inicio {
       font-size: 1.5rem;
-    }
-  
-    .card-body h5.card-title {
+  }
+
+  .card-body h5.card-title {
       font-size: 0.7rem;
-    }
-  
-    .especialidad .col-lg-6 {
+  }
+
+  .especialidad .col-lg-6 {
       margin-bottom: -75px;
-    }
-  
-    .imagen-card {
+  }
+
+  .imagen-card {
       width: 60%;
       margin: 0 auto;
-    }
   }
-  
-  /*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
-  @media (min-width: 992px) {
-  
-    header.bienvenida p {
+}
+
+/*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
+@media (min-width: 992px) {
+
+  header.bienvenida p {
       font-size: 1.5rem;
-    }
-  
-    header.especialidad p {
+  }
+
+  header.especialidad p {
       font-size: 1.5rem;
-    }
-  
   }
-  
-  /*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
-  @media (min-width: 1200px) {
-  
-    header.bienvenida h1,
-    header.bienvenida .h1 {
+
+}
+
+/*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
+@media (min-width: 1200px) {
+
+  header.bienvenida h1,
+  header.bienvenida .h1 {
       font-size: 3.0rem;
-    }
-  
-    header.especialidad h1,
-    header.especialidad .h1 {
-      font-size: 3.0rem;
-    }
   }
+
+  header.especialidad h1,
+  header.especialidad .h1 {
+      font-size: 3.0rem;
+  }
+}

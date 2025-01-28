@@ -8,7 +8,7 @@ import { NavComponent } from '../../../footer-nav/nav/nav.component';
 
 @Component({
   selector: 'app-doctor-panel',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './doctor-panel.component.html',
   styleUrl: './doctor-panel.component.css',
 })

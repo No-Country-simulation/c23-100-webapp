@@ -1,8 +1,11 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./home/home.component').then((c) => c.HomeComponent),
+  },
   {
     path: 'login',
     loadComponent: () =>
@@ -22,11 +25,27 @@ export const appRoutes: Routes = [
         (c) => c.DashboardComponent
       ),
   },
+
+  /***** Rutas para pruebas ****/
+  {
+    path: 'home-admin',
+    loadComponent: () =>
+    import('./home/admin/admin.component').then(
+      (c) => c.AdminComponent
+    ),
+  },
   {
     path: 'dashboard-admin',
     loadComponent: () =>
     import('./dashboard/components/admin-panel/admin-panel.component').then(
       (c) => c.AdminPanelComponent
+    ),
+  },
+  {
+    path: 'home-doctor',
+    loadComponent: () =>
+    import('./home/doctor/doctor.component').then(
+      (c) => c.DoctorComponent
     ),
   },
   {
@@ -37,10 +56,17 @@ export const appRoutes: Routes = [
     ),
   },
   {
-    path: 'dashboard-user',
+    path: 'home-paciente',
     loadComponent: () =>
-    import('./dashboard/components/user-panel/user-panel.component').then(
-        (c) => c.UserPanelComponent
+    import('./home/paciente/paciente.component').then(
+      (c) => c.PacienteComponent
+    ),
+  },
+  {
+    path: 'dashboard-paciente',
+    loadComponent: () =>
+    import('./dashboard/components/paciente-panel/paciente-panel.component').then(
+        (c) => c.PacientePanelComponent
       ),
   },
   {

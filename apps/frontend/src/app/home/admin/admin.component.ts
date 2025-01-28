@@ -1,17 +1,21 @@
-import { Component, HostListener, OnInit } from '@angular/core'
+import { RouterModule } from '@angular/router';
+import { Component, HostListener, input, OnInit } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../footer-nav/footer/footer.component';
 import { NavComponent } from '../../footer-nav/nav/nav.component';
+import { User } from '@org/shared';
+
 @Component({
-  selector: 'app-admin',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
+  selector: 'home-admin',
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
 export class AdminComponent {
+  
+  public user = input.required<User>();
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
 
@@ -19,8 +23,6 @@ export class AdminComponent {
     this.checkScreenWidth();
     this.loadSidebarState(); // Cargar el estado del sidebar al iniciar
   }
-
-
 
   loadSidebarState() {
     const sidebarState = localStorage.getItem('sidebarState');

@@ -1,188 +1,152 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Icono del Buscador -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-</head>
-
-
-
-<body>
-
-
-    <app-nav></app-nav>
-
-    <!-- Sidebar -->
-    <div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
-        <div class="sidebar-content">
-            <div class="container">
-                <!-- Section: Links -->
-                    <!--Grid row-->
-                    <div class="row">
-                        <!-- Grid column -->
-
-                        <div class="col">
-                            <ul>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <div style="display: flex; align-items: center;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                                                <path
-                                                    d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                                            </svg>
-                                            <span style="margin-left: 10px;">Inicio</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/dashboard-admin">
-                                        <div style="display: flex; align-items: center;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                            </svg>
-                                            <span style="margin-left: 10px;">Citas <br> Solicitadas </span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Grid column -->
-
-                        <div class="col">
-
-                            <div class="sidebar-button-container" (click)="toggleSidebar()">
-                                <button class="btn btn-primary">
-                                    <span *ngIf="!isSidebarOpen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                                        </svg>
-                                    </span>
-                                    <span *ngIf="isSidebarOpen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                        </svg>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
+<!-- Sidebar -->
+<div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
+    <div class="sidebar-content">
+        <div class="container">
+            <!-- Section: Links -->
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['']">
+                                <div style="display: flex; align-items: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                        class="bi bi-house-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                                        <path
+                                            d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                                    </svg>
+                                    <span style="margin-left: 10px;">Inicio</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/dashboard-admin']">
+                                <div style="display: flex; align-items: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                        class="bi bi-calendar" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                    </svg>
+                                    <span style="margin-left: 10px;">Citas <br> Solicitadas </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+                <div class="col">
+                    <div class="sidebar-button-container" (click)="toggleSidebar()">
+                        <button class="btn btn-primary">
+                            <span *ngIf="!isSidebarOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </span>
+                            <span *ngIf="isSidebarOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                </svg>
+                            </span>
+                        </button>
                     </div>
-                <!-- Section: Links -->
+                </div>
+            </div>
+            <!-- Section: Links -->
+        </div>
+
+    </div>
+</div>
+<!-- Bienvenida -->
+<header class="bienvenida" id="bienvenida">
+    <div class="container text-center"> <!-- Agregamos text-center aquí -->
+        <div class="row">
+            <div class="col-lg-6 align-self-baseline">
+                <img src="/imagenes/admin-bienvenida.png" height="400" width="300" class="img-fluid" alt="Médico">
             </div>
 
+            <div class="col">
+                <br><br><br><br>
+                <h1 class="texto-inicio font-weight-bold">¡¡Piensa en grande!!</h1>
+                <br>
+                <p class="text-white-75 mb-5">
+                    Como administradores del sitio web nos aseguramos que cada rincon de este sitio funcione
+                    a la perfeccion. Gestionando el contenido, supervisando la seguridad y optimizando
+                    el rendimiento para ofrecer una experiencia de usuario excepcional.
+                </p>
+            </div>
         </div>
     </div>
-    <!-- Bienvenida -->
-    <header class="bienvenida" id="bienvenida">
-        <div class="container text-center"> <!-- Agregamos text-center aquí -->
-            <div class="row">
-                <div class="col-lg-6 align-self-baseline">
-                    <img src="/imagenes/admin-bienvenida.png"  height="400" width="300"  class="img-fluid" alt="Médico">
-                </div>
+    <br><br>
+</header>
+<header class="especialidad" id="Especialidades">
+    <div class="container text-center"> <!-- Agregamos text-center aquí -->
+        <div class="row">
+            <div class="col-lg-6 align-self-baseline">
+                <img src="/imagenes/fondo-especialidad.jpeg" class="img-fluid">
+            </div>
 
-                <div class="col">
-                    <br><br><br><br>
-                    <h1 class="texto-inicio font-weight-bold">¡¡Piensa en grande!!</h1>
+            <div class="col">
+                <br><br><br><br>
+                <h1 class="texto-inicio font-weight-bold">Especialidades Medicas.
+                </h1>
+                <br>
+                <p class="text-white-75 mb-5">Contamos con una amplia gama de especialistas en diverseas
+                    areas como Cardiologia, Oncologia, Pediatria, Neurologia, Ginecologia y mas.
+                    <br><br>
+                    Nuestra prioridad es tu salud y bienestar.
                     <br>
-                    <p class="text-white-75 mb-5">
-                        Como administradores del sitio web nos aseguramos que cada rincon de este sitio funcione 
-                        a la perfeccion. Gestionando el contenido, supervisando la seguridad y optimizando
-                        el rendimiento para ofrecer una experiencia de usuario excepcional.
-                    </p>
-                </div>
+                    Nos aseguramos de que cada paso de tu tratamiento sea lo mas comodo y eficaz posible.
+                </p>
             </div>
         </div>
-        <br><br>
-    </header>
-
-
-
-
-
-
-
-    <header class="especialidad" id="Especialidades">
-        <div class="container text-center"> <!-- Agregamos text-center aquí -->
-            <div class="row">
-                <div class="col-lg-6 align-self-baseline">
-                    <img src="/imagenes/fondo-especialidad.jpeg" class="img-fluid">
-                </div>
-
-                <div class="col">
-                    <br><br><br><br>
-                    <h1 class="texto-inicio font-weight-bold">Especialidades Medicas.
-                    </h1>
-                    <br>
-                    <p class="text-white-75 mb-5">Contamos con una amplia gama de especialistas en diverseas
-                        areas como Cardiologia, Oncologia, Pediatria, Neurologia, Ginecologia y mas.
-                        <br><br>
-                        Nuestra prioridad es tu salud y bienestar.
+    </div>
+    <br><br>
+</header>
+<!-- Cards de  Planes de alimentacion, salud y enfermedades -->
+<header class="especialidad" id="Especialidades">
+    <div class="container text-center"> <!-- Agregamos text-center aquí -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col ">
+                <div class="card h-100 especialidad">
+                    <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Planes de alimentacion y dieta</h5>
                         <br>
-                        Nos aseguramos de que cada paso de tu tratamiento sea lo mas comodo y eficaz posible.
-                    </p>
+                        <p class="card-text">Implementacion y seguimiento de una alimentacion saludable y estable
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br><br>
-    </header>
-
-    <!-- Cards de  Planes de alimentacion, salud y enfermedades -->
-    <header class="especialidad" id="Especialidades">
-        <div class="container text-center"> <!-- Agregamos text-center aquí -->
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col ">
-                    <div class="card h-100 especialidad">
-                        <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Planes de alimentacion y dieta</h5>
-                            <br>
-                            <p class="card-text">Implementacion y seguimiento de una alimentacion saludable y estable
-                            </p>
-                        </div>
+            <div class="col">
+                <div class="card h-100 especialidad">
+                    <img src="/imagenes/card-salud.png" class="card-img-top imagen-card ">
+                    <div class="card-body">
+                        <h5 class="card-title">Planes de salud compatibles</h5>
+                        <br>
+                        <p class="card-text">Informacion sobre seguros medicos y planes de salud compatibles con el
+                            sitio web.</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card h-100 especialidad">
-                        <img src="/imagenes/card-salud.png" class="card-img-top imagen-card ">
-                        <div class="card-body">
-                            <h5 class="card-title">Planes de salud compatibles</h5>
-                            <br>
-                            <p class="card-text">Informacion sobre seguros medicos y planes de salud compatibles con el
-                                sitio web.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 especialidad">
-                        <img src="/imagenes/card-enfermedades.png" class="card-img-top imagen-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Enfermedades</h5>
-                            <br>
-                            <p class="card-text">Las enfermedades son mortales para la sociedad, por eso debemos
-                                informarnos mas.</p>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 especialidad">
+                    <img src="/imagenes/card-enfermedades.png" class="card-img-top imagen-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Enfermedades</h5>
+                        <br>
+                        <p class="card-text">Las enfermedades son mortales para la sociedad, por eso debemos
+                            informarnos mas.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
-    </header>
-
-
-
-
-
-    <!-- Footer -->
-    <app-footer></app-footer>
+    </div>
+    <br>
+</header>

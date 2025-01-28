@@ -7,7 +7,7 @@ import { FooterComponent } from 'apps/frontend/src/app/footer-nav/footer/footer.
 import { NavComponent } from 'apps/frontend/src/app/footer-nav/nav/nav.component';
 @Component({
   selector: 'app-registrar-doctor',
-  imports: [CommonModule, ReactiveFormsModule, FooterComponent, NavComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registrar-doctor.component.html',
   styleUrl: './registrar-doctor.component.css',
 })

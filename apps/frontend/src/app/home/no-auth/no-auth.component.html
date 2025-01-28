@@ -1,138 +1,103 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Icono del Buscador -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-</head>
-
-
-
-<body>
-
-
-    <app-nav></app-nav>
-    <!-- Bienvenida -->
-    <header class="bienvenida" id="bienvenida">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-lg-6 align-self-baseline">
-                    <img src="/imagenes/hospital.jpg" class="img-fluid" alt="Médico">
-                </div>
-
-                <div class="col">
-                    <h1 class="texto-inicio font-weight-bold">¡Bienvenidos!
-                        <br>
-                        Somos NoCountry Medical
-                    </h1>
-                    <br>
-                    <p class="text-white-75 mb-5">Somos una Clinica que fue fundada en el año 2020, el cual empezo
-                        brindado atencion medica para los pacientes del COVID-19 y actualmente contamos con varias
-                        especialidades como Psicologia, Psiquiatria, Neurologia etc... Estamos ubicados en Buenos Aires,
-                        Argentina
-                    </p>
-                </div>
+<!-- Bienvenida -->
+<header class="bienvenida pt-5" id="bienvenida">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-6 align-self-baseline">
+                <img src="/imagenes/hospital.jpg" class="img-fluid" alt="Médico">
+            </div>
+            <div class="col">
+                <h1 class="texto-inicio font-weight-bold">¡Bienvenidos!<br>Somos NoCountry Medical</h1>
+                <br>
+                <p class="text-white-75 mb-5">Somos una Clinica que fue fundada en el año 2020, el cual empezo
+                    brindado atencion medica para los pacientes del COVID-19 y actualmente contamos con varias
+                    especialidades como Psicologia, Psiquiatria, Neurologia etc... Estamos ubicados en Buenos Aires,
+                    Argentina</p>
             </div>
         </div>
-    </header>
-
-
-
-    <!--Servicios-->
-    <section id="servicios">
-        <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
-            <h3 class="heading text-center texto-amarillo">Servicios que ofrecemos:</h3>
-            <br>
-            <div class="carousel-inner text-center">
-                <div class="carousel-item active">
-                    <div class="card-wrapper container-sm d-flex justify-content-around">
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/cardiologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Cardiologia</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/odontologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Odontologia</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/dermatologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Dermatologia</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card-wrapper container-sm d-flex justify-content-around">
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/neumologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Neumologia</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/oftalmologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Oftamologia</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/neurologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Neurologia</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item ">
-                    <div class="card-wrapper container-sm d-flex justify-content-around">
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/otorrino.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Otorrino</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/pediatria.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Pediatria</h5>
-                            </div>
-                        </div>
-                        <div class="card h-100 servicio-card" style="width: 18rem">
-                            <img src="/imagenes/podologia.png" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <h5 class="card-title">Podologia</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Boton de atras-->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <!--Boton de adelante-->
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
+    </div>
+</header>
+<!--Servicios-->
+<section id="servicios" class="pb-5">
+    <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <h3 class="heading text-center texto-amarillo pt-5">Servicios que ofrecemos:</h3>
         <br>
-    </section>
-
-
-
-
-
-
-
-    <!-- Footer -->
-    <app-footer></app-footer>
+        <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+                <div class="card-wrapper container-sm d-flex justify-content-around">
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/cardiologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Cardiologia</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/odontologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Odontologia</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/dermatologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Dermatologia</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card-wrapper container-sm d-flex justify-content-around">
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/neumologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Neumologia</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/oftalmologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Oftamologia</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/neurologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Neurologia</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <div class="card-wrapper container-sm d-flex justify-content-around">
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/otorrino.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Otorrino</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/pediatria.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Pediatria</h5>
+                        </div>
+                    </div>
+                    <div class="card h-100 servicio-card" style="width: 18rem">
+                        <img src="/imagenes/podologia.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Podologia</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Boton de atras-->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <!--Boton de adelante-->
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+</section>
