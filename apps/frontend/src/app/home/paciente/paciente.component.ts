@@ -1,24 +1,38 @@
-import { Component, HostListener, input, OnInit } from '@angular/core'
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms'; 
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { User } from '@org/shared';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'home-paciente',
+  standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './paciente.component.html',
-  styleUrl: './paciente.component.css',
+  styleUrls: ['./paciente.component.css'],
 })
-export class PacienteComponent {
-  public user = input.required<User>();
-  isSidebarOpen = true; // Cambiado a false por defecto
+export class PacienteComponent implements OnInit {
+  @Input() user!: User;
+  isSidebarOpen = true;
   isSidebarHalfOpen = false;
+
+  form = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    provincia: new FormControl(null, [Validators.required]),
+    direccion: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    especialidad: new FormControl(null, [Validators.required]),
+  });
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.checkScreenWidth();
-    this.loadSidebarState(); // Cargar el estado del sidebar al iniciar
+    this.loadSidebarState();
+    this.loadUserProfile();
   }
 
   loadSidebarState() {
@@ -26,14 +40,14 @@ export class PacienteComponent {
     if (sidebarState === 'open') {
       this.isSidebarOpen = true;
       this.isSidebarHalfOpen = false;
-    } else if (sidebarState === 'closed') {
+    } else {
       this.isSidebarOpen = false;
       this.isSidebarHalfOpen = true;
     }
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -45,33 +59,33 @@ export class PacienteComponent {
   }
 
   toggleSidebar() {
-    if (this.isSidebarOpen) {
-      this.isSidebarOpen = false;
-      this.isSidebarHalfOpen = true;
-      localStorage.setItem('sidebarState', 'closed'); // Guardar estado cerrado
-    } else {
-      this.isSidebarOpen = true;
-      this.isSidebarHalfOpen = false;
-      localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
-    }
+    this.isSidebarOpen = !this.isSidebarOpen;
+    this.isSidebarHalfOpen = !this.isSidebarOpen;
+    localStorage.setItem('sidebarState', this.isSidebarOpen ? 'open' : 'closed');
   }
-  
-  form = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    provincia: new FormControl(null, [Validators.required]),  
-    direccion: new FormControl('', [Validators.required, Validators.min(8)]),      
-    especialidad: new FormControl(null, [Validators.required]),      
-  });
 
-  constructor() {}
+  loadUserProfile() {
+    this.userService.getProfile().subscribe({
+      next: (user) => {
+        this.user = user;
+        this.form.patchValue({
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+        });
+      },
+      error: (err) => {
+        console.error('Error al cargar el perfil del usuario:', err);
+      },
+    });
+  }
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value); // Muestra la información en la consola
+      console.log(this.form.value);
     } else {
-      this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
+      this.form.markAllAsTouched();
     }
   }
 }
+

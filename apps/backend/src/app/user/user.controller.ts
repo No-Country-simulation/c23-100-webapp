@@ -21,6 +21,7 @@ export class UserController {
 
   @Get('profile')
   getProfile(@User('uid') userId: string) {
+    console.log('Usuario autenticado con ID:', userId);
     return this.userService.getProfile(userId);
   }
 }

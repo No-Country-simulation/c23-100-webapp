@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'], // Corrección en la propiedad
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router // Inyectar el Router para la redirección
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -35,8 +35,12 @@ export class LoginComponent {
           text: 'Has iniciado sesión correctamente.',
           icon: 'success',
           confirmButtonText: 'Aceptar',
+        }).then(() => {
+          this.router.navigate(['/home-paciente']); // Redirección
         });
       });
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
 }

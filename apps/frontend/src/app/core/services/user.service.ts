@@ -7,7 +7,7 @@ import { User } from '@org/shared';
 })
 export class UserService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000/user';
+  private readonly baseUrl = 'http://localhost:3000/api/user';
 
   getProfile() {
     return this.http.get<User>(`${this.baseUrl}/profile`, {
