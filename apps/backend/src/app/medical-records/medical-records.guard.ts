@@ -11,7 +11,7 @@ export class MedicalRecordsGuard implements CanActivate {
     const request: Request = context.switchToHttp().getRequest();
     const user = request['user'];
 
-    if (user.role !== Role.DOCTOR) {
+    if (user && user.role !== Role.DOCTOR) {
       return false;
     }
 
