@@ -28,15 +28,15 @@ export const appRoutes: Routes = [
   {
     path: 'asignar-doctor',
     loadComponent: () =>
-      import('./dashboard/components/admin-panel/asignar-doctor/asignar-doctor.component').then(
-        (c) => c.AsignarDoctorComponent
-      ),
+      import(
+        './dashboard/components/admin-panel/asignar-doctor/asignar-doctor.component'
+      ).then((c) => c.AsignarDoctorComponent),
   },
   {
     path: 'registrar-doctor',
     loadComponent: () =>
-      import('./dashboard/components/admin-panel/registrar-doctor/registrar-doctor.component').then(
-        (c) => c.RegistrarDoctorComponent
-      ),
+      import(
+        './dashboard/components/admin-panel/registrar-doctor/registrar-doctor.component'
+      ).then((c) => c.RegistrarDoctorComponent),
   },
 ];

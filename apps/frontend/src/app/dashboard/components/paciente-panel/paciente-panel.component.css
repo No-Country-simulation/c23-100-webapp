@@ -4,11 +4,11 @@
   position: fixed;
   top: 200px;
   width: 220px;
-  background: #1D1832;
+  background: #1d1832;
   overflow-y: auto;
   z-index: 1;
   transition: left 0.3s ease-in-out;
-  border-radius: 8px
+  border-radius: 8px;
   /* Agrega una transición suave */
 }
 
@@ -43,14 +43,14 @@
 }
 
 .sidebar ul li a:hover {
-  background: #127F2F;
+  background: #127f2f;
   color: white;
   /* Color del texto al pasar el ratón */
 }
 
 .sidebar-button {
   /* Add your button styles here */
-  background-color: #127F2F;
+  background-color: #127f2f;
   /* Example button style */
   color: white;
   border-radius: 5px;
@@ -96,9 +96,12 @@
 
 .quotes {
   background-image: url('../../../../../public/imagenes/fondo-verde.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   padding-top: 100px;
   padding-bottom: 100px;
+  width: 100%;
 }
 .cont-cuadro {
   width: 60%;
@@ -121,10 +124,12 @@
   justify-content: space-between;
   background-image: url('../../../../../public/imagenes/fondo-azul.jpg');
 }
-input:disabled, textarea:disabled {
+input:disabled,
+textarea:disabled {
   background-color: white;
 }
-input[type='text'], textarea {
+input[type='text'],
+textarea {
   width: 100%;
   padding: 6px;
   display: block;
@@ -151,11 +156,6 @@ textarea {
 }
 
 /*------------------------------------------RESPONSIVE----------------------------------*/
-@media (max-width: 1250px) {
-  .quotes {
-    width: 90%;
-  }
-}
 
 @media (max-width: 880px) {
   .cont-cuadro {

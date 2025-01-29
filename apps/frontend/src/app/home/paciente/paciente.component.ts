@@ -74,7 +74,7 @@ export class PacienteComponent implements OnInit {
   }
 
   loadUserProfile() {
-    this.userService.getProfile().subscribe({
+    this.userService.user$.subscribe({
       next: (user) => {
         this.user = user;
         this.form.patchValue({

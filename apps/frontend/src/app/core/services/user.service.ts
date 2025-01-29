@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../../shared';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,12 +9,16 @@ import { User } from '../../shared';
 export class UserService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/user';
+  private userSubject = new BehaviorSubject<User | null>(null);
+  public user$ = this.userSubject.asObservable();
 
   getProfile() {
-    return this.http.get<User>(`${this.baseUrl}/profile`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-      },
-    });
+    return this.http
+      .get<User>(`${this.baseUrl}/profile`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+        },
+      })
+      .pipe(tap((user) => this.userSubject.next(user)));
   }
 }

@@ -21,7 +21,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({
-      next: (user) => (this.user = user),
+      next: (user) => {
+        this.user = user;
+      },
       error: (err: HttpErrorResponse) => {
         if (err.status == 401) {
           Swal.fire({
