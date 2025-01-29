@@ -36,7 +36,7 @@ export class LoginComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar',
         }).then(() => {
-          this.router.navigate(['/home-paciente']); // Redirección
+          this.router.navigate(['']); // Redirección
         });
       });
     } else {
