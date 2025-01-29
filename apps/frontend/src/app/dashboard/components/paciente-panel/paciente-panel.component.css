@@ -101,7 +101,8 @@
   padding-bottom: 100px;
 }
 .cont-cuadro {
-  width: 60%;
+  width: 900px;
+  padding: 0px;
   margin: auto;
   background-color: yellow;
   border-radius: 8px;
@@ -113,7 +114,7 @@
   width: 50%;
   padding: 40px;
 }
-.cuadroFoto {
+.cuadroPaciente {
   width: 50%;
   padding: 40px;
   display: flex;
@@ -138,28 +139,44 @@ input[type='text'], textarea {
 }
 textarea {
   margin: 0px;
-  height: 150px;
+  height: 170px;
 }
-#cuadroFoto {
-  width: 250px;
-  height: 250px;
+.cuadroFoto {
+  align-self: center;
+}
+.cuadroFoto img {
+  width: 270px;
+  height: 270px;
   border-radius: 50%;
   align-self: center;
 }
 .cuadroFoto h2 {
   text-align: center;
+  color: white;
+}
+.cuadroBotones {
+  display: flex;
+  justify-content: space-between;
+}
+.cuadroBotones div {
+  width: 170px;
+  height: 50px;
+  align-content: center;
+}
+.cuadroBotones a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
 }
 
 /*------------------------------------------RESPONSIVE----------------------------------*/
-@media (max-width: 1250px) {
-  .quotes {
-    width: 90%;
-  }
-}
-
 @media (max-width: 880px) {
   .cont-cuadro {
+    width: 100%;
     flex-direction: column-reverse;
+  }
+  .cuadroPaciente {
+    width: 100%;
   }
   .formCuadro {
     width: 100%;
