@@ -1,21 +1,16 @@
-import { Component, HostListener, input, OnInit } from '@angular/core'
+import { Component, HostListener, input, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
-import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms'; 
-import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../footer-nav/footer/footer.component';
-import { NavComponent } from '../../footer-nav/nav/nav.component';
-import { User } from '@org/shared';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from '../../shared';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'home-doctor',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
 })
-export class DoctorComponent {
-
+export class DoctorComponent implements OnInit {
   public user = input.required<User>();
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
@@ -37,7 +32,7 @@ export class DoctorComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -59,17 +54,15 @@ export class DoctorComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
-  
+
   form = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    provincia: new FormControl(null, [Validators.required]),  
-    direccion: new FormControl('', [Validators.required, Validators.min(8)]),      
-    especialidad: new FormControl(null, [Validators.required]),      
+    provincia: new FormControl(null, [Validators.required]),
+    direccion: new FormControl('', [Validators.required, Validators.min(8)]),
+    especialidad: new FormControl(null, [Validators.required]),
   });
-
-  constructor() {}
 
   onSubmit() {
     if (this.form.valid) {

@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
+<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
   <div class="sidebar-content">
     <div class="container">
       <!-- Section: Links -->
@@ -42,20 +42,23 @@
 
           <div class="sidebar-button-container" (click)="toggleSidebar()">
             <button class="btn btn-primary">
-              <span *ngIf="!isSidebarOpen">
+            @if (!isSidebarOpen) {
+            <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                 </svg>
               </span>
-              <span *ngIf="isSidebarOpen">
+            } @else {
+            <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-chevron-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                 </svg>
               </span>
+              }
             </button>
           </div>
         </div>
@@ -75,7 +78,7 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col ">
           <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
             <div class="card-body">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row">
@@ -84,11 +87,13 @@
                     <select class="form-control" id="provincias">
                       <option value="">Asignar doctor</option>
                       <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicologo</option>
+                      <option>Jose Perez - Psicólogo</option>
                     </select>
-                    <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched" class="text-danger">
+                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
+                    <div class="text-danger">
                       Debe seleccionar una provincia.
                     </div>
+                    }
                   </div>
                   <br> <br> <br>
                   <button class="btn btn-success" type="submit" [disabled]="form.invalid">
@@ -101,7 +106,7 @@
         </div>
         <div class="col ">
           <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
             <div class="card-body">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row">
@@ -110,11 +115,13 @@
                     <select class="form-control" id="provincias">
                       <option value="">Asignar doctor</option>
                       <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicologo</option>
+                      <option>Jose Perez - Psicólogo</option>
                     </select>
-                    <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched" class="text-danger">
+                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
+                    <div class="text-danger">
                       Debe seleccionar una provincia.
                     </div>
+                    }
                   </div>
                   <br> <br> <br>
                   <button class="btn btn-success" type="submit" [disabled]="form.invalid">
@@ -128,7 +135,7 @@
 
         <div class="col ">
           <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
             <div class="card-body">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row">
@@ -137,11 +144,13 @@
                     <select class="form-control" id="provincias">
                       <option value="">Asignar doctor</option>
                       <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicologo</option>
+                      <option>Jose Perez - Psicólogo</option>
                     </select>
-                    <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched" class="text-danger">
+                    @if(form.get('provincia')?.invalid && form.get('provincia')?.touched){
+                    <div class="text-danger">
                       Debe seleccionar una provincia.
                     </div>
+                  }
                   </div>
                   <br> <br> <br>
                   <button class="btn btn-success" type="submit" [disabled]="form.invalid">
@@ -154,7 +163,7 @@
         </div>
         <div class="col ">
           <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
             <div class="card-body">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row">
@@ -163,11 +172,13 @@
                     <select class="form-control" id="provincias">
                       <option value="">Asignar doctor</option>
                       <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicologo</option>
+                      <option>Jose Perez - Psicólogo</option>
                     </select>
-                    <div *ngIf="form.get('provincia')?.invalid && form.get('provincia')?.touched" class="text-danger">
-                      Debe seleccionar una provincia.
-                    </div>
+                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
+                      <div class="text-danger">
+                        Debe seleccionar una provincia.
+                      </div>
+                    }
                   </div>
                   <br> <br> <br>
                   <button class="btn btn-success" type="submit" [disabled]="form.invalid">

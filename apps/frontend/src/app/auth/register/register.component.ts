@@ -11,7 +11,7 @@ import {
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DoctorSpecialization, Role } from '@org/shared';
+import { DoctorSpecialization, Role } from '../../shared';
 
 @Component({
   selector: 'app-register',

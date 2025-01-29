@@ -1,17 +1,20 @@
 import { RouterModule } from '@angular/router';
-import { Component, input,  HostListener } from '@angular/core';
-import { User } from '@org/shared';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, input, HostListener, OnInit } from '@angular/core';
+import { User } from '../../../shared';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-panel',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './doctor-panel.component.html',
   styleUrl: './doctor-panel.component.css',
 })
-export class DoctorPanelComponent {
-
+export class DoctorPanelComponent implements OnInit {
   public user = input.required<User>();
 
   isSidebarOpen = true; // Cambiado a false por defecto
@@ -34,7 +37,7 @@ export class DoctorPanelComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -59,13 +62,23 @@ export class DoctorPanelComponent {
 
   form = new FormGroup({
     id: new FormControl(''),
-    horario_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    direccion_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    pasillo_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    numero_de_puerta: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    horario_cita: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    direccion_cita: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    pasillo_cita: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    numero_de_puerta: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
   });
-
-  constructor() { }
 
   onSubmit() {
     if (this.form.valid) {
@@ -74,5 +87,4 @@ export class DoctorPanelComponent {
       this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
     }
   }
-  
 }

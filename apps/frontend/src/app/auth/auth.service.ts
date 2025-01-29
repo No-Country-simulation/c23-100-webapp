@@ -11,7 +11,7 @@ import {
 import { firebaseApp } from '../core/config/firebase';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { CreateUserDto } from '@org/shared';
+import { User as UserDto } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class AuthService {
     });
   }
 
-  async signup(data: CreateUserDto, password: string) {
+  async signup(data: UserDto, password: string) {
     const userCredential = await createUserWithEmailAndPassword(
       this.auth,
       data.email,
@@ -38,7 +38,7 @@ export class AuthService {
     const userToken = await userCredential.user.getIdToken(true);
 
     await firstValueFrom(
-      this.http.post<CreateUserDto>(`${this.baseUrl}/user`, data, {
+      this.http.post<UserDto>(`${this.baseUrl}/user`, data, {
         headers: { Authorization: `Bearer ${userToken}` },
       })
     );

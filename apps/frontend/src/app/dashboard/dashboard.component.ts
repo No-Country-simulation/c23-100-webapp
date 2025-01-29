@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@org/shared';
+import { User } from '../shared';
 import { UserService } from '../core/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -10,14 +10,14 @@ import { PacientePanelComponent } from './components/paciente-panel/paciente-pan
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DoctorPanelComponent, AdminPanelComponent, PacientePanelComponent ],
+  imports: [DoctorPanelComponent, AdminPanelComponent, PacientePanelComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
   protected user?: User;
 
-  constructor(private userService:UserService,private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({

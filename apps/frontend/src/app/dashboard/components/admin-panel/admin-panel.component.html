@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
+<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
   <div class="sidebar-content">
     <div class="container">
       <!-- Section: Links -->
@@ -41,20 +41,23 @@
 
           <div class="sidebar-button-container" (click)="toggleSidebar()">
             <button class="btn btn-primary">
-              <span *ngIf="!isSidebarOpen">
+              @if (!isSidebarOpen) {
+              <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-chevron-right" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                 </svg>
               </span>
-              <span *ngIf="isSidebarOpen">
+              } @else {
+              <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-chevron-left" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
                     d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                 </svg>
               </span>
+              }
             </button>
           </div>
         </div>
@@ -72,7 +75,7 @@
       <div class="col ">
         <br><br><br>
         <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card">
+            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
             <div class="card-body">
                 <a href="/asignar-doctor" class="btn btn-success">Asignar Doctores</a>
             </div>
@@ -81,7 +84,7 @@
     <div class="col">
       <br><br><br>
         <div class="card h-100 especialidad">
-            <img src="/imagenes/card-salud.png" class="card-img-top imagen-card ">
+            <img src="/imagenes/card-salud.png" class="card-img-top imagen-card" alt="Salud">
             <div class="card-body">
                 <a href="/registrar-doctor" class="btn btn-success">Registrar Doctores</a>
             </div>
