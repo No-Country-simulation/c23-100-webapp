@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../../shared';
 
 @Component({
-  selector: 'home-admin',
+  selector: 'app-home-admin',
   imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',

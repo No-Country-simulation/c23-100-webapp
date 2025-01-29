@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
-  selector: 'home-paciente',
+  selector: 'app-home-paciente',
   imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css'],

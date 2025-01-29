@@ -5,7 +5,7 @@ import { User } from '../../shared';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'home-doctor',
+  selector: 'app-home-doctor',
   imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
