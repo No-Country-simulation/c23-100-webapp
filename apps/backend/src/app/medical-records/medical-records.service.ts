@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { FirestoreService } from '../database/firestore.service';
-import { CreateMedicalRecordDto, MedicalRecord } from '@org/shared';
+import { CreateMedicalRecordDto } from './dto/create-medical-record.dto';
+import { MedicalRecord } from '../common/interfaces/medical-record';
 
 @Injectable()
 export class MedicalRecordsService {

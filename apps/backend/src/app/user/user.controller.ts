@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
-import { CreateUserDto, PaginationDto } from '@org/shared';
+import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserService } from './user.service';
 import { User } from '../common/decorators/user.decorator';
+import { PaginationDto } from '../common/dtos/pagination.dto';
 
 @Controller('user')
 @UseGuards(AuthGuard)

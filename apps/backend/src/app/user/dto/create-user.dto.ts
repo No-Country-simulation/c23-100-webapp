@@ -6,8 +6,8 @@ import {
   IsString,
   IsEmail,
 } from 'class-validator';
-import { Role } from '../../enums/user-role';
-import { DoctorSpecialization } from '../../enums/doctor-specialization';
+import { Role } from '../../common/enums/user-role';
+import { DoctorSpecialization } from '../../common/enums/doctor-specialization';
 
 export class CreateUserDto {
   @IsString()

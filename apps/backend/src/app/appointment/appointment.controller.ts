@@ -9,9 +9,10 @@ import {
   Patch,
 } from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
-import { CreateAppointmentDto, UpdateAppointmentDto } from '@org/shared';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { AdminGuard } from '../common/guards/admin.guard';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Controller('appointments')
 @UseGuards(AuthGuard)

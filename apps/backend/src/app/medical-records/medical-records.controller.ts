@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { MedicalRecordsService } from './medical-records.service';
 import { AuthGuard } from '../auth/auth.guard';
-import { CreateMedicalRecordDto } from '@org/shared';
+import { CreateMedicalRecordDto } from './dto/create-medical-record.dto';
 import { MedicalRecordsGuard } from './medical-records.guard';
 import { User } from '../common/decorators/user.decorator';
 

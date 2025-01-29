@@ -6,12 +6,16 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Length,
+  Matches,
 } from 'class-validator';
-import { AppointmentStatus } from '../../enums/appointment-status';
-import { DoctorSpecialization } from '../../enums/doctor-specialization';
+import { AppointmentStatus } from '../../common/enums/appointment-status';
+import { DoctorSpecialization } from '../../common/enums/doctor-specialization';
 
 export class CreateAppointmentDto {
-  @IsUUID()
+  @IsString()
+  @Length(28, 28)
+  @Matches(/^[A-Za-z0-9_-]+$/)
   patientId: string;
 
   @IsUUID()

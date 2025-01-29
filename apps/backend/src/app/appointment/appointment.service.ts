@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { FirestoreService } from '../database/firestore.service';
-import {
-  Appointment,
-  CreateAppointmentDto,
-  UpdateAppointmentDto,
-} from '@org/shared';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { Appointment } from '../common/interfaces/appointment';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Injectable()
 export class AppointmentService {

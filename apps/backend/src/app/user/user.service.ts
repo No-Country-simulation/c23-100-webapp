@@ -1,6 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto, PaginationDto, Role, User } from '@org/shared';
 import { FirestoreService } from '../database/firestore.service';
+import { User } from '../common/interfaces/user';
+import { PaginationDto } from '../common/dtos/pagination.dto';
+import { Role } from '../common/enums/user-role';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
