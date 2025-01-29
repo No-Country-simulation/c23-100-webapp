@@ -19,6 +19,10 @@ export class UserService {
           Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
         },
       })
-      .pipe(tap((user) => this.userSubject.next(user)));
+      .pipe(
+        tap((user) => {
+          this.userSubject.next(user);
+        })
+      );
   }
 }
