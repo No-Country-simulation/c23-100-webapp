@@ -10,8 +10,8 @@ import {
 } from 'firebase/auth';
 import { firebaseApp } from '../core/config/firebase';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { User as UserDto } from '../shared';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +23,12 @@ export class AuthService {
   private readonly auth = getAuth(firebaseApp);
   private currentUser: User | null = null;
 
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
-      this.currentUser = user;
+      this.userSubject.next(user);
     });
   }
 
@@ -58,9 +61,11 @@ export class AuthService {
 
   async logout(): Promise<void> {
     await signOut(this.auth);
+    this.userSubject.next(null); // Limpia el usuario
+    this.router.navigate(['/']);
   }
 
   getCurrentUser(): User | null {
-    return this.currentUser;
+    return this.userSubject.value;
   }
 }
