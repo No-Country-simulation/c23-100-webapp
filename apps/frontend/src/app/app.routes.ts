@@ -25,50 +25,6 @@ export const appRoutes: Routes = [
         (c) => c.DashboardComponent
       ),
   },
-
-  /***** Rutas para pruebas ****/
-  {
-    path: 'home-admin',
-    loadComponent: () =>
-    import('./home/admin/admin.component').then(
-      (c) => c.AdminComponent
-    ),
-  },
-  {
-    path: 'dashboard-admin',
-    loadComponent: () =>
-    import('./dashboard/components/admin-panel/admin-panel.component').then(
-      (c) => c.AdminPanelComponent
-    ),
-  },
-  {
-    path: 'home-doctor',
-    loadComponent: () =>
-    import('./home/doctor/doctor.component').then(
-      (c) => c.DoctorComponent
-    ),
-  },
-  {
-    path: 'dashboard-doctor',
-    loadComponent: () =>
-    import('./dashboard/components/doctor-panel/doctor-panel.component').then(
-      (c) => c.DoctorPanelComponent
-    ),
-  },
-  {
-    path: 'home-paciente',
-    loadComponent: () =>
-    import('./home/paciente/paciente.component').then(
-      (c) => c.PacienteComponent
-    ),
-  },
-  {
-    path: 'dashboard-paciente',
-    loadComponent: () =>
-    import('./dashboard/components/paciente-panel/paciente-panel.component').then(
-        (c) => c.PacientePanelComponent
-      ),
-  },
   {
     path: 'asignar-doctor',
     loadComponent: () =>

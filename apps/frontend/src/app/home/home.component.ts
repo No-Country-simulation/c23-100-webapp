@@ -6,6 +6,7 @@ import { PacienteComponent } from './paciente/paciente.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { AdminComponent } from './admin/admin.component';
 import { NoAuthComponent } from './no-auth/no-auth.component';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +18,22 @@ export class HomeComponent implements OnInit {
 
   protected user?: User;
 
+  constructor(private userService:UserService) {}
+
   ngOnInit(): void {
-    let usuario: User = {name: "", email: "", role: undefined, phone: "", specialization: ""};
-    this.user = usuario;
+    this.loadUserProfile();
   }
+
+  loadUserProfile() {
+    this.userService.getProfile().subscribe({
+      next: (user) => {
+        this.user = user;
+        console.log(this.user);
+      },
+      error: (err) => {
+        console.error('Error al cargar el perfil del usuario:', err);
+      },
+    });
+  }
+
 }

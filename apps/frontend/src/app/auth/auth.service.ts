@@ -55,9 +55,8 @@ export class AuthService {
       password
     );
     const userToken = await userCredential.user.getIdToken(true);
-
     sessionStorage.setItem('userToken', userToken);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['']);
   }
 
   async logout(): Promise<void> {

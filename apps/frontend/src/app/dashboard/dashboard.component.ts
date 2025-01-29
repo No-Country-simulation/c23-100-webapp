@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { User,Role } from '@org/shared';
+import { Component, OnInit } from '@angular/core';
+import { User } from '@org/shared';
 import { UserService } from '../core/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -15,9 +15,9 @@ import { PacientePanelComponent } from './components/paciente-panel/paciente-pan
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  private readonly userService = inject(UserService);
-  private readonly router = inject(Router);
   protected user?: User;
+
+  constructor(private userService:UserService,private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getProfile().subscribe({

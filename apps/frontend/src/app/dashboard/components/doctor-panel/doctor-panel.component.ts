@@ -1,20 +1,18 @@
-import { Component, input,  HostListener, OnInit  } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { Component, input,  HostListener } from '@angular/core';
 import { User } from '@org/shared';
-
-import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../../footer-nav/footer/footer.component';
-import { NavComponent } from '../../../footer-nav/nav/nav.component';
 
 @Component({
   selector: 'app-doctor-panel',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './doctor-panel.component.html',
   styleUrl: './doctor-panel.component.css',
 })
 export class DoctorPanelComponent {
-  public user = input.required<User>();
 
+  public user = input.required<User>();
 
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
@@ -23,8 +21,6 @@ export class DoctorPanelComponent {
     this.checkScreenWidth();
     this.loadSidebarState(); // Cargar el estado del sidebar al iniciar
   }
-
-
 
   loadSidebarState() {
     const sidebarState = localStorage.getItem('sidebarState');
@@ -60,6 +56,7 @@ export class DoctorPanelComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
+
   form = new FormGroup({
     id: new FormControl(''),
     horario_cita: new FormControl('', [Validators.required, Validators.minLength(4)]),

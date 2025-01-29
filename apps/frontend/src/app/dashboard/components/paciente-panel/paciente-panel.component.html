@@ -1,3 +1,67 @@
+<!-- Sidebar -->
+<div class="sidebar" [ngClass]="{'half-open': isSidebarHalfOpen, 'full-open': isSidebarOpen}">
+    <div class="sidebar-content">
+        <div class="container">
+            <!-- Section: Links -->
+            <!--Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <ul>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['']">
+                                <div style="display: flex; align-items: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                                        class="bi bi-house-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
+                                        <path
+                                            d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
+                                    </svg>
+                                    <span style="margin-left: 10px;">Inicio</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/dashboard']">
+                                <div style="display: flex; align-items: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+                                        class="bi bi-calendar" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                    </svg>
+                                    <span style="margin-left: 10px">Pacientes en espera</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+                <div class="col">
+                    <div class="sidebar-button-container" (click)="toggleSidebar()">
+                        <button class="btn btn-primary">
+                            <span *ngIf="!isSidebarOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </span>
+                            <span *ngIf="isSidebarOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Section: Links -->
+        </div>
+    </div>
+</div>
 <!-- Citas -->
 <div class="quotes">
   <div class="cont-cuadro">
