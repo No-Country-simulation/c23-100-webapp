@@ -11,9 +11,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <div class="button-group">
-                    <a class="boton1 btn btn-warning" href="/login">Iniciar sesión</a>
-                    <a class="boton2 btn btn-warning" href="/register">Registro</a>
+                <!-- Si el usuario NO está autenticado, mostrar botones de login y registro -->
+                <div class="button-group" *ngIf="!isAuthenticated">
+                    <a class="boton1 btn btn-warning" routerLink="/login">Iniciar sesión</a>
+                    <a class="boton2 btn btn-warning" routerLink="/register">Registro</a>
+                </div>
+
+                <!-- Si el usuario está autenticado, mostrar su nombre y botón de cerrar sesión -->
+                <div *ngIf="isAuthenticated" class="d-flex align-items-center">
+                    <span class="navbar-text me-3">Bienvenido, {{ userName }}</span>
+                    <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
                 </div>
             </ul>
         </div>
