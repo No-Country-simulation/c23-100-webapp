@@ -5,11 +5,12 @@ import {
   IsOptional,
   IsString,
   IsEmail,
+  MinLength,
 } from 'class-validator';
-import { Role } from '../../enums/user-role';
-import { DoctorSpecialization } from '../../enums/doctor-specialization';
+import { Role } from '../../common/enums/user-role';
+import { DoctorSpecialization } from '../../common/enums/doctor-specialization';
 
-export class CreateUserDto {
+export class SignUpDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -17,6 +18,11 @@ export class CreateUserDto {
   @IsString()
   @IsEmail()
   email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(6)
+  password: string;
 
   @IsEnum(Role)
   @IsOptional()
