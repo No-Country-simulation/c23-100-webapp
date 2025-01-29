@@ -1,26 +1,4 @@
-import { Transform } from 'class-transformer';
-import { IsDate, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
-import { AppointmentStatus } from '../../enums/appointment-status';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateAppointmentDto } from './create-appointment.dto';
 
-export class UpdateAppointmentDto {
-  @IsUUID()
-  @IsOptional()
-  patientId?: string;
-
-  @IsUUID()
-  @IsOptional()
-  doctorId?: string;
-
-  @IsDate()
-  @Transform(({ value }) => new Date(value))
-  @IsOptional()
-  date?: Date;
-
-  @IsEnum(AppointmentStatus)
-  @IsOptional()
-  status?: AppointmentStatus;
-
-  @IsString()
-  @IsOptional()
-  videoCallLink?: string;
-}
+export class UpdateAppointmentDto extends PartialType(CreateAppointmentDto) {}
