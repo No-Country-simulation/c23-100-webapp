@@ -3,15 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  User,
 } from 'firebase/auth';
 import { firebaseApp } from '../core/config/firebase';
 import { Router } from '@angular/router';
 import { User as UserDto } from '../shared';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,16 +19,6 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly auth = getAuth(firebaseApp);
-  private currentUser: User | null = null;
-
-  private userSubject = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject.asObservable();
-
-  constructor() {
-    onAuthStateChanged(this.auth, (user) => {
-      this.userSubject.next(user);
-    });
-  }
 
   async signup(data: UserDto, password: string) {
     const userCredential = await createUserWithEmailAndPassword(
@@ -55,17 +43,12 @@ export class AuthService {
       password
     );
     const userToken = await userCredential.user.getIdToken(true);
-    sessionStorage.setItem('userToken', userToken);
-    this.router.navigate(['']);
+    return userToken;
   }
 
   async logout(): Promise<void> {
     await signOut(this.auth);
-    this.userSubject.next(null); // Limpia el usuario
+    sessionStorage.clear();
     this.router.navigate(['/']);
-  }
-
-  getCurrentUser(): User | null {
-    return this.userSubject.value;
   }
 }

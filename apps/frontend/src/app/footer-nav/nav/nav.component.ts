@@ -1,4 +1,3 @@
-import { User } from '../../shared';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../../core/services/user.service';
@@ -20,29 +19,21 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Detecta cambios en la autenticación
-    this.authService.user$.subscribe((user) => {
-      this.isAuthenticated = !!user;
-      if (this.isAuthenticated) {
-        this.loadUserProfile();
-      } else {
-        this.userName = '';
-      }
-    });
-  }
-
-  loadUserProfile() {
-    this.userService.getProfile().subscribe({
-      next: (user: User) => {
-        this.userName = user.name;
-      },
-      error: (err) => {
-        console.error('Error al obtener el perfil:', err);
-      },
-    });
+    if ('userToken' in sessionStorage) {
+      this.userService.user$.subscribe((user) => {
+        this.isAuthenticated = !!user;
+        if (this.isAuthenticated) {
+          this.userName = user.name;
+        } else {
+          this.userName = '';
+        }
+      });
+    }
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().then(() => {
+      this.isAuthenticated = false;
+    });
   }
 }

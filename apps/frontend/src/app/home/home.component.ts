@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (user) => {
         this.user = user;
-        console.log(this.user);
       },
       error: (err) => {
         console.error('Error al cargar el perfil del usuario:', err);
