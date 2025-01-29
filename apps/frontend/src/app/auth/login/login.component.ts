@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { FirebaseError } from 'firebase/app';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -34,9 +34,8 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      this.authService
-        .login(email, password)
-        .then((userToken) => {
+      this.authService.login(email, password).subscribe({
+        next: ({ userToken }) => {
           Swal.fire({
             title: 'Éxito!',
             text: 'Has iniciado sesión correctamente.',
@@ -46,16 +45,16 @@ export class LoginComponent {
             sessionStorage.setItem('userToken', userToken);
             this.router.navigate(['/dashboard']);
           });
-        })
-        .catch((err: FirebaseError) => {
-          if (err.code === 'auth/invalid-credential') {
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
             Swal.fire({
               title: 'Error!',
               text: 'El email o la contraseña son incorrectos.',
               icon: 'error',
               confirmButtonText: 'Aceptar',
             });
-          } else {
+          } else if (err.status === 404) {
             Swal.fire({
               title: 'Error!',
               text: 'Usuario no encontrado',
@@ -63,7 +62,8 @@ export class LoginComponent {
               confirmButtonText: 'Aceptar',
             });
           }
-        });
+        },
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

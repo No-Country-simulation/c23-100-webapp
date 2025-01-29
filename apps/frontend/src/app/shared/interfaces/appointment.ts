@@ -2,7 +2,7 @@ import { AppointmentStatus } from '../enums/appointment-status.enum';
 import { DoctorSpecialization } from '../enums/doctor-specialization.enum';
 
 export interface Appointment {
-  id: string;
+  _id: string;
   patientId: string;
   doctorId?: string;
   date: Date;

@@ -93,41 +93,47 @@ export class RegisterComponent {
 
     if (this.registerForm.valid) {
       this.authService
-        .signup(
-          {
-            name,
-            email,
-            role: role as Role,
-            specialization:
-              (specialization as DoctorSpecialization) || undefined, // Para evitar enviar un string vacío y que ocurra un error de validación
-            phone,
-          },
-          password
-        )
-        .then((userToken) => {
-          sessionStorage.setItem('userToken', userToken);
-
-          Swal.fire({
-            title: 'Registro Exitoso!',
-            text: 'Te has registrado correctamente.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar',
-            didClose: () => {
-              this.router.navigate(['/dashboard']);
-            },
-          });
+        .signup({
+          name,
+          email,
+          role: role as Role,
+          specialization: (specialization as DoctorSpecialization) || undefined, // Para evitar enviar un string vacío y que ocurra un error de validación
+          phone,
+          password,
         })
-        .catch((err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            this.router.navigate(['/login']);
-          }
+        .subscribe({
+          next: ({ userToken }) => {
+            sessionStorage.setItem('userToken', userToken);
 
-          Swal.fire({
-            title: 'Error al registrarse!',
-            text: 'Hubo un problema durante el registro.',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-          });
+            Swal.fire({
+              title: 'Registro Exitoso!',
+              text: 'Te has registrado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Aceptar',
+              didClose: () => {
+                this.router.navigate(['/dashboard']);
+              },
+            });
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.status === 401) {
+              this.router.navigate(['/login']);
+            } else if (err.status === 409) {
+              Swal.fire({
+                title: 'Email en uso!',
+                text: 'Ya existe un usuario registrado con este email.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+              });
+            } else {
+              Swal.fire({
+                title: 'Error al registrarse!',
+                text: 'Hubo un problema durante el registro.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+              });
+            }
+          },
         });
     }
   }
