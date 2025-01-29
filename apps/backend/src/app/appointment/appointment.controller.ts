@@ -11,7 +11,7 @@ import {
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { AdminGuard } from '../common/guards/admin.guard';
+import { AppointmentGuard } from './appointment.guard';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Controller('appointments')
@@ -25,7 +25,7 @@ export class AppointmentController {
   }
 
   @Get()
-  @UseGuards(AdminGuard)
+  @UseGuards(AppointmentGuard)
   findAll() {
     return this.appointmentService.findAll();
   }

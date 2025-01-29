@@ -1,6 +1,6 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import { SendAppointmentConfirmationOptions } from '../common/interfaces/mails';
+import { SendAppointmentConfirmationOptions } from './send-appointment-confirmation.interface';
 
 @Injectable()
 export class MailsService {

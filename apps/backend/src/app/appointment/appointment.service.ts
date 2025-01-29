@@ -1,52 +1,70 @@
-import { Injectable } from '@nestjs/common';
-import { FirestoreService } from '../database/firestore.service';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
-import { Appointment } from '../common/interfaces/appointment';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Appointment } from './schema/appointment.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AppointmentService {
-  private readonly collectionName = 'appointments';
+  constructor(
+    @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>
+  ) {}
 
-  constructor(private readonly firestoreService: FirestoreService) {}
+  async create(createAppointmentDto: CreateAppointmentDto) {
+    try {
+      const appointment = new this.appointmentModel(createAppointmentDto);
+      const savedAppointment = (await appointment.save()).toObject();
 
-  async create(
-    createAppointmentDto: CreateAppointmentDto
-  ): Promise<Appointment> {
-    return this.firestoreService.createDocument<CreateAppointmentDto>(
-      this.collectionName,
-      createAppointmentDto
-    ) as Promise<Appointment>;
+      return savedAppointment;
+    } catch {
+      throw new InternalServerErrorException('Error al registrar cita');
+    }
   }
 
-  async findAll(): Promise<Appointment[]> {
-    return this.firestoreService.getCollection<Appointment>(
-      this.collectionName
-    );
+  async findAll() {
+    try {
+      const appointments = await this.appointmentModel.find().lean();
+      return appointments;
+    } catch {
+      throw new InternalServerErrorException('Error al recuperar citas');
+    }
   }
 
-  async findOne(id: string): Promise<Appointment> {
-    return this.firestoreService.getDocument<Appointment>(
-      this.collectionName,
-      id
-    );
+  async findOne(id: string) {
+    const appointment = await this.appointmentModel.findById(id).lean();
+
+    if (!appointment) {
+      throw new NotFoundException(`Cita con id: ${id} no encontrada`);
+    }
+
+    return appointment;
   }
 
-  async update(
-    id: string,
-    updateAppointmentDto: UpdateAppointmentDto
-  ): Promise<Appointment> {
-    return this.firestoreService.updateDocument<Appointment>(
-      this.collectionName,
-      id,
-      updateAppointmentDto
-    );
+  async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
+    await this.findOne(id);
+
+    const updatedAppointment = await this.appointmentModel
+      .findByIdAndUpdate(id, updateAppointmentDto, { new: true })
+      .lean();
+
+    if (!updatedAppointment) {
+      throw new NotFoundException(
+        `Cita con id: ${id} no encontrada para actualizar`
+      );
+    }
+
+    return updatedAppointment;
   }
 
-  async delete(id: string): Promise<Appointment> {
-    return this.firestoreService.deleteDocument<Appointment>(
-      this.collectionName,
-      id
-    );
+  async delete(id: string) {
+    const appointment = await this.findOne(id);
+    await this.appointmentModel.deleteOne({ _id: id });
+
+    return appointment;
   }
 }

@@ -3,13 +3,23 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { Role } from '../enums/user-role';
+import { DoctorSpecialization } from '../enums/doctor-specialization';
+
+interface UserTokenMetadata {
+  sub: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: Role;
+  specialization?: DoctorSpecialization;
+}
 
 export const User = createParamDecorator(
   (
-    data: keyof DecodedIdToken | undefined,
+    data: keyof UserTokenMetadata | undefined,
     ctx: ExecutionContext
-  ): keyof DecodedIdToken | DecodedIdToken => {
+  ): keyof UserTokenMetadata | UserTokenMetadata => {
     const request = ctx.switchToHttp().getRequest();
     const { user } = request;
 
@@ -27,6 +37,6 @@ export const User = createParamDecorator(
       return user[data];
     }
 
-    return user as DecodedIdToken;
+    return user as UserTokenMetadata;
   }
 );

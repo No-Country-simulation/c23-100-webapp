@@ -2,23 +2,19 @@ import { Transform } from 'class-transformer';
 import {
   IsDate,
   IsEnum,
+  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsString,
-  IsUUID,
-  Length,
-  Matches,
 } from 'class-validator';
 import { AppointmentStatus } from '../../common/enums/appointment-status';
 import { DoctorSpecialization } from '../../common/enums/doctor-specialization';
 
 export class CreateAppointmentDto {
-  @IsString()
-  @Length(28, 28)
-  @Matches(/^[A-Za-z0-9_-]+$/)
+  @IsMongoId()
   patientId: string;
 
-  @IsUUID()
+  @IsMongoId()
   @IsOptional()
   doctorId?: string;
 

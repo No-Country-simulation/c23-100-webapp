@@ -4,11 +4,11 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Role } from '../enums/user-role';
+import { Role } from '../common/enums/user-role';
 import { Request } from 'express';
 
 @Injectable()
-export class AdminGuard implements CanActivate {
+export class AppointmentGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const request: Request = context.switchToHttp().getRequest();
     const user = request['user'];

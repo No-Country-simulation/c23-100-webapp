@@ -1,14 +1,10 @@
-import { IsNotEmpty, IsString, Length, Matches } from 'class-validator';
+import { IsMongoId, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateMedicalRecordDto {
-  @IsString()
-  @Length(28, 28)
-  @Matches(/^[A-Za-z0-9_-]+$/)
+  @IsMongoId()
   appointmentId: string;
 
-  @IsString()
-  @Length(28, 28)
-  @Matches(/^[A-Za-z0-9_-]+$/)
+  @IsMongoId()
   patientId: string;
 
   @IsString()

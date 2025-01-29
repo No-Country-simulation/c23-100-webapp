@@ -5,6 +5,8 @@ import { UserModule } from './user/user.module';
 import { AppointmentModule } from './appointment/appointment.module';
 import { MailsModule } from './mails/mails.module';
 import { MedicalRecordsModule } from './medical-records/medical-records.module';
+import { JwtModule } from '@nestjs/jwt';
+import { envs } from '../config/envs';
 
 @Module({
   imports: [
@@ -14,6 +16,11 @@ import { MedicalRecordsModule } from './medical-records/medical-records.module';
     AppointmentModule,
     MailsModule,
     MedicalRecordsModule,
+    JwtModule.register({
+      global: true,
+      secret: envs.jwtSecretKey,
+      signOptions: { expiresIn: '4h' },
+    }),
   ],
   controllers: [],
   providers: [],

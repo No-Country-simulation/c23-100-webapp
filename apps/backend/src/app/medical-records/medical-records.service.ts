@@ -1,44 +1,43 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { FirestoreService } from '../database/firestore.service';
 import { CreateMedicalRecordDto } from './dto/create-medical-record.dto';
-import { MedicalRecord } from '../common/interfaces/medical-record';
+import { InjectModel } from '@nestjs/mongoose';
+import { MedicalRecord } from './schemas/medical-records.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class MedicalRecordsService {
-  private readonly collectionName = 'medical_records';
-
-  constructor(private readonly firestoreService: FirestoreService) {}
+  constructor(
+    @InjectModel(MedicalRecord.name)
+    private medicalRecordModel: Model<MedicalRecord>
+  ) {}
 
   async create(
     doctorId: string,
     createMedicalRecordDto: CreateMedicalRecordDto
   ) {
-    const id = crypto.randomUUID();
+    const medicalRecord = new this.medicalRecordModel({
+      ...createMedicalRecordDto,
+      doctorId,
+    });
+    const savedMedicalRecord = await medicalRecord.save();
 
-    return this.firestoreService.createDocument<MedicalRecord>(
-      this.collectionName,
-      {
-        ...createMedicalRecordDto,
-        date: new Date(),
-        id,
-        doctorId,
-      },
-      id
-    );
+    return savedMedicalRecord.toObject();
   }
 
   async getAll(appointmentId: string) {
-    const records = await this.firestoreService.getCollection<MedicalRecord>(
-      this.collectionName
-    );
-    const filteredRecords = records.filter(
-      (record) => record.appointmentId === appointmentId
-    );
+    const medicalRecords = await this.medicalRecordModel
+      .find({
+        appointmentId,
+      })
+      .lean()
+      .exec();
 
-    if (filteredRecords.length === 0) {
-      throw new NotFoundException('No medical records found');
+    if (medicalRecords.length == 0) {
+      throw new NotFoundException(
+        `La cita con id: ${appointmentId} no tiene grabaciones médicas todavía`
+      );
     }
 
-    return filteredRecords;
+    return medicalRecords;
   }
 }

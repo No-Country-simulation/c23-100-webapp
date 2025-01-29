@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  ParseUUIDPipe,
-  Post,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { MedicalRecordsService } from './medical-records.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateMedicalRecordDto } from './dto/create-medical-record.dto';
@@ -21,14 +13,14 @@ export class MedicalRecordsController {
   @Post()
   @UseGuards(MedicalRecordsGuard)
   create(
-    @User('uid') doctorId: string,
+    @User('sub') doctorId: string,
     @Body() createMedicalRecordDto: CreateMedicalRecordDto
   ) {
     return this.medicalRecordsService.create(doctorId, createMedicalRecordDto);
   }
 
   @Get()
-  getAll(@Query('appointmentId', ParseUUIDPipe) appointmentId: string) {
+  getAll(@Query('appointmentId') appointmentId: string) {
     return this.medicalRecordsService.getAll(appointmentId);
   }
 }
