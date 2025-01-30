@@ -8,6 +8,7 @@ import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
+import { PaginationDto } from '../common/dtos/pagination.dto';
 
 @Injectable()
 export class AppointmentService {
@@ -26,17 +27,38 @@ export class AppointmentService {
     }
   }
 
-  async findAll() {
+  async findAll(paginationDto: PaginationDto) {
     try {
-      const appointments = await this.appointmentModel.find().lean();
-      return appointments;
+      const { page, limit } = paginationDto;
+      const startIndex = (page - 1) * limit;
+
+      const appointments = await this.appointmentModel
+        .find()
+        .skip(startIndex)
+        .limit(limit)
+        .select('-__v')
+        .exec();
+      const total = await this.appointmentModel.countDocuments();
+
+      return {
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+        data: appointments,
+      };
     } catch {
       throw new InternalServerErrorException('Error al recuperar citas');
     }
   }
 
   async findOne(id: string) {
-    const appointment = await this.appointmentModel.findById(id).lean();
+    const appointment = await this.appointmentModel
+      .findById(id)
+      .lean()
+      .select('-__v');
 
     if (!appointment) {
       throw new NotFoundException(`Cita con id: ${id} no encontrada`);
@@ -45,12 +67,30 @@ export class AppointmentService {
     return appointment;
   }
 
+  async findByUser(userId: string) {
+    const appointments = await this.appointmentModel
+      .find({
+        patientId: userId,
+      })
+      .select('-__v')
+      .exec();
+
+    if (appointments.length === 0) {
+      throw new NotFoundException(
+        'El usuario no tiene citas médicas agendadas'
+      );
+    }
+
+    return appointments;
+  }
+
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
     await this.findOne(id);
 
     const updatedAppointment = await this.appointmentModel
       .findByIdAndUpdate(id, updateAppointmentDto, { new: true })
-      .lean();
+      .lean()
+      .select('-__v');
 
     if (!updatedAppointment) {
       throw new NotFoundException(
