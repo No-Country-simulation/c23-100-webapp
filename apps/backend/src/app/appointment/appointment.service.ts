@@ -60,11 +60,4 @@ export class AppointmentService {
 
     return updatedAppointment;
   }
-
-  async delete(id: string) {
-    const appointment = await this.findOne(id);
-    await this.appointmentModel.deleteOne({ _id: id });
-
-    return appointment;
-  }
 }

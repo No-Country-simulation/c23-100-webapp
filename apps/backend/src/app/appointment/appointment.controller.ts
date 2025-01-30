@@ -4,7 +4,6 @@ import {
   Post,
   Param,
   Body,
-  Delete,
   UseGuards,
   Patch,
 } from '@nestjs/common';
@@ -38,10 +37,5 @@ export class AppointmentController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() appointment: UpdateAppointmentDto) {
     return this.appointmentService.update(id, appointment);
-  }
-
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.appointmentService.delete(id);
   }
 }
