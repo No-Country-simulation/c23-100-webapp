@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../../shared';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +20,9 @@ export class UserService {
         },
       })
       .pipe(
-        tap((user) => {
+        map((user) => {
           this.userSubject.next(user);
+          return user;
         })
       );
   }

@@ -29,13 +29,15 @@ export class HomeComponent implements OnInit {
   }
 
   loadUserProfile() {
-    this.userService.getProfile().subscribe({
-      next: (user) => {
-        this.user = user;
-      },
-      error: (err) => {
-        console.error('Error al cargar el perfil del usuario:', err);
-      },
-    });
+    if ('userToken' in sessionStorage) {
+      this.userService.getProfile().subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (err) => {
+          console.error('Error al cargar el perfil del usuario:', err);
+        },
+      });
+    }
   }
 }

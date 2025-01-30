@@ -19,16 +19,14 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if ('userToken' in sessionStorage) {
-      this.userService.user$.subscribe((user) => {
-        this.isAuthenticated = !!user;
-        if (this.isAuthenticated) {
-          this.userName = user.name;
-        } else {
-          this.userName = '';
-        }
-      });
-    }
+    this.userService.user$.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      if (this.isAuthenticated) {
+        this.userName = user.name;
+      } else {
+        this.userName = '';
+      }
+    });
   }
 
   logout() {

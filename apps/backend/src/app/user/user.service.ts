@@ -37,6 +37,7 @@ export class UserService {
     const user = await this.userModel
       .findById(userId)
       .select('-password')
+      .select('-__v')
       .exec();
 
     if (!user) {
