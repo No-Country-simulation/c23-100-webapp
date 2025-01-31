@@ -4,6 +4,7 @@ import {
   Post,
   Param,
   Body,
+  Delete,
   UseGuards,
   Patch,
   Query,
@@ -11,6 +12,7 @@ import {
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import { AppointmentGuard } from './appointment.guard';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { User } from '../common/decorators/user.decorator';
@@ -27,6 +29,7 @@ export class AppointmentController {
   }
 
   @Get()
+  @UseGuards(AppointmentGuard)
   findAll(@Query() paginationDto: PaginationDto) {
     return this.appointmentService.findAll(paginationDto);
   }
@@ -48,4 +51,18 @@ export class AppointmentController {
   ) {
     return this.appointmentService.update(id, appointment);
   }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.appointmentService.delete(id);
+  }
+  @Patch(':id/assign-doctor')
+  @UseGuards(AppointmentGuard) // Solo el administrador puede asignar doctores
+  async assignDoctor(
+    @Param('id') appointmentId: string,
+    @Body('doctorId') doctorId: string
+  ) {
+    return this.appointmentService.assignDoctor(appointmentId, doctorId);
+  }
+
 }
