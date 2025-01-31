@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -10,11 +11,13 @@ import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
 import { AppointmentStatus } from '../common/enums/appointment-status';
 import { PaginationDto } from '../common/dtos/pagination.dto';
+import { User } from '../user/schemas/user.schema';
 
 @Injectable()
 export class AppointmentService {
   constructor(
-    @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>
+    @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>,
+    @InjectModel(User.name) private userModel: Model<User>
   ) {}
 
   async create(createAppointmentDto: CreateAppointmentDto) {
@@ -83,6 +86,22 @@ export class AppointmentService {
     return appointments;
   }
 
+  async findByStatus(status: AppointmentStatus) {
+    const appointments = await this.appointmentModel
+      .find({ status })
+      .select('-__v')
+      .lean()
+      .exec();
+
+    if (appointments.length === 0) {
+      throw new NotFoundException(
+        `No se encontraron citas médicas con estado: ${status}`
+      );
+    }
+
+    return appointments;
+  }
+
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
     await this.findOne(id);
 
@@ -102,8 +121,21 @@ export class AppointmentService {
   async assignDoctor(appointmentId: string, doctorId: string) {
     // Verificar si la cita existe
     const appointment = await this.appointmentModel.findById(appointmentId);
+
     if (!appointment) {
       throw new NotFoundException(`Cita con id ${appointmentId} no encontrada`);
+    }
+
+    const doctor = await this.userModel.findById(doctorId);
+
+    if (!doctor) {
+      throw new NotFoundException(`Doctor con id ${doctorId} no encontrado`);
+    }
+
+    if (doctor.specialization !== appointment.specialization) {
+      throw new BadRequestException(
+        'El doctor asignado no cumple con la especialidad solicitada'
+      );
     }
 
     appointment.doctorId = doctorId;
@@ -112,7 +144,6 @@ export class AppointmentService {
     const updatedAppointment = await appointment.save();
     return updatedAppointment;
   }
-
 
   async delete(id: string) {
     const appointment = await this.findOne(id);

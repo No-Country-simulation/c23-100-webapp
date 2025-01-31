@@ -17,6 +17,9 @@ import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { User } from '../common/decorators/user.decorator';
 import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id.pipe';
+import { AssignDoctorDto } from './dto/assign-doctor.dto';
+import { AppointmentStatus } from '../common/enums/appointment-status';
+import { ParseAppointmentStatusPipe } from '../common/pipes/parse-appointment-status.pipe';
 
 @Controller('appointments')
 @UseGuards(AuthGuard)
@@ -39,6 +42,13 @@ export class AppointmentController {
     return this.appointmentService.findByUser(userId);
   }
 
+  @Get('status/:status')
+  findByStatus(
+    @Param('status', ParseAppointmentStatusPipe) status: AppointmentStatus
+  ) {
+    return this.appointmentService.findByStatus(status);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.appointmentService.findOne(id);
@@ -52,17 +62,20 @@ export class AppointmentController {
     return this.appointmentService.update(id, appointment);
   }
 
+  @Patch(':id/assign-doctor')
+  @UseGuards(AppointmentGuard)
+  async assignDoctor(
+    @Param('id', ParseMongoIdPipe) appointmentId: string,
+    @Body() assignDoctorDto: AssignDoctorDto
+  ) {
+    return this.appointmentService.assignDoctor(
+      appointmentId,
+      assignDoctorDto.doctorId
+    );
+  }
+
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.appointmentService.delete(id);
   }
-  @Patch(':id/assign-doctor')
-  @UseGuards(AppointmentGuard) // Solo el administrador puede asignar doctores
-  async assignDoctor(
-    @Param('id') appointmentId: string,
-    @Body('doctorId') doctorId: string
-  ) {
-    return this.appointmentService.assignDoctor(appointmentId, doctorId);
-  }
-
 }
