@@ -8,6 +8,7 @@ import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Appointment } from './schema/appointment.schema';
 import { Model } from 'mongoose';
+import { AppointmentStatus } from '../common/enums/appointment-status';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 
 @Injectable()
@@ -31,7 +32,6 @@ export class AppointmentService {
     try {
       const { page, limit } = paginationDto;
       const startIndex = (page - 1) * limit;
-
       const appointments = await this.appointmentModel
         .find()
         .skip(startIndex)
@@ -59,7 +59,6 @@ export class AppointmentService {
       .findById(id)
       .lean()
       .select('-__v');
-
     if (!appointment) {
       throw new NotFoundException(`Cita con id: ${id} no encontrada`);
     }
@@ -99,5 +98,26 @@ export class AppointmentService {
     }
 
     return updatedAppointment;
+  }
+  async assignDoctor(appointmentId: string, doctorId: string) {
+    // Verificar si la cita existe
+    const appointment = await this.appointmentModel.findById(appointmentId);
+    if (!appointment) {
+      throw new NotFoundException(`Cita con id ${appointmentId} no encontrada`);
+    }
+
+    appointment.doctorId = doctorId;
+    appointment.status = AppointmentStatus.CONFIRMED;
+
+    const updatedAppointment = await appointment.save();
+    return updatedAppointment;
+  }
+
+
+  async delete(id: string) {
+    const appointment = await this.findOne(id);
+    await this.appointmentModel.deleteOne({ _id: id });
+
+    return appointment;
   }
 }
