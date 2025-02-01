@@ -1,14 +1,17 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms'; 
-import { CommonModule } from '@angular/common';
-import { User } from '@org/shared';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { User } from '../../shared';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
-  selector: 'home-paciente',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  selector: 'app-home-paciente',
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css'],
 })
@@ -23,7 +26,10 @@ export class PacienteComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     provincia: new FormControl(null, [Validators.required]),
-    direccion: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    direccion: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
     especialidad: new FormControl(null, [Validators.required]),
   });
 
@@ -61,11 +67,14 @@ export class PacienteComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
     this.isSidebarHalfOpen = !this.isSidebarOpen;
-    localStorage.setItem('sidebarState', this.isSidebarOpen ? 'open' : 'closed');
+    localStorage.setItem(
+      'sidebarState',
+      this.isSidebarOpen ? 'open' : 'closed'
+    );
   }
 
   loadUserProfile() {
-    this.userService.getProfile().subscribe({
+    this.userService.user$.subscribe({
       next: (user) => {
         this.user = user;
         this.form.patchValue({
@@ -88,4 +97,3 @@ export class PacienteComponent implements OnInit {
     }
   }
 }
-

@@ -1,20 +1,16 @@
 import { RouterModule } from '@angular/router';
-import { Component, HostListener, input, OnInit } from '@angular/core'
+import { Component, HostListener, input, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../../footer-nav/footer/footer.component';
-import { NavComponent } from '../../footer-nav/nav/nav.component';
-import { User } from '@org/shared';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from '../../shared';
 
 @Component({
-  selector: 'home-admin',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  selector: 'app-home-admin',
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
-export class AdminComponent {
-  
+export class AdminComponent implements OnInit {
   public user = input.required<User>();
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
@@ -36,7 +32,7 @@ export class AdminComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -58,7 +54,7 @@ export class AdminComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
-  
+
   form = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -67,8 +63,6 @@ export class AdminComponent {
     direccion: new FormControl('', [Validators.required, Validators.min(8)]),
     especialidad: new FormControl(null, [Validators.required]),
   });
-
-  constructor() { }
 
   onSubmit() {
     if (this.form.valid) {

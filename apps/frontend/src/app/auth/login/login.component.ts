@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'], // Corrección en la propiedad
@@ -29,15 +34,35 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      this.authService.login(email, password).then(() => {
-        Swal.fire({
-          title: 'Éxito!',
-          text: 'Has iniciado sesión correctamente.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-        }).then(() => {
-          this.router.navigate(['']); // Redirección
-        });
+      this.authService.login(email, password).subscribe({
+        next: ({ userToken }) => {
+          Swal.fire({
+            title: 'Éxito!',
+            text: 'Has iniciado sesión correctamente.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          }).then(() => {
+            sessionStorage.setItem('userToken', userToken);
+            this.router.navigate(['/dashboard']);
+          });
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'El email o la contraseña son incorrectos.',
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
+            });
+          } else if (err.status === 404) {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Usuario no encontrado',
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
+            });
+          }
+        },
       });
     } else {
       this.loginForm.markAllAsTouched();

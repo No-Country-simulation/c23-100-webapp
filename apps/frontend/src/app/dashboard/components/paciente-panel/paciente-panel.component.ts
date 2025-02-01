@@ -1,17 +1,15 @@
-import { CommonModule } from '@angular/common';
-import { Component, HostListener, input } from '@angular/core';
+import { Component, HostListener, input, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { User } from '@org/shared';
+import { User } from '../../../shared';
 
 @Component({
   selector: 'app-paciente-panel',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [ ReactiveFormsModule, RouterModule],
   templateUrl: './paciente-panel.component.html',
   styleUrl: './paciente-panel.component.css',
 })
-export class PacientePanelComponent {
-
+export class PacientePanelComponent implements OnInit {
   public user = input.required<User>();
 
   isSidebarOpen = true; // Cambiado a false por defecto
@@ -34,7 +32,7 @@ export class PacientePanelComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -56,5 +54,4 @@ export class PacientePanelComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
-
 }

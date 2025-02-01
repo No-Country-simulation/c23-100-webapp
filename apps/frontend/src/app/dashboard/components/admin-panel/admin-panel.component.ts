@@ -1,18 +1,20 @@
-import { Component, input,  HostListener  } from '@angular/core';
-import { User } from '@org/shared';
-
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, input, HostListener, OnInit } from '@angular/core';
+import { User } from '../../../shared';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
 })
-export class AdminPanelComponent {
-  
+export class AdminPanelComponent implements OnInit {
   public user = input.required<User>();
 
   isSidebarOpen = true; // Cambiado a false por defecto
@@ -35,7 +37,7 @@ export class AdminPanelComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -57,7 +59,7 @@ export class AdminPanelComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
-  
+
   form = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -67,8 +69,6 @@ export class AdminPanelComponent {
     especialidad: new FormControl(null, [Validators.required]),
   });
 
-  constructor() { }
-
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value); // Muestra la información en la consola
@@ -76,5 +76,4 @@ export class AdminPanelComponent {
       this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
     }
   }
-
 }

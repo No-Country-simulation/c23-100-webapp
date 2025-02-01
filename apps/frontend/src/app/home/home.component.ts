@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { User } from '@org/shared';
+import { User } from '../shared';
 import { PacienteComponent } from './paciente/paciente.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { AdminComponent } from './admin/admin.component';
@@ -10,30 +9,35 @@ import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ReactiveFormsModule, PacienteComponent, DoctorComponent, AdminComponent, NoAuthComponent],
+  imports: [
+    ReactiveFormsModule,
+    PacienteComponent,
+    DoctorComponent,
+    AdminComponent,
+    NoAuthComponent,
+  ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
   protected user?: User;
 
-  constructor(private userService:UserService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
   }
 
   loadUserProfile() {
-    this.userService.getProfile().subscribe({
-      next: (user) => {
-        this.user = user;
-        console.log(this.user);
-      },
-      error: (err) => {
-        console.error('Error al cargar el perfil del usuario:', err);
-      },
-    });
+    if ('userToken' in sessionStorage) {
+      this.userService.getProfile().subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: (err) => {
+          console.error('Error al cargar el perfil del usuario:', err);
+        },
+      });
+    }
   }
-
 }

@@ -1,42 +1,49 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto, PaginationDto, Role, User } from '@org/shared';
-import { FirestoreService } from '../database/firestore.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from './schemas/user.schema';
+import { Model } from 'mongoose';
+import { Role } from '../common/enums/user-role';
+import { PaginationDto } from '../common/dtos/pagination.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly firestoreService: FirestoreService) {}
-
-  async create(userId: string, createUserDto: CreateUserDto): Promise<User> {
-    try {
-      await this.firestoreService.getDocument('user', userId);
-
-      throw new UnauthorizedException(
-        `El usuario con id: ${userId} ya se encuentra registrado.`
-      );
-    } catch {
-      return await this.firestoreService.createDocument<User>(
-        'user',
-        createUserDto,
-        userId
-      );
-    }
-  }
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async getDoctors(paginationDto: PaginationDto) {
     const { page, limit } = paginationDto;
     const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
 
-    const users = await this.firestoreService.getCollection<User>('user');
-    const doctors = users.filter((user) => user.role === Role.DOCTOR);
-    const filteredDoctors = doctors.filter(
-      (_, index) => index >= startIndex && index < endIndex
-    );
+    const doctors = await this.userModel
+      .find({ role: Role.DOCTOR })
+      .skip(startIndex)
+      .limit(limit)
+      .select('-password')
+      .exec();
 
-    return filteredDoctors;
+    const total = await this.userModel.countDocuments({ role: Role.DOCTOR });
+
+    return {
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+      data: doctors,
+    };
   }
 
-  async getProfile(userId: string): Promise<User> {
-    return await this.firestoreService.getDocument<User>('user', userId);
+  async getProfile(userId: string) {
+    const user = await this.userModel
+      .findById(userId)
+      .select('-password')
+      .select('-__v')
+      .exec();
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${userId} not found`);
+    }
+
+    return user;
   }
 }

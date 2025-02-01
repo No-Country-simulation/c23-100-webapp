@@ -1,18 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { FormGroup, FormControl, Validators, FormBuilder, } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FooterComponent } from 'apps/frontend/src/app/footer-nav/footer/footer.component';
-import { NavComponent } from 'apps/frontend/src/app/footer-nav/nav/nav.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-registrar-doctor',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './registrar-doctor.component.html',
   styleUrl: './registrar-doctor.component.css',
 })
-export class RegistrarDoctorComponent {
-  
+export class RegistrarDoctorComponent implements OnInit {
   isSidebarOpen = true; // Cambiado a false por defecto
   isSidebarHalfOpen = false;
 
@@ -20,8 +16,6 @@ export class RegistrarDoctorComponent {
     this.checkScreenWidth();
     this.loadSidebarState(); // Cargar el estado del sidebar al iniciar
   }
-
-
 
   loadSidebarState() {
     const sidebarState = localStorage.getItem('sidebarState');
@@ -35,7 +29,7 @@ export class RegistrarDoctorComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize() {
     this.checkScreenWidth();
   }
 
@@ -57,7 +51,7 @@ export class RegistrarDoctorComponent {
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
     }
   }
-  
+
   form = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -66,8 +60,6 @@ export class RegistrarDoctorComponent {
     direccion: new FormControl('', [Validators.required, Validators.min(8)]),
     especialidad: new FormControl(null, [Validators.required]),
   });
-
-  constructor() { }
 
   onSubmit() {
     if (this.form.valid) {

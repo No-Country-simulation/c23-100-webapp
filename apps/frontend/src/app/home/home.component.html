@@ -1,13 +1,13 @@
 <section>
     @switch (user?.role) {
         @case ('Patient') {
-            <home-paciente [user]="user" />
+            <app-home-paciente [user]="user" />
         }
         @case ('Doctor') {
-            <home-doctor [user]="user" />
+            <app-home-doctor [user]="user" />
         }
         @case ('Admin') {
-            <home-admin [user]="user" />
+            <app-home-admin [user]="user" />
         }
         @default {
             <app-no-auth></app-no-auth>

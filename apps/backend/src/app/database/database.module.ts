@@ -1,18 +1,21 @@
-import { Global, Module } from '@nestjs/common';
-import { FirestoreService } from './firestore.service';
-import admin from 'firebase-admin';
+import { Logger, Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { envs } from '../../config/envs';
+import { Connection } from 'mongoose';
 
-@Global()
 @Module({
-  providers: [
-    FirestoreService,
-    {
-      provide: 'FIREBASE_ADMIN',
-      useFactory: () => {
-        return admin.firestore();
+  imports: [
+    MongooseModule.forRoot(envs.db.url, {
+      onConnectionCreate: (connection: Connection) => {
+        const dbLogger = new Logger('Database');
+
+        connection.on('open', () => {
+          dbLogger.log('Database connected successfully');
+        });
+
+        return connection;
       },
-    },
+    }),
   ],
-  exports: ['FIREBASE_ADMIN', FirestoreService],
 })
 export class DatabaseModule {}

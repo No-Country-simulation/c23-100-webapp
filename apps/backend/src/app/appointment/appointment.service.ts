@@ -1,54 +1,154 @@
-import { Injectable } from '@nestjs/common';
-import { FirestoreService } from '../database/firestore.service';
 import {
-  Appointment,
-  CreateAppointmentDto,
-  UpdateAppointmentDto,
-} from '@org/shared';
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Appointment } from './schema/appointment.schema';
+import { Model } from 'mongoose';
+import { AppointmentStatus } from '../common/enums/appointment-status';
+import { PaginationDto } from '../common/dtos/pagination.dto';
+import { User } from '../user/schemas/user.schema';
 
 @Injectable()
 export class AppointmentService {
-  private readonly collectionName = 'appointments';
+  constructor(
+    @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>,
+    @InjectModel(User.name) private userModel: Model<User>
+  ) {}
 
-  constructor(private readonly firestoreService: FirestoreService) {}
+  async create(createAppointmentDto: CreateAppointmentDto) {
+    try {
+      const appointment = new this.appointmentModel(createAppointmentDto);
+      const savedAppointment = (await appointment.save()).toObject();
 
-  async create(
-    createAppointmentDto: CreateAppointmentDto
-  ): Promise<Appointment> {
-    return this.firestoreService.createDocument<CreateAppointmentDto>(
-      this.collectionName,
-      createAppointmentDto
-    ) as Promise<Appointment>;
+      return savedAppointment;
+    } catch {
+      throw new InternalServerErrorException('Error al registrar cita');
+    }
   }
 
-  async findAll(): Promise<Appointment[]> {
-    return this.firestoreService.getCollection<Appointment>(
-      this.collectionName
-    );
+  async findAll(paginationDto: PaginationDto) {
+    try {
+      const { page, limit } = paginationDto;
+      const startIndex = (page - 1) * limit;
+      const appointments = await this.appointmentModel
+        .find()
+        .skip(startIndex)
+        .limit(limit)
+        .select('-__v')
+        .exec();
+      const total = await this.appointmentModel.countDocuments();
+
+      return {
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+        data: appointments,
+      };
+    } catch {
+      throw new InternalServerErrorException('Error al recuperar citas');
+    }
   }
 
-  async findOne(id: string): Promise<Appointment> {
-    return this.firestoreService.getDocument<Appointment>(
-      this.collectionName,
-      id
-    );
+  async findOne(id: string) {
+    const appointment = await this.appointmentModel
+      .findById(id)
+      .lean()
+      .select('-__v');
+    if (!appointment) {
+      throw new NotFoundException(`Cita con id: ${id} no encontrada`);
+    }
+
+    return appointment;
   }
 
-  async update(
-    id: string,
-    updateAppointmentDto: UpdateAppointmentDto
-  ): Promise<Appointment> {
-    return this.firestoreService.updateDocument<Appointment>(
-      this.collectionName,
-      id,
-      updateAppointmentDto
-    );
+  async findByUser(userId: string) {
+    const appointments = await this.appointmentModel
+      .find({
+        patientId: userId,
+      })
+      .select('-__v')
+      .exec();
+
+    if (appointments.length === 0) {
+      throw new NotFoundException(
+        'El usuario no tiene citas médicas agendadas'
+      );
+    }
+
+    return appointments;
   }
 
-  async delete(id: string): Promise<Appointment> {
-    return this.firestoreService.deleteDocument<Appointment>(
-      this.collectionName,
-      id
-    );
+  async findByStatus(status: AppointmentStatus) {
+    const appointments = await this.appointmentModel
+      .find({ status })
+      .select('-__v')
+      .lean()
+      .exec();
+
+    if (appointments.length === 0) {
+      throw new NotFoundException(
+        `No se encontraron citas médicas con estado: ${status}`
+      );
+    }
+
+    return appointments;
+  }
+
+  async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
+    await this.findOne(id);
+
+    const updatedAppointment = await this.appointmentModel
+      .findByIdAndUpdate(id, updateAppointmentDto, { new: true })
+      .lean()
+      .select('-__v');
+
+    if (!updatedAppointment) {
+      throw new NotFoundException(
+        `Cita con id: ${id} no encontrada para actualizar`
+      );
+    }
+
+    return updatedAppointment;
+  }
+  async assignDoctor(appointmentId: string, doctorId: string) {
+    // Verificar si la cita existe
+    const appointment = await this.appointmentModel.findById(appointmentId);
+
+    if (!appointment) {
+      throw new NotFoundException(`Cita con id ${appointmentId} no encontrada`);
+    }
+
+    const doctor = await this.userModel.findById(doctorId);
+
+    if (!doctor) {
+      throw new NotFoundException(`Doctor con id ${doctorId} no encontrado`);
+    }
+
+    if (doctor.specialization !== appointment.specialization) {
+      throw new BadRequestException(
+        'El doctor asignado no cumple con la especialidad solicitada'
+      );
+    }
+
+    appointment.doctorId = doctorId;
+    appointment.status = AppointmentStatus.CONFIRMED;
+
+    const updatedAppointment = await appointment.save();
+    return updatedAppointment;
+  }
+
+  async delete(id: string) {
+    const appointment = await this.findOne(id);
+    await this.appointmentModel.deleteOne({ _id: id });
+
+    return appointment;
   }
 }
