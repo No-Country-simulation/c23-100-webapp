@@ -1,70 +1,5 @@
-<!-- Sidebar -->
-<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
-    <div class="sidebar-content">
-        <div class="container">
-            <!-- Section: Links -->
-            <!--Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col">
-                    <ul>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['']">
-                                <div style="display: flex; align-items: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                                        class="bi bi-house-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                                        <path
-                                            d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                                    </svg>
-                                    <span style="margin-left: 10px;">Inicio</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['/dashboard']">
-                                <div style="display: flex; align-items: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                                        class="bi bi-calendar" viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                    </svg>
-                                    <span style="margin-left: 10px;">Citas <br> Pendientes </span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Grid column -->
-                <div class="col">
-                    <div class="sidebar-button-container">
-                        <button class="btn btn-primary" (click)="toggleSidebar()">
-                            @if (!isSidebarOpen) {
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                            } @else {
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                    </svg>
-                                </span>
-                            }
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Section: Links -->
-        </div>
-    </div>
-</div>
+
+
 <!-- Bienvenida -->
 <header class="bienvenida" id="bienvenida">
     <div class="container text-center"> <!-- Agregamos text-center aquí -->
@@ -104,7 +39,7 @@
                     <div class="row">
                         <div class="">
                             <label for="name" class="formbold-form-label">Nombre y Apellido</label>
-                            <input type="text" formControlName="name" id="name" class="form-control">
+                            <input placeholder="Nombre y apellido" type="text" formControlName="name" id="name" class="form-control">
                             @if(form.get('name')?.invalid && form.get('name')?.touched){
                                 <div class="text-danger">
                                     El nombre es obligatorio y debe tener al menos 4 caracteres.
@@ -114,7 +49,7 @@
                         <br><br>
                         <div class="">
                             <label for="email" class="formbold-form-label">Email</label>
-                            <input type="email" formControlName="email" id="email" class="form-control">
+                            <input placeholder="Correo electronico"  type="email" formControlName="email" id="email" class="form-control">
                             @if(form.get('email')?.invalid && form.get('email')?.touched){
                             <div class="text-danger">
                                 Debe ingresar un email válido.
@@ -123,7 +58,7 @@
                         </div>
                         <div class="">
                             <label for="phone" class="formbold-form-label">Número telefónico</label>
-                            <input type="phone" formControlName="phone" id="phone" class="form-control">
+                            <input placeholder="Numero telefonico" type="phone" formControlName="phone" id="phone" class="form-control">
                             @if(form.get('phone')?.invalid && form.get('phone')?.touched){
                                 <div class="text-danger">
                                     Debe ingresar un phone válido.
@@ -134,26 +69,29 @@
                         <div class="form-group">
                             <label for="especialidad">Especialidad</label>
                             <select class="form-control" formControlName="especialidad" id="especialidad">
-                                <option value="">Seleccione una especialidad</option>
+                                <option value="" disabled selected>Seleccione una especialidad</option>
                                 <option>Odontología</option>
                                 <option>Cardiología</option>
                                 <option>Neurología</option>
                                 <option>Dermatología</option>
                                 <option>Oftalmología</option>
-                                <option>Neurología</option>
                                 <option>Pediatría</option>
                                 <option>Podología</option>
                             </select>
                             @if (form.get('especialidad')?.invalid && form.get('especialidad')?.touched) {
-                                <div
-                                class="text-danger">
-                                Debe seleccionar una especialidad.
-                            </div>
+                                <div class="text-danger">
+                                    Debe seleccionar una especialidad.
+                                </div>
                             }
                         </div>
                         <div class="mb-3">
-                            <label for="indicacion" class="form-label">Motivo de la consulta:</label>
-                            <textarea class="form-control" id="indicacion" rows="3"></textarea>
+                            <label for="motivo_consulta" class="form-label">Motivo de la consulta:</label>
+                            <textarea placeholder="Motivo de la consulta"  type="text" formControlName="motivo_consulta" id="motivo_consulta"  class="form-control" rows="3"></textarea>
+                            @if(form.get('motivo_consulta')?.invalid && form.get('motivo_consulta')?.touched){
+                                <div class="text-danger">
+                                    Debe indicar el motivo de su consulta
+                                </div>
+                            }
                         </div>
                         <br> <br> <br> <br>
                         <button class="btn btn-success" type="submit" [disabled]="form.invalid">

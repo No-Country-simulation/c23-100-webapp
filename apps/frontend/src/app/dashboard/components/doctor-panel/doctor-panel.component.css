@@ -3,102 +3,37 @@
   background-color: #127F2F;
   width: 750px;
 }
-
-/*SideBar o Barra Vertical*/
-
-.sidebar {
-  position: fixed;
-  top: 200px;
-  width: 220px;
-  background: #1D1832;
-  overflow-y: auto;
-  z-index: 1;
-  transition: left 0.3s ease-in-out;
-  border-radius: 8px
-  /* Agrega una transición suave */
-}
-
-.sidebar.half-open {
-  left: -160px;
-  /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
-}
-
-.sidebar.full-open {
-  left: 0;
-  /* This positions the sidebar fully open */
-}
-
-.sidebar ul {
-  list-style-type: none;
-  /* Elimina los puntos de la lista */
-  padding: 0;
-  /* Elimina el padding */
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  /* Elimina el subrayado de los enlaces */
-  color: #ffffff;
-  /* Color del texto */
-  display: block;
-  /* Hace que el área del enlace sea más grande */
-  padding: 5px;
-  /* Espaciado interno del enlace */
-  border-radius: 5px;
-  /* Bordes redondeados */
-}
-
-.sidebar ul li a:hover {
-  background: #127F2F;
-  color: white;
-  /* Color del texto al pasar el ratón */
-}
-
-.sidebar-button {
-  /* Add your button styles here */
-  background-color: #127F2F;
-  /* Example button style */
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-.sidebar-content {
-  flex: 1;
-  /* Permite que esta sección ocupe el espacio disponible */
+/*Estilos botones*/
+ 
+/*Separacion entre el boton de iniciar sesion y registro*/
+.button-group {
   display: flex;
-  /* Usar flexbox para las columnas internas */
-  padding: 30px 10px;
+  /* Para alinear los botones horizontalmente */
+  gap: 10px;
+  /* Espacio entre los botones */
 }
 
-.sidebar-content ul {
-  flex: 1;
-  /* Esta columna ocupa el espacio restante */
+.boton1:hover {
+  transform: scale(1.05);
+  /* Aumenta el tamaño ligeramente al pasar el mouse */
 }
 
-.sidebar-button-container {
-  margin-top: auto;
-  /* Empuja el botón hacia abajo */
-  padding: 0;
-  /* Elimina el padding */
-  position: absolute;
-  /* Posiciona el contenedor de manera absoluta */
-  bottom: 50px;
-  /* Alinea el contenedor al fondo */
-  right: 0;
-  /* Alinea el contenedor a la derecha */
+.boton2:hover {
+  transform: scale(1.05);
+  /* Aumenta el tamaño ligeramente al pasar el mouse */
 }
-
-.nav-item {
-  margin-bottom: 20px;
-}
-
-.sidebar-button-container .btn {
-  height: 100px;
+.centrar {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
 }
 
 /**Estilos para el formulario***/
+.no-resize {
+  resize: none;
+  /* No aumenta el tamaño del textarea*/
+}
 
 form#contactForm {
   width: 100%;
@@ -115,6 +50,7 @@ form#contactForm {
   /* Esquinas redondeadas */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   /* Sombra para un diseño más limpio */
+  
 }
 
 form#contactForm .form-control {
@@ -168,18 +104,6 @@ form#contactForm .form-control {
       pero no funciona por el background-size, solamente  */
   /* Altura de la sección */
 }
-
-.fondo-card1 {
-  background: url("/imagenes/fondo-estetoscopio.png");
-  background-size: cover;
-  /* Ajusta la imagen para que cubra toda la sección */
-  background-position: 50%;
-  /* El primer porcentaje indica que tanto a la izquierda o derecha
-      pero no funciona por el background-size, solamente  */
-  height: 400px;
-  /* Altura de la sección */
-}
-
 /*Especialides*/
 
 
@@ -223,11 +147,6 @@ header.especialidad {
     padding: 15px;
   }
 
-  /*Aqui extiendo la imagen del fondo o en tal caso la seccion*/
-  .page-section {
-    height: 1000px;
-    /* Altura de la sección */
-  }
 
   /*Aqui subo el texto para que este mas cerca de la imagen*/
   .especialidad .col-lg-6 {

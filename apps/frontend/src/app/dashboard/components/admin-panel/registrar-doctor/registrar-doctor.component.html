@@ -1,75 +1,123 @@
-<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
-    <div class="sidebar-content">
-      <div class="container">
-        <!-- Section: Links -->
-        <!--Grid row-->
-        <div class="row">
-          <!-- Grid column -->
-  
-          <div class="col">
-            <ul>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <div style="display: flex; align-items: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                      class="bi bi-house-fill" viewBox="0 0 16 16">
-                      <path
-                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                      <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                    </svg>
-                    <span style="margin-left: 10px;">Inicio</span>
-                  </div>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/cita-admin">
-                  <div style="display: flex; align-items: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                      class="bi bi-calendar" viewBox="0 0 16 16">
-                      <path
-                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                    </svg>
-                    <span style="margin-left: 10px;">Citas <br> Solicitadas </span>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- Grid column -->
-  
-          <div class="col">
-  
-            <div class="sidebar-button-container" >
-              <button class="btn btn-primary" (click)="toggleSidebar()">
-                @if (!isSidebarOpen) {
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-chevron-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                  </span>
-                } @else {
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-chevron-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd"
-                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                    </svg>
-                  </span>
-                }
-              </button>
-            </div>
-          </div>
+<div class="register-container">
+  <div class="register-card">
+    <img
+      src="/imagenes/medico-bienvenida.png"
+      class="register-image"
+      alt="Médico"
+    />
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="register-form"
+    >
+      <h2>Crear Cuenta</h2>
+
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="name">Nombre</label>
+          <input
+            id="name"
+            formControlName="name"
+            type="name"
+            placeholder="Ingresa tu nombre"
+          />
+          @if (hasErrors("name", 'required')) {
+          <span>El nombre es obligatorio.</span>
+          }@if (hasErrors('name', 'minlength')) {
+          <span>Debe tener un mínimo de 3 caracteres.</span>
+          }
         </div>
-        <!-- Section: Links -->
+
+        <div class="w-100">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            formControlName="email"
+            type="email"
+            placeholder="Ingresa tu email"
+          />
+          @if (hasErrors("email", 'required')) {
+          <span>El email es obligatorio.</span>
+          } @if (hasErrors('email', 'email')) {
+          <span>Debe ser un email válido.</span>
+          }
+        </div>
       </div>
-  
-    </div>
+
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            formControlName="password"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+          />
+          @if (hasErrors("password", 'required')) {
+          <span>El password es obligatorio.</span>
+          } @if (hasErrors('password', 'minlength')) {
+          <span>Debe tener un mínimo de 6 caracteres.</span>
+          }
+        </div>
+        <div class="w-100">
+          <label for="confirm-password">Confirmar contraseña</label>
+          <input
+            id="confirm-password"
+            formControlName="confirmPassword"
+            type="password"
+            placeholder="Confirma tu contraseña"
+          />
+          @if (hasErrors("confirmPassword", 'required')) {
+          <span>Debe confirmar su password.</span>
+          } @if (hasErrors('confirmPassword', 'mismatch') &&
+          !hasErrors('confirmPassword', 'required')) {
+          <span>Los passwords deben de coincidir.</span>
+          }
+        </div>
+      </div>
+
+      <label for="phone">Teléfono:</label>
+      <input
+        id="phone"
+        formControlName="phone"
+        type="phone"
+        placeholder="Ingresa tu número de teléfono"
+        [value]="'+'"
+      />
+      @if (hasErrors("phone", 'required')) {
+      <span>El teléfono es obligatorio.</span>
+      }@if (hasErrors('phone', 'pattern')) {
+      <span>Número de teléfono inválido.</span>
+      }
+
+
+
+        <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+        <div class="w-100">
+          <label for="specialization">Especialización (Doctor)</label>
+          <select
+            formControlName="specialization"
+            name="specialization"
+            id="specialization"
+          >
+           
+          <option value="" disabled selected>Seleccione una especialidad</option>
+          <option value="Médicina General">Médicina General</option>
+          <option value="Psicólogo">Psicologo</option>
+          <option value="Psiquiatría">Psiquiatria</option>
+          <option value="Psicoterapia">Psicoterapia</option>
+          <option value="Nutricionista">Nutricionista</option>
+          <option value="Endocrinólogo">Endocrinólogo</option>
+          </select>
+          @if (hasErrors("specialization", 'specializationRequired')) {
+          <span>Debe de elegir una especialización</span>
+          }
+        </div>
+      </div>
+
+
+
+      <button type="submit" [disabled]="">Regístrate</button>
+    </form>
   </div>
-  
-  <section class="page-section full-screen" id="about">
-    <div class="container px-4 px-lg-5 text-center">
-  
-    </div>
-  </section>
+</div>

@@ -6,11 +6,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    rgb(151, 181, 218) 0%,
-    rgba(177, 205, 240, 0.877) 100%
-  );
+  background: url("/imagenes/fondo-verde.jpg");
   padding: 20px;
 }
 
@@ -58,7 +54,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(151, 181, 218);
+  background-color: rgb(151, 218, 162);
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -71,5 +67,5 @@
 }
 
 .login-form button:hover:not(:disabled) {
-  background-color: rgb(120, 150, 200);
+  background-color: #198754
 }

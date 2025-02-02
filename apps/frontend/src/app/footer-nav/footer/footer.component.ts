@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';// Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-footer',
-  imports: [],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  styleUrls: ['./footer.component.css'], // Corrige 'styleUrl' a 'styleUrls'
 })
-export class FooterComponent {}
+export class FooterComponent {
+  isAuthenticated: boolean = false;
+
+  constructor(private authService: AuthService) {
+    this.isAuthenticated = this.authService.isAuthenticated();
+  }
+}

@@ -25,12 +25,8 @@ export class PacienteComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    provincia: new FormControl(null, [Validators.required]),
-    direccion: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
     especialidad: new FormControl(null, [Validators.required]),
+    motivo_consulta: new FormControl(null, [Validators.required]),
   });
 
   constructor(private userService: UserService) {}

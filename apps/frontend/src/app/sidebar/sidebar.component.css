@@ -1,0 +1,99 @@
+
+.sidebar {
+    position: fixed;
+    top: 200px;
+    width: 220px;
+    background: #1D1832;
+    z-index: 1;
+    transition: left 0.3s ease-in-out;
+    border-radius: 8px
+    /* Agrega una transición suave */
+  }
+  
+  .sidebar.half-open {
+    left: -160px;
+    /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
+  }
+  
+  .sidebar.full-open {
+    left: 0;
+    /* This positions the sidebar fully open */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    /* Elimina los puntos de la lista */
+    padding: 0;
+    /* Elimina el padding */
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    /* Elimina el subrayado de los enlaces */
+    color: #ffffff;
+    /* Color del texto */
+    display: block;
+    /* Hace que el área del enlace sea más grande */
+    /* Bordes redondeados */
+  }
+  
+  .sidebar ul li a:hover {
+    background: #127F2F;
+    color: white;
+    /* Color del texto al pasar el ratón */
+  }
+  
+  .sidebar-button {
+    /* Add your button styles here */
+    background-color: #127F2F;
+    /* Example button style */
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidebar-content {
+    flex: 1;
+    /* Permite que esta sección ocupe el espacio disponible */
+    display: flex;
+    /* Usar flexbox para las columnas internas */
+    padding: 30px 10px;
+  }
+  
+  .sidebar-content ul {
+    flex: 1;
+    /* Esta columna ocupa el espacio restante */
+  }
+  
+  .sidebar-button-container {
+    margin-top: auto;
+    /* Empuja el botón hacia abajo */
+    padding: 0;
+    /* Elimina el padding */
+    position: absolute;
+    /* Posiciona el contenedor de manera absoluta */
+    bottom: 50px;
+    /* Alinea el contenedor al fondo */
+    right: 0;
+    /* Alinea el contenedor a la derecha */
+  }
+  
+  .nav-item {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-button-container .btn {
+    height: 100px;
+  }
+  .sidebar ul li a span div {
+    margin-bottom: 5px; /* Adjust as needed */
+  }
+
+@media (max-width: 768px) {
+    .sidebar {
+      left: -160px;
+      width: 200px;
+    }
+  
+  }

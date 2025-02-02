@@ -3,160 +3,8 @@
   background-color: #127F2F;
   width: 750px;
 }
-
-/*SideBar o Barra Vertical*/
-
-.sidebar {
-  position: fixed;
-  top: 200px;
-  width: 220px;
-  background: #1D1832;
-  overflow-y: auto;
-  z-index: 1;
-  transition: left 0.3s ease-in-out;
-  border-radius: 8px
-  /* Agrega una transición suave */
-}
-
-.sidebar.half-open {
-  left: -160px;
-  /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
-}
-
-.sidebar.full-open {
-  left: 0;
-  /* This positions the sidebar fully open */
-}
-
-.sidebar ul {
-  list-style-type: none;
-  /* Elimina los puntos de la lista */
-  padding: 0;
-  /* Elimina el padding */
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  /* Elimina el subrayado de los enlaces */
-  color: #ffffff;
-  /* Color del texto */
-  display: block;
-  /* Hace que el área del enlace sea más grande */
-  padding: 5px;
-  /* Espaciado interno del enlace */
-  border-radius: 5px;
-  /* Bordes redondeados */
-}
-
-.sidebar ul li a:hover {
-  background: #127F2F;
-  color: white;
-  /* Color del texto al pasar el ratón */
-}
-
-.sidebar-button {
-  /* Add your button styles here */
-  background-color: #127F2F;
-  /* Example button style */
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-.sidebar-content {
-  flex: 1;
-  /* Permite que esta sección ocupe el espacio disponible */
-  display: flex;
-  /* Usar flexbox para las columnas internas */
-  padding: 30px 10px;
-}
-
-.sidebar-content ul {
-  flex: 1;
-  /* Esta columna ocupa el espacio restante */
-}
-
-.sidebar-button-container {
-  margin-top: auto;
-  /* Empuja el botón hacia abajo */
-  padding: 0;
-  /* Elimina el padding */
-  position: absolute;
-  /* Posiciona el contenedor de manera absoluta */
-  bottom: 50px;
-  /* Alinea el contenedor al fondo */
-  right: 0;
-  /* Alinea el contenedor a la derecha */
-}
-
-.nav-item {
-  margin-bottom: 20px;
-}
-
-.sidebar-button-container .btn {
-  height: 100px;
-}
-
 /**Estilos para el formulario***/
 
-form#contactForm {
-  width: 100%;
-  /* Haz que ocupe todo el ancho del contenedor */
-  max-width: 600px;
-  /* Tamaño máximo para formularios más estrechos */
-  margin: 0 auto;
-  /* Centra el formulario horizontalmente */
-  padding: 20px;
-  /* Espaciado interno para mejor presentación */
-
-  background-color: #E8E407;
-  border-radius: 8px;
-  /* Esquinas redondeadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* Sombra para un diseño más limpio */
-}
-
-form#contactForm .form-control {
-  font-size: 16px;
-  /* Ajusta el tamaño del texto */
-  padding: 10px;
-  /* Espaciado interno */
-  height: auto;
-  /* Permite que el campo se ajuste al contenido */
-
-}
-
-/* ... (tu código CSS existente) */
-
-.form-group select {
-  /* ... (tus estilos existentes) */
-  /* Agregar un icono de flecha a la derecha */
-  appearance: none;
-  /* Ocultar la flecha por defecto del navegador */
-  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="currentColor" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1H4.5A.5.5 0 0 1 4 8z"/%3E%3C/svg%3E');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  /* Ajusta la posición del icono */
-  background-size: 16px 12px;
-  /* Ajusta el tamaño del icono */
-}
-
-.col-lg-6.align-self-baseline {
-  margin-top: 30px;
-  /* Ajusta según sea necesario */
-  margin-bottom: 30px;
-}
-
-.text-white col-lg-6.align-self-end {
-  margin-top: 100px;
-  /* Aumenta el margen superior para subir el texto */
-}
-
-.card-container {
-  flex: 1;
-  /* Ocupa todo el espacio disponible menos el footer */
-}
 
 
 .page-section {
@@ -166,9 +14,10 @@ form#contactForm .form-control {
   background-position: 50%;
   /* El primer porcentaje indica que tanto a la izquierda o derecha
       pero no funciona por el background-size, solamente  */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap; /* Permite que los elementos se ajusten a varias líneas en pantallas pequeñas */
+      justify-content: center; /* Centra los elementos horizontalmente */
+      align-items: center; /* Centra los elementos verticalmente */
   /* Ocupa toda la altura de la viewport */
 
   /* Altura de la sección */
@@ -177,25 +26,32 @@ form#contactForm .form-control {
 /*Especialides*/
 
 
-header.especialidad {
-  background: #127F2F;
-
+.col {
+  flex: 1 0 30%; /* Cada elemento ocupa el 30% del ancho disponible */
+  margin: 10px; /* Espacio entre los elementos */
+  box-sizing: border-box; /* Incluye el padding y el border en el cálculo del ancho */
 }
 
+.card {
+  height: 100%; /* Asegura que las tarjetas ocupen toda la altura del contenedor */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye el espacio entre la imagen y el botón */
+}
+
+.card-body {
+  text-align: center; /* Centra el texto del botón */
+}
+
+.imagen-card {
+  width: 60%; /* Ajusta el tamaño de la imagen */
+  height: auto;
+  margin: 20px auto; /* Ajusta el margen para centrar y separar la imagen */
+}
 .especialidad {
   background: #E8E407;
 
 }
-
-.imagen-card {
-  width: 30%;
-  /* Asegúrate de que las imágenes ocupen el 100% del ancho de su contenedor */
-  height: auto;
-  /* Mantiene la proporción de la imagen */
-  margin: 0 auto;
-  /* Centra la imagen horizontalmente */
-}
-
 /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
 
 @media (max-width: 768px) {
@@ -210,25 +66,9 @@ header.especialidad {
   }
 
   /*Formularios*/
-
-  form#contactForm {
-    max-width: 100%;
-    /* Ocupa todo el ancho en pantallas pequeñas */
-    padding: 15px;
-  }
-
-  /*Aqui extiendo la imagen del fondo o en tal caso la seccion*/
-  .page-section {
-    height: 1000px;
-    /* Altura de la sección */
-  }
-
-  /*Aqui subo el texto para que este mas cerca de la imagen*/
-  .especialidad .col-lg-6 {
-    margin-bottom: -75px;
-    /* Add margin to separate image and text */
-  }
-
+  .col {
+    flex: 1 0 45%; /* Dos elementos por línea en pantallas pequeñas */
+}
   .imagen-card {
     width: 60%;
     /* Cambia el tamaño según lo que desees */

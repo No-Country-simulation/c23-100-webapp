@@ -1,70 +1,3 @@
-<!-- Sidebar -->
-<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
-    <div class="sidebar-content">
-        <div class="container">
-            <!-- Section: Links -->
-            <!--Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col">
-                    <ul>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['']">
-                                <div style="display: flex; align-items: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                                        class="bi bi-house-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                                        <path
-                                            d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                                    </svg>
-                                    <span style="margin-left: 10px;">Inicio</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['/dashboard']">
-                                <div style="display: flex; align-items: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                                        class="bi bi-calendar" viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                    </svg>
-                                    <span style="margin-left: 10px">Pacientes en espera</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Grid column -->
-                <div class="col">
-                    <div class="sidebar-button-container" >
-                        <button class="btn btn-primary" (click)="toggleSidebar()">
-                            @if (!isSidebarOpen) {
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                                    </svg>
-                                </span>
-                            } @else {
-                                <span >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                    </svg>
-                                </span>
-                            }
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Section: Links -->
-        </div>
-    </div>
-</div>
 <section class="page-section full-screen" id="about">
     <div class="container px-4 px-lg-5 text-center">
         <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
@@ -77,45 +10,19 @@
                             class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
-                        <div class="card-body">
-                            <p>Paciente: Jose Luis</p>
-                            <p>Motivo: Diarrea con hipo XD</p>
-                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                data-bs-target="#indicacionesModal">
-                                Realizar indicaciones
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col ">
-                    <div class="card h-100 especialidad">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
-                        <div class="card-body">
-                            <p>Paciente: Miguel Suarez</p>
-                            <p>Motivo: No controla su impulsos</p>
-                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                data-bs-target="#indicacionesModal">
-                                Realizar indicaciones
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col ">
-                    <div class="card h-100 especialidad">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                        </svg>
-                        <div class="card-body">
-                            <p>Paciente: Roberto Rodriguez</p>
+                        <div class="card-body centrar">
+                            <p>Paciente: Jesus</p>
                             <p>Motivo: Ansiedad</p>
-                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                data-bs-target="#indicacionesModal">
-                                Realizar indicaciones
-                            </button>
+                            <div class="button-group">
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#historialModal">Historial</button>
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#indicacionesModal">Indicaciones</button>
+                            </div>
+                            <br>
+                            <button class="boton1 btn btn-success">Realizar consulta</button>
+
+
                         </div>
                     </div>
                 </div>
@@ -125,13 +32,63 @@
                             class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
-                        <div class="card-body">
-                            <p>Paciente: Manuel Novoa</p>
-                            <p>Motivo: Depresión</p>
-                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                data-bs-target="#indicacionesModal">
-                                Realizar indicaciones
-                            </button>
+                        <div class="card-body centrar">
+                            <p>Paciente: Jacinto Perez</p>
+                            <p>Motivo: Bipolaridad</p>
+                            <div class="button-group">
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#historialModal">Historial</button>
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#indicacionesModal">Indicaciones</button>
+                            </div>
+                            <br>
+                            <button class="boton1 btn btn-success">Realizar consulta</button>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col ">
+                    <div class="card h-100 especialidad">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                        <div class="card-body centrar">
+                            <p>Paciente: Miguel Angel</p>
+                            <p>Motivo: Depresion</p>
+                            <div class="button-group">
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#historialModal">Historial</button>
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#indicacionesModal">Indicaciones</button>
+                            </div>
+                            <br>
+                            <button class="boton1 btn btn-success">Realizar consulta</button>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col ">
+                    <div class="card h-100 especialidad">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-fill card-img-top imagen-card" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        </svg>
+                        <div class="card-body centrar">
+                            <p>Paciente: Jose Luis</p>
+                            <p>Motivo: Ansiedad</p>
+                            <div class="button-group">
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#historialModal">Historial</button>
+                                <button class="boton1 btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#indicacionesModal">Indicaciones</button>
+                            </div>
+                            <br>
+                            <button class="boton1 btn btn-success">Realizar consulta</button>
+
+
                         </div>
                     </div>
                 </div>
@@ -139,7 +96,42 @@
         </div>
     </div>
 </section>
-<!-- Modal -->
+
+<!-- Modal Historial -->
+<div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="historialModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content background-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="indicacionesModalLabel">Historial de Indicaciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
+                    <div class="row">
+                        <div class="">
+                            <label for="name" class="formbold-form-label">Fecha de la cita:</label>
+                            <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
+                        </div>
+                        <br><br>
+
+                        <div class="mb-3">
+                            <label for="indicacion" class="form-label">Indicaciones</label>
+                            <textarea class="form-control" id="indicacion" rows="3">Descansar mas</textarea>
+                        </div>
+
+                        <br> <br> <br> <br>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar Indicaciones</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Indicaciones -->
 <div class="modal fade" id="indicacionesModal" tabindex="-1" aria-labelledby="indicacionesModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -151,18 +143,9 @@
             <div class="modal-body">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
                     <div class="row">
-                        <div class="">
-                            <label for="name" class="formbold-form-label">Hora de la cita:</label>
-                            <input type="text" formControlName="name" id="name" class="form-control">
-                            @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                            <div class="text-danger">El nombre es obligatorio y debe tener al menos 4 caracteres.</div>
-                            }
-                        </div>
-                        <br><br>
-
                         <div class="mb-3">
                             <label for="indicacion" class="form-label">Indicaciones</label>
-                            <textarea class="form-control" id="indicacion" rows="3"></textarea>
+                            <textarea class="form-control no-resize" id="indicacion" rows="7"></textarea>
                         </div>
 
                         <br> <br> <br> <br>

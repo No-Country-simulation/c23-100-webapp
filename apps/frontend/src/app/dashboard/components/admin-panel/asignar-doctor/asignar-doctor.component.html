@@ -1,195 +1,188 @@
-<!-- Sidebar -->
-<div class="sidebar" [class.half-open]="isSidebarHalfOpen" [class.full-open]="isSidebarOpen">
-  <div class="sidebar-content">
-    <div class="container">
-      <!-- Section: Links -->
-      <!--Grid row-->
-      <div class="row">
-        <!-- Grid column -->
-
-        <div class="col">
-          <ul>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <div style="display: flex; align-items: center;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                    class="bi bi-house-fill" viewBox="0 0 16 16">
-                    <path
-                      d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z" />
-                    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z" />
-                  </svg>
-                  <span style="margin-left: 10px;">Inicio</span>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/cita-admin">
-                <div style="display: flex; align-items: center;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
-                    class="bi bi-calendar" viewBox="0 0 16 16">
-                    <path
-                      d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                  </svg>
-                  <span style="margin-left: 10px;">Citas <br> Solicitadas </span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-
-        <div class="col">
-
-          <div class="sidebar-button-container">
-            <button class="btn btn-primary" (click)="toggleSidebar()">
-            @if (!isSidebarOpen) {
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-chevron-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-                </svg>
-              </span>
-            } @else {
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-chevron-left" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                </svg>
-              </span>
-              }
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Section: Links -->
-    </div>
-
-  </div>
-</div>
-
-<!--Lista de pacientes para asignar doctor-->
-<section class="page-section full-screen" id="about">
+<!-- Lista de pacientes para asignar doctor -->
+<section class="page-section full-screen" id="sapo">
   <div class="container px-4 px-lg-5 text-center">
-    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
-      <br><br><br><br><br>
-      <h1 class="texto-amarillo">Lista de pacientes para asignar doctor</h1>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col ">
-          <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
-            <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div class="form-group">
-                    <label for="provincias">Paciente: Jose Luis</label>
-                    <select class="form-control" id="provincias">
-                      <option value="">Asignar doctor</option>
-                      <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicólogo</option>
-                    </select>
-                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
-                    <div class="text-danger">
-                      Debe seleccionar una provincia.
-                    </div>
-                    }
-                  </div>
-                  <br> <br> <br>
-                  <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                    Asignar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col ">
-          <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
-            <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div class="form-group">
-                    <label for="provincias">Paciente: Miguel Suarez</label>
-                    <select class="form-control" id="provincias">
-                      <option value="">Asignar doctor</option>
-                      <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicólogo</option>
-                    </select>
-                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
-                    <div class="text-danger">
-                      Debe seleccionar una provincia.
-                    </div>
-                    }
-                  </div>
-                  <br> <br> <br>
-                  <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                    Asignar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="col ">
-          <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
-            <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div class="form-group">
-                    <label for="provincias">Paciente: Roberto Rodriguez</label>
-                    <select class="form-control" id="provincias">
-                      <option value="">Asignar doctor</option>
-                      <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicólogo</option>
-                    </select>
-                    @if(form.get('provincia')?.invalid && form.get('provincia')?.touched){
-                    <div class="text-danger">
-                      Debe seleccionar una provincia.
-                    </div>
-                  }
-                  </div>
-                  <br> <br> <br>
-                  <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                    Asignar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col ">
-          <div class="card h-100 especialidad">
-            <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta">
-            <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="row">
-                  <div class="form-group">
-                    <label for="provincias">Paciente: Manuel Novoa</label>
-                    <select class="form-control" id="provincias">
-                      <option value="">Asignar doctor</option>
-                      <option>Jose Medina - Pediatra</option>
-                      <option>Jose Perez - Psicólogo</option>
-                    </select>
-                    @if (form.get('provincia')?.invalid && form.get('provincia')?.touched) {
-                      <div class="text-danger">
-                        Debe seleccionar una provincia.
-                      </div>
-                    }
-                  </div>
-                  <br> <br> <br>
-                  <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                    Asignar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+    <br><br>
+    <div class="table-responsive"> <!-- Contenedor para hacer la tabla responsiva -->
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Estado de la cita</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Luis</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Pepe</td>
+            <td>Sin asignar</td>
+            <td><span class="badge text-bg-warning custom-badge">En espera</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Richard</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Jose Luis</td>
+            <td>Vicente Escalona</td>
+            <td><span class="badge text-bg-danger custom-badge">Cancelada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">5</th>
+            <td>Manolo</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Manolo</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">7</th>
+            <td>Manolo</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Manolo</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+          <tr>
+            <th scope="row">9</th>
+            <td>Manolo</td>
+            <td>Doofenshmirtz</td>
+            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
+                cita</a></td>
+            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
+                cita</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
+
+<!-- Modal agendar citas -->
+<div class="modal fade" id="agendarcitasModal" tabindex="-1" aria-labelledby="agendarcitasModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content background-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="indicacionesModalLabel">Agendar cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  id="contactForm">
+          <div class="row">
+            <div class="">
+              <label for="name" class="formbold-form-label">Fecha de la cita:</label>
+              <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
+            </div>
+            <br><br>
+
+            <select class="form-control" id="provincias">
+              <option value="">Asignar doctor</option>
+              <option>Jose Medina - Pediatra</option>
+              <option>Jose Perez - Psicólogo</option>
+            </select>
+
+            <br> <br> <br> <br>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar Indicaciones</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal agendar citas -->
+<div class="modal fade" id="editarcitasModal" tabindex="-1" aria-labelledby="editarcitasModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content background-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="indicacionesModalLabel">Editar cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  id="contactForm">
+          <div class="row">
+            <div class="">
+              <label for="name" class="formbold-form-label">Cambiar fecha:</label>
+              <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
+            </div>
+            <br><br>
+
+            <select class="form-control" id="provincias">
+              <option value="">Cambiar doctor </option>
+              <option>Jose Medina - Pediatra</option>
+              <option>Jose Perez - Psicólogo</option>
+            </select>
+
+            <select class="form-control" id="provincias">
+              <option value="">Cambiar estado de la cita</option>
+              <option>Cancelar</option>
+              <option>En espera</option>
+            </select>
+
+            <br> <br> <br> <br>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Guardar Indicaciones</button>
+      </div>
+    </div>
+  </div>
+</div>

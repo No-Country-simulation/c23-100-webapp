@@ -3,11 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    rgb(151, 181, 218) 0%,
-    rgba(177, 205, 240, 0.877) 100%
-  );
+   background: url("/imagenes/fondo-verde.jpg");
   padding: 20px;
 }
 
@@ -51,7 +47,7 @@
 }
 
 .register-form :is(input, select):focus {
-  outline-color: rgb(15, 103, 255);
+  outline-color: rgb(151, 218, 162);
 }
 
 .register-form button {
@@ -59,7 +55,7 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(151, 181, 218);
+  background-color: rgb(153, 218, 151);
   color: white;
   font-size: 1rem;
   cursor: pointer;
@@ -72,7 +68,7 @@
 }
 
 .register-form button:hover:not(:disabled) {
-  background-color: rgb(15, 103, 255);
+  background-color: #198754
 }
 
 .register-form span {
