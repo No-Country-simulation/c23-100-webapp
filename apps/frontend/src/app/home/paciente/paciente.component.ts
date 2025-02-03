@@ -8,6 +8,7 @@ import {
 import { User } from '../../shared';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-paciente',
@@ -88,6 +89,15 @@ export class PacienteComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value);
+      Swal.fire({
+        title: 'Solicitud enviada',
+        text: 'Tu solicitud ha sido enviada con éxito. Un administrador asignará horarios y médicos disponibles.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      });
+
+      // Resetea el formulario después del envío
+      this.form.reset();
     } else {
       this.form.markAllAsTouched();
     }
