@@ -23,7 +23,7 @@
         type="password"
         placeholder="Ingresa tu contraseña"
       />
-      <button type="submit" [disabled]="">Iniciar Sesion</button>
+      <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Iniciar Sesion</button>
     </form>
   </div>
 </div>

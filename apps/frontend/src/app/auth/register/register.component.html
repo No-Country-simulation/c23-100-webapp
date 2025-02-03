@@ -80,7 +80,7 @@
       <input
         id="phone"
         formControlName="phone"
-        type="phone"
+        type="tel"
         placeholder="Ingresa tu número de teléfono"
         [value]="'+'"
       />
@@ -89,49 +89,7 @@
       }@if (hasErrors('phone', 'pattern')) {
       <span>Número de teléfono inválido.</span>
       }
-
-  <!--
-
-        <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
-        <div class="w-100">
-          <label for="role">Rol:</label>
-          <select formControlName="role" name="role" id="role">
-            <option [defaultSelected]="true" value="Patient">Patient</option>
-            <option value="Doctor">Doctor</option>
-          </select>
-          @if (hasErrors("role", 'required')) {
-          <span>El rol es obligatorio.</span>
-          } @if (hasErrors('role','specializationNotAllowed')) {
-          <span>No se permite una especialidad</span>
-          }
-        </div>
-        <div class="w-100">
-          <label for="specialization">Especialización (Doctor)</label>
-          <select
-            formControlName="specialization"
-            name="specialization"
-            id="specialization"
-          >
-            <option [defaultSelected]="true" value="">Ninguna</option>
-            <option value="Médico General">Médico General</option>
-            <option value="Cardiólogo">Cardiólogo</option>
-            <option value="Neurólogo">Neurólogo</option>
-            <option value="Dermatólogo">Dermatólogo</option>
-            <option value="Oftalmólogo">Oftalmólogo</option>
-            <option value="Endocrinólogo">Endocrinólogo</option>
-            <option value="Especialista en Salud Pública">
-              Especialista en Salud Pública
-            </option>
-          </select>
-          @if (hasErrors("specialization", 'specializationRequired')) {
-          <span>Debe de elegir una especialización</span>
-          }
-        </div>
-      </div>
-
-  -->
-
-      <button type="submit" [disabled]="">Regístrate</button>
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Regístrate</button>
     </form>
   </div>
 </div>
