@@ -1,5 +1,5 @@
 <!-- Lista de pacientes para asignar doctor -->
-<section class="page-section full-screen" id="sapo">
+<section class="page-section full-screen">
   <div class="container px-4 px-lg-5 text-center">
     <br><br>
     <div class="table-responsive"> <!-- Contenedor para hacer la tabla responsiva -->
@@ -15,95 +15,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Luis</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Pepe</td>
-            <td>Sin asignar</td>
-            <td><span class="badge text-bg-warning custom-badge">En espera</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Richard</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Jose Luis</td>
-            <td>Vicente Escalona</td>
-            <td><span class="badge text-bg-danger custom-badge">Cancelada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Manolo</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Manolo</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>Manolo</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">8</th>
-            <td>Manolo</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
-          </tr>
-          <tr>
-            <th scope="row">9</th>
-            <td>Manolo</td>
-            <td>Doofenshmirtz</td>
-            <td><span class="badge text-bg-success custom-badge">Aprobada</span></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar
-                cita</a></td>
-            <td><a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar
-                cita</a></td>
+          <tr *ngFor="let appointment of appointments; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ appointment.patientId }}</td>
+            <td>{{ appointment.doctorId || 'Sin asignar' }}</td> <!-- Asegúrate de que doctorId exista -->
+            <td>
+              <span class="badge" [ngClass]="{
+                'text-bg-success': appointment.status === 'Confirmed',
+                'text-bg-warning': appointment.status === 'Pending',
+                'text-bg-danger': appointment.status === 'Cancelled'
+              }">{{ appointment.status }}</span>
+            </td>
+            <td>
+              <a data-bs-toggle="modal" data-bs-target="#agendarcitasModal" class="btn btn-primary btn-sm">Agendar cita</a>
+            </td>
+            <td>
+              <a data-bs-toggle="modal" data-bs-target="#editarcitasModal" class="btn btn-secondary btn-sm">Editar cita</a>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -123,8 +51,8 @@
         <form  id="contactForm">
           <div class="row">
             <div class="">
-              <label for="name" class="formbold-form-label">Fecha de la cita:</label>
-              <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
+              <label for="" class="formbold-form-label">Fecha de la cita:</label>
+              <input type="text" value="15-01-2025" formControlName="" id="" class="form-control">
             </div>
             <br><br>
 
@@ -158,18 +86,18 @@
         <form  id="contactForm">
           <div class="row">
             <div class="">
-              <label for="name" class="formbold-form-label">Cambiar fecha:</label>
-              <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
+              <label for="" class="formbold-form-label">Cambiar fecha:</label>
+              <input type="text" value="15-01-2025" formControlName="" id="" class="form-control">
             </div>
             <br><br>
 
-            <select class="form-control" id="provincias">
+            <select class="form-control" id="">
               <option value="">Cambiar doctor </option>
               <option>Jose Medina - Pediatra</option>
               <option>Jose Perez - Psicólogo</option>
             </select>
 
-            <select class="form-control" id="provincias">
+            <select class="form-control" id="">
               <option value="">Cambiar estado de la cita</option>
               <option>Cancelar</option>
               <option>En espera</option>

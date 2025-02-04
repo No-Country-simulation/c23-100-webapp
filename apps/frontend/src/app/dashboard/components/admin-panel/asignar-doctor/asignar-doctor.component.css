@@ -35,6 +35,7 @@
       pero no funciona por el background-size, solamente  */
   display: flex;
   flex-direction: column;
+  height: 400px;
   /* Ocupa toda la altura de la viewport */
 
   /* Altura de la sección */
