@@ -16,4 +16,13 @@ export class MailsService {
       context: options,
     });
   }
+
+  async sendDoctorNotification(options: SendAppointmentConfirmationOptions) {
+    await this.mailerService.sendMail({
+      to: options.patient.email,
+      subject: '¡Nueva cita médica asignada!',
+      template: 'doctor-notification',
+      context: options,
+    });
+  }
 }

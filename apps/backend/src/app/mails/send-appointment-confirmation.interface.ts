@@ -8,4 +8,5 @@ export interface SendAppointmentConfirmationOptions {
   };
   date: string;
   hour: string;
+  reason?: string;
 }

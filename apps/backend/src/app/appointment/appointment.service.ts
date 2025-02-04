@@ -13,6 +13,7 @@ import { AppointmentStatus } from '../common/enums/appointment-status';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { User } from '../user/schemas/user.schema';
 import { MailsService } from '../mails/mails.service';
+import { formatHourByDate } from '../common/utils/format-date';
 
 @Injectable()
 export class AppointmentService {
@@ -147,6 +148,7 @@ export class AppointmentService {
     appointment.status = AppointmentStatus.CONFIRMED;
 
     this.sendConfirmationEmail(appointment);
+    this.sendDoctorNotificationEmail(appointment);
 
     const updatedAppointment = await appointment.save();
     return updatedAppointment;
@@ -160,19 +162,24 @@ export class AppointmentService {
   }
 
   private async sendConfirmationEmail(appointment: Appointment) {
+    const options = await this.getBaseEmailOptionsByAppointment(appointment);
+    await this.mailsService.sendAppointmentConfirmation(options);
+  }
+
+  private async sendDoctorNotificationEmail(appointment: Appointment) {
+    const options = await this.getBaseEmailOptionsByAppointment(appointment);
+
+    this.mailsService.sendDoctorNotification({
+      ...options,
+      reason: appointment.reason,
+    });
+  }
+
+  private async getBaseEmailOptionsByAppointment(appointment: Appointment) {
     const doctor = await this.userModel.findById(appointment.doctorId);
     const patient = await this.userModel.findById(appointment.patientId);
 
-    const hours = appointment.date.getHours();
-    const convertedHours = hours % 12 || 12;
-    const minutes = appointment.date.getMinutes().toString().padStart(2, '0');
-    const suffix = hours >= 12 ? 'PM' : 'AM';
-
-    const formattedHour = `${convertedHours
-      .toString()
-      .padStart(2, '0')}:${minutes} ${suffix}`;
-
-    this.mailsService.sendAppointmentConfirmation({
+    return {
       doctor: {
         name: doctor.name,
       },
@@ -181,7 +188,7 @@ export class AppointmentService {
         name: patient.name,
       },
       date: appointment.date.toDateString(),
-      hour: formattedHour,
-    });
+      hour: formatHourByDate(appointment.date),
+    };
   }
 }
