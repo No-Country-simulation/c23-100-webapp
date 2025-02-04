@@ -6,7 +6,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class AdminService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/user';
   private readonly appointmentUrl = 'http://localhost:3000/api/appointments';
@@ -15,12 +15,12 @@ export class UserService {
 
   getProfile() {
     const token = localStorage.getItem('userToken'); // Obtener token de localStorage
-    return this.http
-      .get<User>(`${this.baseUrl}/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Usar token de localStorage
-        },
-      })
+  return this.http
+    .get<User>(`${this.baseUrl}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Usar token de localStorage
+      },
+    })
       .pipe(
         map((user) => {
           this.userSubject.next(user);
@@ -36,10 +36,4 @@ export class UserService {
       },
     });
   }
-
-  /////////////////////////////////////ADMIN///////////////////////////////////////////
-
-
-
-
 }
