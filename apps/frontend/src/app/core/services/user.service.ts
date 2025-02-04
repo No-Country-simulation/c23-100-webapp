@@ -32,7 +32,7 @@ export class UserService {
   createAppointment(appointmentData: any): Observable<any> {
     return this.http.post(this.appointmentUrl, appointmentData, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('userToken')}`,
       },
     });
   }
