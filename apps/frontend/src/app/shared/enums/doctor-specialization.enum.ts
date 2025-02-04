@@ -1,8 +1,8 @@
 export enum DoctorSpecialization {
-  GENERAL_PRACTITIONER = 'Médicina General',
+  GENERAL_PRACTITIONER = 'Medicina General',
   PSYCHOLOGIST = 'Psicólogo',
   PSYCHIATRIST = 'Psiquiatría',
-  PSYCHOTHERAPIST  = 'Psicoterapia',
+  PSYCHOTHERAPIST = 'Psicoterapia',
   NUTRITIONIST = 'Nutricionista',
   ENDOCRINOLOGIST = 'Endocrinólogo',
 }

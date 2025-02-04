@@ -12,17 +12,22 @@ import { Model } from 'mongoose';
 import { AppointmentStatus } from '../common/enums/appointment-status';
 import { PaginationDto } from '../common/dtos/pagination.dto';
 import { User } from '../user/schemas/user.schema';
+import { MailsService } from '../mails/mails.service';
 
 @Injectable()
 export class AppointmentService {
   constructor(
     @InjectModel(Appointment.name) private appointmentModel: Model<Appointment>,
-    @InjectModel(User.name) private userModel: Model<User>
+    @InjectModel(User.name) private userModel: Model<User>,
+    private readonly mailsService: MailsService
   ) {}
 
-  async create(createAppointmentDto: CreateAppointmentDto) {
+  async create(patientId: string, createAppointmentDto: CreateAppointmentDto) {
     try {
-      const appointment = new this.appointmentModel(createAppointmentDto);
+      const appointment = new this.appointmentModel({
+        ...createAppointmentDto,
+        patientId,
+      });
       const savedAppointment = (await appointment.save()).toObject();
 
       return savedAppointment;
@@ -141,6 +146,8 @@ export class AppointmentService {
     appointment.doctorId = doctorId;
     appointment.status = AppointmentStatus.CONFIRMED;
 
+    this.sendConfirmationEmail(appointment);
+
     const updatedAppointment = await appointment.save();
     return updatedAppointment;
   }
@@ -150,5 +157,25 @@ export class AppointmentService {
     await this.appointmentModel.deleteOne({ _id: id });
 
     return appointment;
+  }
+
+  private async sendConfirmationEmail(appointment: Appointment) {
+    const doctor = await this.userModel.findById(appointment.doctorId);
+    const patient = await this.userModel.findById(appointment.patientId);
+
+    this.mailsService.sendAppointmentConfirmation({
+      doctor: {
+        name: doctor.name,
+      },
+      patient: {
+        email: patient.email,
+        name: patient.name,
+      },
+      date: appointment.date.toDateString(),
+      hour:
+        appointment.date.getHours().toString().padStart(2, '0') +
+        ':' +
+        appointment.date.getMinutes().toString().padStart(2, '0'),
+    });
   }
 }

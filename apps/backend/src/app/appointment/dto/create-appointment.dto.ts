@@ -12,10 +12,6 @@ import { DoctorSpecialization } from '../../common/enums/doctor-specialization';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAppointmentDto {
-  @ApiProperty()
-  @IsMongoId()
-  patientId: string;
-
   @ApiProperty({
     nullable: true,
   })

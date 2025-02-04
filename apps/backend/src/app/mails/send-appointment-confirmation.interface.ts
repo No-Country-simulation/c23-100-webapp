@@ -8,7 +8,4 @@ export interface SendAppointmentConfirmationOptions {
   };
   date: string;
   hour: string;
-  org: {
-    phone: string;
-  };
 }
