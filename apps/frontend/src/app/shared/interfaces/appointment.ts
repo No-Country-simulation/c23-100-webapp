@@ -5,7 +5,7 @@ export interface Appointment {
   _id: string;
   patientId: string;
   doctorId?: string;
-  date: Date;
+  date?: Date;
   specialization: DoctorSpecialization;
   reason: string;
   status: AppointmentStatus;

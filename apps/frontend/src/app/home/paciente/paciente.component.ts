@@ -8,6 +8,7 @@ import {
 import { User } from '../../shared';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-paciente',
@@ -27,6 +28,7 @@ export class PacienteComponent implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     especialidad: new FormControl(null, [Validators.required]),
     motivo_consulta: new FormControl(null, [Validators.required]),
+    date: new FormControl<Date | null>(null),
   });
 
   constructor(private userService: UserService) {}
@@ -74,6 +76,7 @@ export class PacienteComponent implements OnInit {
       next: (user) => {
         this.user = user;
         this.form.patchValue({
+          
           name: user.name,
           email: user.email,
           phone: user.phone,
@@ -84,10 +87,39 @@ export class PacienteComponent implements OnInit {
       },
     });
   }
-
+  
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+
+      const formattedDate = new Date(this.form.value.date).toISOString();
+
+      const appointmentData = {
+        date: formattedDate,
+        patientId: this.user._id,
+        specialization: this.form.value.especialidad, // Renombrar según la API
+        reason: this.form.value.motivo_consulta || '', // Asegurar que el campo `reason` exista como string
+      };
+  
+      this.userService.createAppointment(appointmentData).subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: 'Solicitud enviada',
+            text: 'Tu solicitud ha sido enviada con éxito.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          this.form.reset();
+        },
+        error: (err) => {
+          console.error('Error al enviar la solicitud:', err);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo enviar la solicitud. Inténtalo nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        },
+      });
     } else {
       this.form.markAllAsTouched();
     }
