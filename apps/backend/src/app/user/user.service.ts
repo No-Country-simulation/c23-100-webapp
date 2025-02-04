@@ -4,33 +4,19 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { Role } from '../common/enums/user-role';
 import { PaginationDto } from '../common/dtos/pagination.dto';
+import { DoctorSpecialization } from '../common/enums/doctor-specialization';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async getDoctors(paginationDto: PaginationDto) {
-    const { page, limit } = paginationDto;
-    const startIndex = (page - 1) * limit;
-
+  async getDoctors(specialization: DoctorSpecialization) {
     const doctors = await this.userModel
-      .find({ role: Role.DOCTOR })
-      .skip(startIndex)
-      .limit(limit)
+      .find({ specialization })
       .select('-password')
       .exec();
 
-    const total = await this.userModel.countDocuments({ role: Role.DOCTOR });
-
-    return {
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
-      data: doctors,
-    };
+    return doctors;
   }
 
   async getProfile(userId: string) {

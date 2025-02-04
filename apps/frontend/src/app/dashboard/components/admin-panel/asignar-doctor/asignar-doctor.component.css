@@ -1,5 +1,5 @@
 .texto-amarillo {
-  color: #E8E407;
+  color: #e8e407;
 }
 
 /*Estilos para la tabla */
@@ -22,12 +22,12 @@
 
 .custom-badge {
   padding: 4px 8px;
-    /* Ajusta el padding según sea necesario */
+  /* Ajusta el padding según sea necesario */
   font-size: 20px;
 }
 
 .page-section {
-  background: url("/imagenes/fondo-verde.jpg");
+  background: url('/imagenes/fondo-verde.jpg');
   background-size: cover;
   /* Ajusta la imagen para que cubra toda la sección */
   background-position: 50%;
@@ -42,15 +42,12 @@
 
 /*Especialides*/
 
-
 header.especialidad {
-  background: #127F2F;
-
+  background: #127f2f;
 }
 
 .especialidad {
-  background: #E8E407;
-
+  background: #e8e407;
 }
 
 .imagen-card {
@@ -65,7 +62,6 @@ header.especialidad {
 /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/
 
 @media (max-width: 768px) {
-
   /* Reduce el tamaño del texto de la Bienvenida en pantallas pequeñas */
   .texto-inicio {
     font-size: 1.5rem;
@@ -87,7 +83,7 @@ header.especialidad {
 
   .custom-badge {
     padding: 4px 8px;
-      /* Ajusta el padding según sea necesario */
+    /* Ajusta el padding según sea necesario */
     font-size: 10px;
   }
   /*Aqui subo el texto para que este mas cerca de la imagen*/
@@ -107,12 +103,10 @@ header.especialidad {
     text-align: center;
     /* This centers the content horizontally */
   }
-
 }
 
 /*Responsabilidad para pantallas grandes es decir las que pasen los 992px*/
 @media (min-width: 992px) {
-
   header.bienvenida p {
     font-size: 1.5rem;
   }
@@ -120,19 +114,25 @@ header.especialidad {
   header.especialidad p {
     font-size: 1.5rem;
   }
-
 }
 
 /*Responsabilidad para pantallas grandes es decir las que pasen los 1200px*/
 @media (min-width: 1200px) {
-
   header.bienvenida h1,
   header.bienvenida .h1 {
-    font-size: 3.0rem;
+    font-size: 3rem;
   }
 
   header.especialidad h1,
   header.especialidad .h1 {
-    font-size: 3.0rem;
+    font-size: 3rem;
   }
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 60vh;
 }

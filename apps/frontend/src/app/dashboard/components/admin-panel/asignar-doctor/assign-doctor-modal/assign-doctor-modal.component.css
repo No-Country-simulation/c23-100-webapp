@@ -1,0 +1,43 @@
+#assignDoctorModal .modal-header {
+  background-color: #28a745;
+  color: white;
+}
+
+#assignDoctorModal .modal-body {
+  padding: 20px;
+  font-size: 16px;
+}
+
+#assignDoctorModal table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+#assignDoctorModal table th,
+#assignDoctorModal table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#assignDoctorModal table th {
+  background-color: #f0f0f0;
+}
+
+#assignDoctorModal .form-check-input {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+#assignDoctorModal .btn-primary {
+  background-color: #28a745;
+  border-color: #28a745;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+#assignDoctorModal .btn-primary:hover {
+  background-color: #218838;
+}

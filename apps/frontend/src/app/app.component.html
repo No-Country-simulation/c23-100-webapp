@@ -1,22 +1,16 @@
 <app-nav></app-nav>
 
 <section>
-    @switch (user?.role) {
-        @case ('Patient') {
-            <app-sidebar></app-sidebar>
-        }
-        @case ('Doctor') {
-            <app-sidebar></app-sidebar>
-        }
-        @case ('Admin') {
-            <app-sidebar></app-sidebar>
-        }
-        @default {
-        }
-    }
+  @switch (user?.role) { @case ('Patient') {
+  <app-sidebar></app-sidebar>
+  } @case ('Doctor') {
+  <app-sidebar></app-sidebar>
+  } @case ('Admin') {
+  <app-sidebar></app-sidebar>
+  } @default { } }
 </section>
 
 <div>
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

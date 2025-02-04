@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../../shared';
+import { DoctorSpecialization, User } from '../../shared';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
@@ -15,18 +15,26 @@ export class UserService {
 
   getProfile() {
     const token = localStorage.getItem('userToken'); // Obtener token de localStorage
-  return this.http
-    .get<User>(`${this.baseUrl}/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Usar token de localStorage
-      },
-    })
+    return this.http
+      .get<User>(`${this.baseUrl}/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Usar token de localStorage
+        },
+      })
       .pipe(
         map((user) => {
           this.userSubject.next(user);
           return user;
         })
       );
+  }
+
+  getDoctors(specialization: DoctorSpecialization) {
+    return this.http.get<User[]>(`${this.baseUrl}/doctors/${specialization}`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // Usar token de localStorage
+      },
+    });
   }
 
   createAppointment(appointmentData: any): Observable<any> {

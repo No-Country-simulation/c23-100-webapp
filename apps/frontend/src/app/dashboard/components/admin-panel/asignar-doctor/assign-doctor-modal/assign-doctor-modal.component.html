@@ -1,0 +1,58 @@
+<div
+  class="modal fade"
+  id="assignDoctorModal"
+  tabindex="-1"
+  aria-labelledby="assignDoctorModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="assignDoctorModalLabel">
+          Asignar Doctor
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          #closeModalButton
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div>Especialidad: {{ appointment?.specialization }}</div>
+        <div>Doctores Disponibles</div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Id</th>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (doctor of availableDoctors(); track $index) {
+            <tr>
+              <td>
+                <input
+                  (change)="doctorId.set(doctor._id)"
+                  class="form-check-input"
+                  type="radio"
+                  name="doctor"
+                />
+              </td>
+              <td>{{ doctor._id }}</td>
+              <td>{{ doctor.name }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button (click)="assignDoctor()" type="button" class="btn btn-primary">
+          Asignar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

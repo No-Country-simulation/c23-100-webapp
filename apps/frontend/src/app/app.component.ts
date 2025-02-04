@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './footer-nav/footer/footer.component';
 import { NavComponent } from './footer-nav/nav/nav.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { User } from './shared'; 
+import { User } from './shared';
 import { UserService } from './core/services/user.service';
 
 @Component({
@@ -12,8 +12,7 @@ import { UserService } from './core/services/user.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-
- protected user?: User;
+  protected user?: User;
 
   constructor(private userService: UserService) {}
 
@@ -31,5 +30,4 @@ export class AppComponent {
       },
     });
   }
-  
 }

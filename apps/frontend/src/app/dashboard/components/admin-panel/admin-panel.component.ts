@@ -1,16 +1,10 @@
 import { Component, input, HostListener, OnInit } from '@angular/core';
 import { User } from '../../../shared';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
 })
@@ -57,23 +51,6 @@ export class AdminPanelComponent implements OnInit {
       this.isSidebarOpen = true;
       this.isSidebarHalfOpen = false;
       localStorage.setItem('sidebarState', 'open'); // Guardar estado abierto
-    }
-  }
-
-  form = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    provincia: new FormControl(null, [Validators.required]),
-    direccion: new FormControl('', [Validators.required, Validators.min(8)]),
-    especialidad: new FormControl(null, [Validators.required]),
-  });
-
-  onSubmit() {
-    if (this.form.valid) {
-      console.log(this.form.value); // Muestra la información en la consola
-    } else {
-      this.form.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
     }
   }
 }
