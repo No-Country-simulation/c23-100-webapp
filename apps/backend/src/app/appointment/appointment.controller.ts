@@ -27,8 +27,11 @@ export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
 
   @Post()
-  create(@Body() appointment: CreateAppointmentDto) {
-    return this.appointmentService.create(appointment);
+  create(
+    @User('sub') patientId: string,
+    @Body() appointment: CreateAppointmentDto
+  ) {
+    return this.appointmentService.create(patientId, appointment);
   }
 
   @Get()
