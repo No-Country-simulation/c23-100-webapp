@@ -163,6 +163,15 @@ export class AppointmentService {
     const doctor = await this.userModel.findById(appointment.doctorId);
     const patient = await this.userModel.findById(appointment.patientId);
 
+    const hours = appointment.date.getHours();
+    const convertedHours = hours % 12 || 12;
+    const minutes = appointment.date.getMinutes().toString().padStart(2, '0');
+    const suffix = hours >= 12 ? 'PM' : 'AM';
+
+    const formattedHour = `${convertedHours
+      .toString()
+      .padStart(2, '0')}:${minutes} ${suffix}`;
+
     this.mailsService.sendAppointmentConfirmation({
       doctor: {
         name: doctor.name,
@@ -172,10 +181,7 @@ export class AppointmentService {
         name: patient.name,
       },
       date: appointment.date.toDateString(),
-      hour:
-        appointment.date.getHours().toString().padStart(2, '0') +
-        ':' +
-        appointment.date.getMinutes().toString().padStart(2, '0'),
+      hour: formattedHour,
     });
   }
 }
