@@ -70,13 +70,12 @@
                             <label for="especialidad">Especialidad</label>
                             <select class="form-control" formControlName="especialidad" id="especialidad">
                                 <option value="" disabled selected>Seleccione una especialidad</option>
-                                <option>Odontología</option>
-                                <option>Cardiología</option>
-                                <option>Neurología</option>
-                                <option>Dermatología</option>
-                                <option>Oftalmología</option>
-                                <option>Pediatría</option>
-                                <option>Podología</option>
+                                <option>Médicina General</option>
+                                <option>Psicólogo</option>
+                                <option>Psiquiatría</option>
+                                <option>Psicoterapia</option>
+                                <option>Nutricionista</option>
+                                <option>Endocrinólogo</option>
                             </select>
                             @if (form.get('especialidad')?.invalid && form.get('especialidad')?.touched) {
                                 <div class="text-danger">
