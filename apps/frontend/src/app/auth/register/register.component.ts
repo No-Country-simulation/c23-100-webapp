@@ -74,11 +74,9 @@ export class RegisterComponent {
         : null;
     };
   }
-
   onSubmit(): void {
-    const { name, email, password, role, specialization, phone } =
-      this.registerForm.value;
-
+    const { name, email, password, role, specialization, phone } = this.registerForm.value;
+    
     if (role == Role.PATIENT && specialization) {
       this.registerForm.setErrors({
         specializationNotAllowed: true,
@@ -90,7 +88,7 @@ export class RegisterComponent {
       });
       return;
     }
-
+    
     if (this.registerForm.valid) {
       this.authService
         .signup({
@@ -103,15 +101,16 @@ export class RegisterComponent {
         })
         .subscribe({
           next: ({ userToken }) => {
-            sessionStorage.setItem('userToken', userToken);
-
+            localStorage.setItem('userToken', userToken);
             Swal.fire({
               title: 'Registro Exitoso!',
               text: 'Te has registrado correctamente.',
               icon: 'success',
               confirmButtonText: 'Aceptar',
               didClose: () => {
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/dashboard']).then(() => {
+                  location.reload(); // Recarga la página después de la navegación
+                });
               },
             });
           },
@@ -137,7 +136,6 @@ export class RegisterComponent {
         });
     }
   }
-
   hasErrors(fieldName: string, errorType: string): boolean {
     const field = this.registerForm.get(fieldName);
 

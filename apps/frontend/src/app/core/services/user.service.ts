@@ -13,12 +13,13 @@ export class UserService {
   public user$ = this.userSubject.asObservable();
 
   getProfile() {
-    return this.http
-      .get<User>(`${this.baseUrl}/profile`, {
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
-        },
-      })
+    const token = localStorage.getItem('userToken'); // Obtener token de localStorage
+  return this.http
+    .get<User>(`${this.baseUrl}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Usar token de localStorage
+      },
+    })
       .pipe(
         map((user) => {
           this.userSubject.next(user);

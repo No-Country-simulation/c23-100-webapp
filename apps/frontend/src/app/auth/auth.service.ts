@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../shared';
-import { UserService } from '../core/services/user.service';  
+import { UserService } from '../core/services/user.service';
+import { tap } from 'rxjs/operators'; // Importar tap
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,21 +26,26 @@ export class AuthService {
     return this.http.post<{ userToken: string }>(`${this.baseUrl}/login`, {
       email,
       password,
+    }).pipe(
+      tap(response => {
+        localStorage.setItem('userToken', response.userToken); // Usar localStorage
+      })
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('userToken');
+    return new Promise<void>((resolve) => { // Devuelve una promesa
+      this.router.navigate(['/']).then(() => {
+        location.reload(); // Recarga la página
+        resolve(); // Resuelve la promesa
+      });
     });
   }
 
-  async logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/']);
-  }
-
-  
   isAuthenticated(): boolean {
-    // Verifica si hay un token de usuario en el almacenamiento de sesión
-    return sessionStorage.getItem('userToken') !== null;
+    return localStorage.getItem('userToken') !== null; // Verificar en localStorage
   }
-
-
   async isAdmin(): Promise<boolean> {
     const user = await this.userService.getProfile().toPromise();
     return user?.role === 'Admin'; // Verificar si el rol es admin

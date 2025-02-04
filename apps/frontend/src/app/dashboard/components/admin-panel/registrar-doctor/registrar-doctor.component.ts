@@ -113,7 +113,9 @@ export class RegistrarDoctorComponent {
               confirmButtonText: 'Aceptar',
             }).then(() => {
               // Redirigir al dashboard después de cerrar el mensaje
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/registrar-doctor']);
+
+              location.reload(); // Recarga la página después de la navegación
             });
           },
           error: (err: HttpErrorResponse) => {

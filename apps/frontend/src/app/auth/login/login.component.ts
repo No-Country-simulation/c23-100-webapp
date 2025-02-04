@@ -33,7 +33,6 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-
       this.authService.login(email, password).subscribe({
         next: ({ userToken }) => {
           Swal.fire({
@@ -43,7 +42,9 @@ export class LoginComponent {
             confirmButtonText: 'Aceptar',
           }).then(() => {
             sessionStorage.setItem('userToken', userToken);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/dashboard']).then(() => {
+              location.reload(); // Recarga la página después de la navegación
+            });
           });
         },
         error: (err: HttpErrorResponse) => {
