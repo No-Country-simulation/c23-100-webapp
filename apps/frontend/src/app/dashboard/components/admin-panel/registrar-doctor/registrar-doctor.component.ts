@@ -8,10 +8,10 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AuthService } from 'apps/frontend/src/app/auth/auth.service'; 
+import { AuthService } from '../../../../auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DoctorSpecialization, Role } from 'apps/frontend/src/app/shared'; 
+import { DoctorSpecialization, Role } from '../../../../shared';
 
 @Component({
   selector: 'app-registrar-doctor',
@@ -21,77 +21,59 @@ import { DoctorSpecialization, Role } from 'apps/frontend/src/app/shared';
 })
 export class RegistrarDoctorComponent {
   private readonly fb = inject(FormBuilder);
-   private readonly authService = inject(AuthService);
-   private readonly router = inject(Router);
- 
-   protected registerForm = this.fb.group({
-     name: ['', [Validators.required, Validators.minLength(3)]],
-     email: ['', [Validators.required, Validators.email]],
-     password: ['', [Validators.required, Validators.minLength(6)]],
-     confirmPassword: [
-       '',
-       [Validators.required, this.passwordMismatchValidator()],
-     ],
- 
-     phone: [
-       '',
-       [Validators.required, Validators.pattern(/^\+\d{1,4}\d{7,10}$/)],
-     ],
-     role: [Role.ADMIN, this.specializationNotAllowedValidator()],
-     specialization: ['', this.specializationRequiredValidator()],
-   });
- 
-   private passwordMismatchValidator(): ValidatorFn {
-     return (control: AbstractControl): ValidationErrors | null => {
-       const currentPassword = this.registerForm
-         ? this.registerForm.get('password').value
-         : '';
- 
-       return currentPassword !== control.value ? { mismatch: true } : null;
-     };
-   }
- 
-   private specializationRequiredValidator(): ValidatorFn {
-     return (control: AbstractControl): ValidationErrors | null => {
-       const currentRole = this.registerForm
-         ? this.registerForm.get('role').value
-         : '';
- 
-       return currentRole === Role.DOCTOR && !control.value
-         ? { specializationRequired: true }
-         : null;
-     };
-   }
- 
-   private specializationNotAllowedValidator(): ValidatorFn {
-     return (control: AbstractControl): ValidationErrors | null => {
-       const specialization = this.registerForm
-         ? this.registerForm.get('specialization').value
-         : '';
- 
-       return control.value === Role.PATIENT && specialization
-         ? { specializationNotAllowed: true }
-         : null;
-     };
-   }
- 
-   onSubmit(): void {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  protected registerForm = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: [
+      '',
+      [Validators.required, this.passwordMismatchValidator()],
+    ],
+
+    phone: [
+      '',
+      [Validators.required, Validators.pattern(/^\+\d{1,4}\d{7,10}$/)],
+    ],
+    role: [Role.DOCTOR],
+    specialization: ['', this.specializationRequiredValidator()],
+  });
+
+  private passwordMismatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currentPassword = this.registerForm
+        ? this.registerForm.get('password').value
+        : '';
+
+      return currentPassword !== control.value ? { mismatch: true } : null;
+    };
+  }
+
+  private specializationRequiredValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const currentRole = this.registerForm
+        ? this.registerForm.get('role').value
+        : '';
+
+      return currentRole === Role.DOCTOR && !control.value
+        ? { specializationRequired: true }
+        : null;
+    };
+  }
+
+  onSubmit(): void {
     const { name, email, password, role, specialization, phone } =
       this.registerForm.value;
-  
-    // Validaciones de especialidad
-    if (role == Role.PATIENT && specialization) {
-      this.registerForm.setErrors({
-        specializationNotAllowed: true,
-      });
-      return;
-    } else if (role == Role.DOCTOR && !specialization) {
+
+    if (role == Role.DOCTOR && !specialization) {
       this.registerForm.setErrors({
         specializationRequired: true,
       });
       return;
     }
-  
+
     // Si el formulario es válido, proceder a registrar
     if (this.registerForm.valid) {
       this.authService
@@ -112,10 +94,10 @@ export class RegistrarDoctorComponent {
               icon: 'success',
               confirmButtonText: 'Aceptar',
             }).then(() => {
-              // Redirigir al dashboard después de cerrar el mensaje
-              this.router.navigate(['/registrar-doctor']);
-
-              location.reload(); // Recarga la página después de la navegación
+              this.registerForm.reset();
+              this.registerForm.patchValue({
+                role: Role.DOCTOR,
+              });
             });
           },
           error: (err: HttpErrorResponse) => {
@@ -140,16 +122,16 @@ export class RegistrarDoctorComponent {
         });
     }
   }
- 
-   hasErrors(fieldName: string, errorType: string): boolean {
-     const field = this.registerForm.get(fieldName);
- 
-     if (!field) {
-       throw new Error(
-         `El campo: ${fieldName} no existe en el formulario de registro.`
-       );
-     }
- 
-     return field.hasError(errorType) && field.touched;
-   }
+
+  hasErrors(fieldName: string, errorType: string): boolean {
+    const field = this.registerForm.get(fieldName);
+
+    if (!field) {
+      throw new Error(
+        `El campo: ${fieldName} no existe en el formulario de registro.`
+      );
+    }
+
+    return field.hasError(errorType) && field.touched;
+  }
 }

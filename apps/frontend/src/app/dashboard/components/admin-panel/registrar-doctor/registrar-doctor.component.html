@@ -90,9 +90,7 @@
       <span>Número de teléfono inválido.</span>
       }
 
-
-
-        <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
+      <div class="d-flex flex-column flex-sm-row justify-items-center gap-sm-3">
         <div class="w-100">
           <label for="specialization">Especialización (Doctor)</label>
           <select
@@ -100,14 +98,15 @@
             name="specialization"
             id="specialization"
           >
-           
-          <option value="" disabled selected>Seleccione una especialidad</option>
-          <option value="Médicina General">Médicina General</option>
-          <option value="Psicólogo">Psicologo</option>
-          <option value="Psiquiatría">Psiquiatria</option>
-          <option value="Psicoterapia">Psicoterapia</option>
-          <option value="Nutricionista">Nutricionista</option>
-          <option value="Endocrinólogo">Endocrinólogo</option>
+            <option value="" disabled selected>
+              Seleccione una especialidad
+            </option>
+            <option value="Medicina General">Medicina General</option>
+            <option value="Psicólogo">Psicólogo</option>
+            <option value="Psiquiatría">Psiquiatría</option>
+            <option value="Psicoterapia">Psicoterapia</option>
+            <option value="Nutricionista">Nutricionista</option>
+            <option value="Endocrinólogo">Endocrinólogo</option>
           </select>
           @if (hasErrors("specialization", 'specializationRequired')) {
           <span>Debe de elegir una especialización</span>
@@ -115,9 +114,13 @@
         </div>
       </div>
 
-
-
-      <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Regístrate</button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!registerForm.valid"
+      >
+        Regístrate
+      </button>
     </form>
   </div>
 </div>
