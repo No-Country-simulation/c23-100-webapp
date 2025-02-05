@@ -42,6 +42,12 @@ export class AppointmentService {
     });
   }
 
+  getByDoctor() {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/doctor`, {
+      headers: this.headers,
+    });
+  }
+
   assignDoctor(appointmentId: string, doctorId: string) {
     return this.http.patch<Appointment>(
       `${this.baseUrl}/${appointmentId}/assign-doctor`,

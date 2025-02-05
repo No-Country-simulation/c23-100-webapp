@@ -45,6 +45,11 @@ export class AppointmentController {
     return this.appointmentService.findByUser(userId);
   }
 
+  @Get('doctor')
+  findByDoctor(@User('sub') userId: string) {
+    return this.appointmentService.findByDoctor(userId);
+  }
+
   @Get('status/:status')
   findByStatus(
     @Param('status', ParseAppointmentStatusPipe) status: AppointmentStatus
