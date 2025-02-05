@@ -12,7 +12,7 @@ export class AppointmentService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/appointments';
   private readonly headers = {
-    Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
+    Authorization: `Bearer ${localStorage.getItem('userToken')}`,
   };
 
   create(data: {
@@ -27,7 +27,7 @@ export class AppointmentService {
     });
   }
 
-  getAll({ page = 1, limit = 6 }: { page?: number; limit?: number }) {
+  getAll({ page = 1, limit = 5 }: { page?: number; limit?: number }) {
     return this.http.get<{
       meta: PaginationMetadata;
       data: Appointment[];
@@ -75,6 +75,19 @@ export class AppointmentService {
       },
       {
         headers: this.headers,
+      }
+    );
+  }
+
+  updateAppointmentStatus(appointmentId: string, status: AppointmentStatus) {
+    return this.http.patch<Appointment>(
+      `${this.baseUrl}/${appointmentId}`,
+      { status },
+      { 
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // 🔥 Agregar token aquí
+        },
       }
     );
   }

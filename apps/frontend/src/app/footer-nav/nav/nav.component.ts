@@ -3,6 +3,8 @@ import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../../core/services/user.service';
 import { RouterLink } from '@angular/router';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-nav',
   imports: [RouterLink],
@@ -15,7 +17,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -28,7 +31,17 @@ export class NavComponent implements OnInit {
       }
     });
   }
+  sessionexpirada() {
+    this.authService.sessionexpiradalogin().then(() => {
+      this.router.navigate(['/login']); // Redirige al login después de cerrar sesión
+    });
+  }
 
+  sessionexpiradaregister() {
+    this.authService.sessionexpiradaregister().then(() => {
+      this.router.navigate(['/register']); // Redirige al login después de cerrar sesión
+    });
+  }
   logout() {
     this.authService.logout().then(() => {
       this.isAuthenticated = false;

@@ -7,8 +7,8 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Id Paciente</th>
             <th scope="col">Especialidad Buscada</th>
+            <th scope="col">Hora de la cita</th>
             <th scope="col">Estado de la cita</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -17,8 +17,8 @@
         <tbody>
           @for (appointment of appointments(); track $index) {
           <tr>
-            <td>{{ appointment._id }}</td>
             <td>{{ appointment.specialization }}</td>
+            <td>{{ appointment.date }}</td>
             <td>{{ appointment.reason }}</td>
             <td>
               <span
@@ -29,19 +29,27 @@
                 >{{ appointment.status }}</span
               >
             </td>
-            @if (appointment.status === "Pending") {
+            @if (appointment.status === "Pending" || appointment.status === "Cancelled"){
             <td>
               <button
                 (click)="assignDoctorModal.setAppointment(appointment)"
                 data-bs-toggle="modal"
                 data-bs-target="#assignDoctorModal"
-                class="btn btn-secondary btn-sm"
+                class="btn btn-primary btn-sm"
               >
                 Asignar Doctor
               </button>
             </td>
             }@else {
-            <td></td>
+              <td>
+                <a
+                  (click)="editarDoctorModal.setAppointment(appointment)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editarDoctorModal"
+                  class="btn btn-warning btn-sm"
+                  >Editar consulta</a
+                >
+              </td>
             }
           </tr>
           }
@@ -62,13 +70,15 @@
             <a class="page-link">{{ page() }}</a>
           </li>
           <li class="page-item">
-            <button
-              (click)="loadPage(page() + 1)"
-              class="page-link"
-              aria-label="Next"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </button>
+            <!-- Botón de paginación -->
+<button
+(click)="loadPage(page() + 1)"
+class="page-link"
+[disabled]="page() >= paginationMetadata()?.totalPages"
+aria-label="Next"
+>
+<span aria-hidden="true">&raquo;</span>
+</button>
           </li>
         </ul>
       </nav>
@@ -78,4 +88,9 @@
 <app-assign-doctor-modal
   (doctorAssignedEvent)="onDoctorAssignedEvent($event)"
   #assignDoctorModal
+/>
+
+<app-editar-doctor-modal
+  (editarAssignedEvent)="onDoctorEditedEvent($event)"
+  #editarDoctorModal
 />

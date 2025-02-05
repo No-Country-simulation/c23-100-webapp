@@ -32,7 +32,7 @@ export class UserService {
   getDoctors(specialization: DoctorSpecialization) {
     return this.http.get<User[]>(`${this.baseUrl}/doctors/${specialization}`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // Usar token de localStorage
+        Authorization: `Bearer ${localStorage.getItem('userToken')}`, // Usar token de localStorage
       },
     });
   }

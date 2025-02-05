@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DoctorSpecialization, Role } from '../../../../shared';
 
+import { User } from '../../../../shared'; 
+import { UserService } from 'apps/frontend/src/app/core/services/user.service';
+
 @Component({
   selector: 'app-registrar-doctor',
   imports: [ReactiveFormsModule],
@@ -23,6 +26,25 @@ export class RegistrarDoctorComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+
+  protected user?: User;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+  }
+
+  loadUserProfile() {
+    this.userService.getProfile().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: () => {
+        localStorage.clear();
+      },
+    });
+  }
 
   protected registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],

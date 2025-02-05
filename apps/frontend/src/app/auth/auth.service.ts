@@ -43,6 +43,26 @@ export class AuthService {
     });
   }
 
+  sessionexpiradalogin() {
+    localStorage.removeItem('userToken');
+    return new Promise<void>((resolve) => { // Devuelve una promesa
+      this.router.navigate(['/login']).then(() => {
+        location.reload(); // Recarga la página
+        resolve(); // Resuelve la promesa
+      });
+    });
+  }
+
+  sessionexpiradaregister() {
+    localStorage.removeItem('userToken');
+    return new Promise<void>((resolve) => { // Devuelve una promesa
+      this.router.navigate(['/register']).then(() => {
+        location.reload(); // Recarga la página
+        resolve(); // Resuelve la promesa
+      });
+    });
+  }
+
   isAuthenticated(): boolean {
     return localStorage.getItem('userToken') !== null; // Verificar en localStorage
   }
