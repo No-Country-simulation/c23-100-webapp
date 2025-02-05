@@ -59,6 +59,13 @@ export class AppointmentService {
       }
     );
   }
+  getPatientName(patientId: string) {
+    return this.http.get<{ name: string }>(`http://localhost:3000/api/user/patient/${patientId}`, {
+      headers: this.headers,
+    });
+  }
+
+
 
   cancel(appointmentId: string) {
     return this.http.patch<Appointment>(

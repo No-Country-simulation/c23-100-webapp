@@ -22,7 +22,7 @@
               />
             </svg>
             <div class="card-body centrar">
-              <p>Paciente: {{ appointment.patientId }}</p>
+              <p>Paciente: {{ getPatientName(appointment.patientId) }}</p>
               <p>Motivo: {{ appointment.reason }}</p>
               <div class="button-group">
                 <button

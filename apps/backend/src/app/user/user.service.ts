@@ -32,4 +32,16 @@ export class UserService {
 
     return user;
   }
+  async getPatientName(patientId: string) {
+    const patient = await this.userModel
+      .findById(patientId)
+      .select('id name') // Solo seleccionamos id y nombre
+      .exec();
+  
+    if (!patient) {
+      throw new NotFoundException('Paciente no encontrado');
+    }
+  
+    return { id: patient.id, name: patient.name };
+  }
 }

@@ -20,6 +20,7 @@ export class DoctorPanelComponent implements OnInit {
     private readonly medicalRecordsService = inject(MedicalRecordsService);
     private readonly router = inject(Router);
     protected appointments = signal<Appointment[]>([]);
+    protected patientNames = new Map<string, string>();
   
     protected selectedAppointment?: Appointment;
     protected medicalRecords = signal<MedicalRecord[]>([]);
@@ -37,6 +38,16 @@ export class DoctorPanelComponent implements OnInit {
       this.appointmentService.getByDoctor().subscribe({
         next: (appointments) => {
           this.appointments.set(appointments);
+          appointments.forEach((appointment) => {
+            this.appointmentService.getPatientName(appointment.patientId).subscribe({
+              next: (data) => {
+                this.patientNames.set(appointment.patientId, data.name);
+              },
+              error: () => {
+                this.patientNames.set(appointment.patientId, 'Desconocido');
+              },
+            });
+          });
         },
         error: (err: HttpErrorResponse) => {
           if (err.status === 401) {
@@ -44,6 +55,10 @@ export class DoctorPanelComponent implements OnInit {
           }
         },
       });
+    }
+
+    getPatientName(patientId: string): string {
+      return this.patientNames.get(patientId) || 'Cargando...';
     }
   
     cancelAppointment(appointment: Appointment) {
