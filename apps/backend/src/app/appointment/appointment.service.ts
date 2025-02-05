@@ -162,26 +162,23 @@ export class AppointmentService {
   }
 
   private async sendConfirmationEmail(appointment: Appointment) {
-    const options = await this.getBaseEmailOptionsByAppointment(appointment);
+    const options = await this.getEmailOptionsByAppointment(appointment);
     await this.mailsService.sendAppointmentConfirmation(options);
   }
 
   private async sendDoctorNotificationEmail(appointment: Appointment) {
-    const options = await this.getBaseEmailOptionsByAppointment(appointment);
-
-    this.mailsService.sendDoctorNotification({
-      ...options,
-      reason: appointment.reason,
-    });
+    const options = await this.getEmailOptionsByAppointment(appointment);
+    await this.mailsService.sendDoctorNotification(options);
   }
 
-  private async getBaseEmailOptionsByAppointment(appointment: Appointment) {
+  private async getEmailOptionsByAppointment(appointment: Appointment) {
     const doctor = await this.userModel.findById(appointment.doctorId);
     const patient = await this.userModel.findById(appointment.patientId);
 
     return {
       doctor: {
         name: doctor.name,
+        email: doctor.email,
       },
       patient: {
         email: patient.email,
@@ -189,6 +186,7 @@ export class AppointmentService {
       },
       date: appointment.date.toDateString(),
       hour: formatHourByDate(appointment.date),
+      reason: appointment.reason,
     };
   }
 }
