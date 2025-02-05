@@ -1,63 +1,63 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from '../../../shared';
-import { Doctor } from '../../../shared/interfaces/doctor';
-import { CommonModule } from '@angular/common';
+import { AppointmentService } from '../../../core/services/appointment.service';
+import { Appointment } from '../../../shared/interfaces/appointment';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+import { MedicalRecordsService } from '../../../core/services/medical-records.service';
+import { MedicalRecord } from '../../../shared/interfaces/medical-record';
 
 @Component({
   selector: 'app-paciente-panel',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, DatePipe],
   templateUrl: './paciente-panel.component.html',
   styleUrl: './paciente-panel.component.css',
 })
 export class PacientePanelComponent implements OnInit {
-  public user = input.required<User>();
-  isSidebarOpen = true; // Cambiado a false por defecto
-  isSidebarHalfOpen = false;
-  registrosCitas: any[];
-  usuario: User;
-  doctor1: Doctor;
-  doctor2: Doctor;
-  doctor3: Doctor;
+  private readonly appointmentService = inject(AppointmentService);
+  private readonly medicalRecordsService = inject(MedicalRecordsService);
+  private readonly router = inject(Router);
+  protected appointments = signal<Appointment[]>([]);
 
-  constructor() {
-    this.doctor1 = { name: 'Jose Roberto', photo: 'jose-roberto.jpg' };
-    this.doctor2 = { name: 'Mila Mesa', photo: 'mila-mesa.jpg' };
-    this.doctor3 = {
-      name: 'Roberto Archundia',
-      photo: 'roberto-archundia.jpg',
-    };
-    this.registrosCitas = [
-      {
-        usuario: this.usuario,
-        doctor: this.doctor1,
-        horario: '18:30 pm',
-        direccion: 'Av. Rivadavia 1000',
-        pasillo: 'C',
-        numeroPuerta: 14,
-        msj: '12 horas de ayuna antes y despues de asistir al turno.',
-      },
-      {
-        usuario: this.usuario,
-        doctor: this.doctor2,
-        horario: '4:30 pm',
-        direccion: 'Av. Tucasa 123',
-        pasillo: 'A',
-        numeroPuerta: 2,
-        msj: 'Tome mucha agua y sientese si le cuesta respirar.',
-      },
-      {
-        usuario: this.usuario,
-        doctor: this.doctor3,
-        horario: '1:00 pm',
-        direccion: 'Rodney 5222',
-        pasillo: 'B',
-        numeroPuerta: 17,
-        msj: 'Venga con 2 horas de anticipación para firmar unos papeles.',
-      },
-    ];
+  protected selectedAppointment?: Appointment;
+  protected medicalRecords = signal<MedicalRecord[]>([]);
+
+  public user = input.required<User>();
+
+  showInstructions(appointment: Appointment) {
+    this.selectedAppointment = appointment;
+    this.medicalRecordsService.getAll(appointment._id).subscribe((records) => {
+      this.medicalRecords.set(records);
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.appointmentService.getByUser().subscribe({
+      next: (appointments) => {
+        this.appointments.set(appointments);
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.router.navigate(['/login']);
+        }
+      },
+    });
+  }
+
+  cancelAppointment(appointment: Appointment) {
+    this.appointmentService
+      .cancel(appointment._id)
+      .subscribe((updatedAppointment) => {
+        this.appointments.update((appointments) => {
+          const index = appointments.findIndex(
+            (appointment) => appointment._id === updatedAppointment._id
+          );
+          appointments[index] = updatedAppointment;
+
+          return appointments;
+        });
+      });
+  }
 }

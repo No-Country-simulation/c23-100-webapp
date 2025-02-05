@@ -1,8 +1,8 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppointmentService } from 'apps/frontend/src/app/core/services/appointment.service';
-import { Appointment } from 'apps/frontend/src/app/shared/interfaces/appointment';
-import { PaginationMetadata } from 'apps/frontend/src/app/shared/interfaces/pagination-metadata';
+import { AppointmentService } from '../../../../core/services/appointment.service';
+import { Appointment } from '../../../../shared/interfaces/appointment';
+import { PaginationMetadata } from '../../../../shared/interfaces/pagination-metadata';
 import { AssignDoctorModal } from './assign-doctor-modal/assign-doctor-modal.component';
 
 @Component({

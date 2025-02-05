@@ -1,34 +1,138 @@
-
-<!-- Citas -->
 <div class="quotes">
-    <div class="container cont-cuadro" *ngFor="let regCita of registrosCitas">
-        <!-- CUADRO DATOS -->
-        <div class="formCuadro">
-            <form>
-                <input id="horario" type="text" name="horario" value="Horario: {{regCita.horario}}" disabled="disabled" />
-                <input id="direccion" type="text" name="direccion" value="Dirección: {{regCita.direccion}}" disabled="disabled" />
-                <input id="pasillo" type="text" name="pasillo" value="Pasillo: {{regCita.pasillo}}" disabled="disabled" />
-                <input id="puerta" type="text" name="puerta" value="Número de puerta: {{regCita.numeroPuerta}}" disabled="disabled" />
-                <textarea id="msj" type="text" name="msj"
-                    disabled="disabled">Mensaje: {{regCita.msj}}</textarea>
-            </form>
-        </div>
-        <!-- CUADRO PACIENTE -->
-        <div class="cuadroPaciente">
-            <div class="cuadroFoto">
-                <div class="d-flex justify-content-center">
-                    <img src="imagenes/doctores/{{regCita.doctor.photo}}" />
-                </div>
-                <h2 class="mt-4">{{regCita.doctor.name}}</h2>
-            </div>
-            <div class="cuadroBotones">
-                <div class="btn btn-danger">
-                    <a href="">Cancelar cita</a>
-                </div>
-                <div class="btn btn-primary">
-                    <a href="">Nueva cita</a>
-                </div>
-            </div>
-        </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Especialidad Buscada</th>
+          <th scope="col">Razón de la cita</th>
+          <th scope="col">Estado de la cita</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (appointment of appointments(); track $index) {
+        <tr>
+          <td>{{ appointment.date | date : 'M/d/yy h:mm a' }}</td>
+          <td>{{ appointment.specialization }}</td>
+          <td>{{ appointment.reason }}</td>
+          <td>
+            <span
+              [class.text-bg-success]="appointment.status === 'Confirmed'"
+              [class.text-bg-danger]="appointment.status === 'Cancelled'"
+              [class.text-bg-warning]="appointment.status === 'Pending'"
+              class="badge custom-badge"
+              >{{ appointment.status }}</span
+            >
+          </td>
+          <td
+            class="d-flex justify-content-center gap-4"
+            style="min-height: 100%"
+          >
+            @if (appointment.status === 'Confirmed') {
+            <button
+              class="btn btn-info btn-sm"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#appointmentDrawer"
+              (click)="showInstructions(appointment)"
+            >
+              Ver Indicaciones
+            </button>
+            } @if (appointment.status === 'Pending') {
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="cancelAppointment(appointment)"
+            >
+              Cancelar
+            </button>
+            }
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="d-flex flex-column gap-1">
+            <img
+              style="margin: 0 auto"
+              src="/no-appointments.png"
+              width="128"
+              height="128"
+              alt="..."
+            />
+            <p class="text-center text-secondary">
+              No has agendado ninguna cita médica aún
+            </p>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="appointmentDrawer"
+  aria-labelledby="appointmentDrawerLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="appointmentDrawerLabel">
+      Indicaciones Médicas
+    </h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Cerrar"
+    ></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <div class="info-box">
+      <strong>Fecha:</strong>
+      <p>{{ selectedAppointment?.date | date : 'M/d/yy h:mm a' }}</p>
     </div>
+
+    <div class="info-box">
+      <strong>Especialidad:</strong>
+      <p>{{ selectedAppointment?.specialization }}</p>
+    </div>
+
+    <div class="info-box">
+      <strong>Razón:</strong>
+      <p>{{ selectedAppointment?.reason }}</p>
+    </div>
+
+    <div class="info-box">
+      <div class="instructions-container">
+        <h5>Indicaciones</h5>
+
+        @for (record of medicalRecords(); track $index) {
+        <div class="instruction-box">
+          <div class="instruction-number">{{ $index + 1 }}</div>
+          <div class="instruction-content">
+            <p>{{ record.notes }}</p>
+          </div>
+        </div>
+        } @empty {
+        <div class="d-flex flex-column gap-1 p-2">
+          <img
+            style="margin: 0 auto"
+            src="/no-records.png"
+            width="256"
+            height="256"
+            alt="..."
+          />
+          <p class="text-center text-secondary">
+            Aún no hay indicaciones médicas realizadas por tu doctor.
+          </p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
 </div>

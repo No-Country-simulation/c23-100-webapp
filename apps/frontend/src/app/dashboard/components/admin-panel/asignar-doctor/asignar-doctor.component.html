@@ -31,13 +31,14 @@
             </td>
             @if (appointment.status === "Pending") {
             <td>
-              <a
+              <button
                 (click)="assignDoctorModal.setAppointment(appointment)"
                 data-bs-toggle="modal"
                 data-bs-target="#assignDoctorModal"
                 class="btn btn-secondary btn-sm"
-                >Asignar Doctor</a
               >
+                Asignar Doctor
+              </button>
             </td>
             }@else {
             <td></td>

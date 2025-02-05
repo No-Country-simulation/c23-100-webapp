@@ -1,194 +1,234 @@
-/*SideBar o Barra Vertical*/
-
-.sidebar {
-  position: fixed;
-  top: 200px;
-  width: 220px;
-  background: #1d1832;
-  overflow-y: auto;
-  z-index: 1;
-  transition: left 0.3s ease-in-out;
-  border-radius: 8px;
-  /* Agrega una transición suave */
-}
-
-.sidebar.half-open {
-  left: -160px;
-  /* Ajusta este valor según el ancho deseado cuando esté medio abierto */
-}
-
-.sidebar.full-open {
-  left: 0;
-  /* This positions the sidebar fully open */
-}
-
-.sidebar ul {
-  list-style-type: none;
-  /* Elimina los puntos de la lista */
-  padding: 0;
-  /* Elimina el padding */
-}
-
-.sidebar ul li a {
-  text-decoration: none;
-  /* Elimina el subrayado de los enlaces */
-  color: #ffffff;
-  /* Color del texto */
-  display: block;
-  /* Hace que el área del enlace sea más grande */
-  padding: 5px;
-  /* Espaciado interno del enlace */
-  border-radius: 5px;
-  /* Bordes redondeados */
-}
-
-.sidebar ul li a:hover {
-  background: #127f2f;
-  color: white;
-  /* Color del texto al pasar el ratón */
-}
-
-.sidebar-button {
-  /* Add your button styles here */
-  background-color: #127f2f;
-  /* Example button style */
-  color: white;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-}
-
-.sidebar-content {
-  flex: 1;
-  /* Permite que esta sección ocupe el espacio disponible */
-  display: flex;
-  /* Usar flexbox para las columnas internas */
-  padding: 30px 10px;
-}
-
-.sidebar-content ul {
-  flex: 1;
-  /* Esta columna ocupa el espacio restante */
-}
-
-.sidebar-button-container {
-  margin-top: auto;
-  /* Empuja el botón hacia abajo */
-  padding: 0;
-  /* Elimina el padding */
-  position: absolute;
-  /* Posiciona el contenedor de manera absoluta */
-  bottom: 50px;
-  /* Alinea el contenedor al fondo */
-  right: 0;
-  /* Alinea el contenedor a la derecha */
-}
-
-.nav-item {
-  margin-bottom: 20px;
-}
-
-.sidebar-button-container .btn {
-  height: 100px;
-}
-
-/* Citas */
-
+/* Fondo y espaciado de la sección */
 .quotes {
   background-image: url('../../../../../public/imagenes/fondo-verde.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding: 100px 20px;
   width: 100%;
-}
-.cont-cuadro {
-  width: 900px;
-  padding: 0px;
-  margin: auto;
-  background-color: yellow;
-  border-radius: 8px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 60px;
-}
-.formCuadro {
-  width: 50%;
-  padding: 40px;
-}
-.cuadroPaciente {
-  width: 50%;
-  padding: 40px;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  background-image: url('../../../../../public/imagenes/fondo-azul.jpg');
-}
-input:disabled,
-textarea:disabled {
-  background-color: white;
-}
-input[type='text'],
-textarea {
-  width: 100%;
-  padding: 6px;
-  display: block;
-  box-sizing: border-box;
-  border: 2px solid #cecece;
-  border-radius: 5px;
-  color: #404040;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 25px;
-}
-textarea {
-  margin: 0px;
-  height: 170px;
-}
-.cuadroFoto {
-  align-self: center;
-}
-.cuadroFoto img {
-  width: 270px;
-  height: 270px;
-  border-radius: 50%;
-  align-self: center;
-}
-.cuadroFoto h2 {
-  text-align: center;
-  color: white;
-}
-.cuadroBotones {
-  display: flex;
-  justify-content: space-between;
-}
-.cuadroBotones div {
-  width: 170px;
-  height: 50px;
-  align-content: center;
-}
-.cuadroBotones a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
+  justify-content: center;
 }
 
-/*------------------------------------------RESPONSIVE----------------------------------*/
-@media (max-width: 880px) {
-  .cont-cuadro {
+/* Contenedor para hacer la tabla responsive */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Estilos generales de la tabla */
+.table {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Evita que el texto se corte en columnas estrechas */
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilos para los botones */
+.btn {
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Botón Cancelar */
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Botón Ver Indicaciones */
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+/* Etiquetas de estado */
+.badge {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.text-bg-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.text-bg-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.text-bg-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .table {
     width: 100%;
-    flex-direction: column-reverse;
   }
-  .cuadroPaciente {
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Hace que los botones se apilen en móviles */
+  .d-flex {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .btn {
     width: 100%;
   }
-  .formCuadro {
-    width: 100%;
+}
+
+@media (max-width: 480px) {
+  .quotes {
+    padding: 50px 10px;
   }
-  .cuadroFoto {
-    width: 100%;
-    margin-bottom: 60px;
+
+  .table {
+    font-size: 12px;
   }
+
+  .badge {
+    font-size: 10px;
+  }
+}
+
+/* Contenedor de cada cuadro */
+.info-box {
+  background: #f8f9fa;
+  border-left: 5px solid #007bff;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Efecto de elevación al pasar el mouse */
+.info-box:hover {
+  transform: scale(1.02);
+}
+
+/* Texto dentro de los cuadros */
+.info-box p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Texto de estado con colores dinámicos */
+.status {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Colores personalizados */
+.text-success {
+  color: #28a745;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+/* Contenedor general de las indicaciones */
+.instructions-container {
+  margin-top: 15px;
+}
+
+/* Título */
+.instructions-container h5 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* Caja de cada indicación */
+.instruction-box {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-left: 5px solid #007bff;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Animación al pasar el mouse */
+.instruction-box:hover {
+  transform: scale(1.02);
+}
+
+/* Número de la indicación (estilo paso a paso) */
+.instruction-number {
+  width: 35px;
+  height: 35px;
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+/* Texto de la indicación */
+.instruction-content p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Mensaje cuando no hay indicaciones */
+.no-instructions {
+  text-align: center;
+  color: #777;
+  font-style: italic;
 }

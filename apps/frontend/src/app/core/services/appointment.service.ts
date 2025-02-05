@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Appointment } from '../../shared/interfaces/appointment';
 import { PaginationMetadata } from '../../shared/interfaces/pagination-metadata';
 import { DoctorSpecialization } from '../../shared';
+import { AppointmentStatus } from '../../shared/enums/appointment-status.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -35,11 +36,29 @@ export class AppointmentService {
     });
   }
 
+  getByUser() {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/user`, {
+      headers: this.headers,
+    });
+  }
+
   assignDoctor(appointmentId: string, doctorId: string) {
     return this.http.patch<Appointment>(
       `${this.baseUrl}/${appointmentId}/assign-doctor`,
       {
         doctorId,
+      },
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  cancel(appointmentId: string) {
+    return this.http.patch<Appointment>(
+      `${this.baseUrl}/${appointmentId}`,
+      {
+        status: AppointmentStatus.CANCELLED,
       },
       {
         headers: this.headers,
