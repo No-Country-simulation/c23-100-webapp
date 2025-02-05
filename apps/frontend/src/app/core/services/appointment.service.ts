@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Appointment } from '../../shared/interfaces/appointment';
 import { PaginationMetadata } from '../../shared/interfaces/pagination-metadata';
+import { DoctorSpecialization } from '../../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,17 @@ export class AppointmentService {
     Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
   };
 
-  create() {}
+  create(data: {
+    specialization: DoctorSpecialization;
+    date: Date;
+    reason: string;
+  }) {
+    return this.http.post<Appointment>(this.baseUrl, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+      },
+    });
+  }
 
   getAll({ page = 1, limit = 6 }: { page?: number; limit?: number }) {
     return this.http.get<{

@@ -1,169 +1,213 @@
-
-
 <!-- Bienvenida -->
 <header class="bienvenida" id="bienvenida">
-    <div class="container text-center"> <!-- Agregamos text-center aquí -->
-        <div class="row">
-            <div class="col-lg-6 align-self-baseline">
-                <img src="/imagenes/medico-bienvenida2.png" class="img-fluid" alt="Médico">
-            </div>
-            <div class="col">
-                <br><br><br><br>
-                <h1 class="texto-inicio font-weight-bold">Citas medicas online,
-                    <br>
-                    accesibles y seguras para tu bienestar.
-                </h1>
-                <br>
-                <p class="text-white-75 mb-5">Sabemos que tu tiempo es valioso
-                    <br>
-                    por eso hemos creado una plataforma sencilla y eficiente.
-                </p>
-            </div>
-        </div>
+  <div class="container text-center">
+    <!-- Agregamos text-center aquí -->
+    <div class="row">
+      <div class="col-lg-6 align-self-baseline">
+        <img
+          src="/imagenes/medico-bienvenida2.png"
+          class="img-fluid"
+          alt="Médico"
+        />
+      </div>
+      <div class="col">
+        <br /><br /><br /><br />
+        <h1 class="texto-inicio font-weight-bold">
+          Citas medicas online,
+          <br />
+          accesibles y seguras para tu bienestar.
+        </h1>
+        <br />
+        <p class="text-white-75 mb-5">
+          Sabemos que tu tiempo es valioso
+          <br />
+          por eso hemos creado una plataforma sencilla y eficiente.
+        </p>
+      </div>
     </div>
+  </div>
 </header>
 <!--Formulario-->
 <section class="page-section full-screen" id="about">
-    <div class="container px-4 px-lg-5 text-center">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
-            <div class="text-white col-lg-6">
-                <br>
-                <h1 class="font-weight-bold">Agenda tu cita
-                    <br><br>
-                    Por favor complete la siguiente información para facilitar su atención médica
-                </h1>
+  <div class="container px-4 px-lg-5 text-center">
+    <div
+      class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center"
+    >
+      <div class="text-white col-lg-6">
+        <br />
+        <h1 class="font-weight-bold">
+          Agenda tu cita <br /><br />
+          Por favor complete la siguiente información para facilitar su atención
+          médica
+        </h1>
+      </div>
+      <div class="col-lg-6 align-self-baseline">
+        <br /><br />
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
+          <div class="row">
+            <div class="mb-3">
+              <label class="form-label" for="specialization"
+                >Especialidad</label
+              >
+              <select
+                class="form-control"
+                formControlName="specialization"
+                id="specialization"
+              >
+                <option value="" disabled selected>
+                  Seleccione una especialidad
+                </option>
+                <option>Medicina General</option>
+                <option>Psicólogo</option>
+                <option>Psiquiatría</option>
+                <option>Psicoterapia</option>
+                <option>Nutricionista</option>
+                <option>Endocrinólogo</option>
+              </select>
+              @if (form.get('specialization')?.invalid &&
+              form.get('specialization')?.touched) {
+              <div class="text-danger">Debe seleccionar una especialidad.</div>
+              }
             </div>
-            <div class="col-lg-6 align-self-baseline">
-                <br><br>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
-                    <div class="row">
-                        <div class="">
-                            <label for="name" class="formbold-form-label">Nombre y Apellido</label>
-                            <input placeholder="Nombre y apellido" type="text" formControlName="name" id="name" class="form-control">
-                            @if(form.get('name')?.invalid && form.get('name')?.touched){
-                                <div class="text-danger">
-                                    El nombre es obligatorio y debe tener al menos 4 caracteres.
-                                </div>
-                            }
-                        </div>
-                        <br><br>
-                        <div class="">
-                            <label for="email" class="formbold-form-label">Email</label>
-                            <input placeholder="Correo electronico"  type="email" formControlName="email" id="email" class="form-control">
-                            @if(form.get('email')?.invalid && form.get('email')?.touched){
-                            <div class="text-danger">
-                                Debe ingresar un email válido.
-                            </div>
-                            }
-                        </div>
-                        <div class="">
-                            <label for="phone" class="formbold-form-label">Número telefónico</label>
-                            <input placeholder="Numero telefonico" type="phone" formControlName="phone" id="phone" class="form-control">
-                            @if(form.get('phone')?.invalid && form.get('phone')?.touched){
-                                <div class="text-danger">
-                                    Debe ingresar un phone válido.
-                                </div>
-                            }
-                        </div>
-                        <br><br>
-                        <div class="form-group">
-                            <label for="especialidad">Especialidad</label>
-                            <select class="form-control" formControlName="especialidad" id="especialidad">
-                                <option value="" disabled selected>Seleccione una especialidad</option>
-                                <option>Médicina General</option>
-                                <option>Psicólogo</option>
-                                <option>Psiquiatría</option>
-                                <option>Psicoterapia</option>
-                                <option>Nutricionista</option>
-                                <option>Endocrinólogo</option>
-                            </select>
-                            @if (form.get('especialidad')?.invalid && form.get('especialidad')?.touched) {
-                                <div class="text-danger">
-                                    Debe seleccionar una especialidad.
-                                </div>
-                            }
-                        </div>
-                        <div class="mb-3">
-                            <label for="motivo_consulta" class="form-label">Motivo de la consulta:</label>
-                            <textarea placeholder="Motivo de la consulta"  type="text" formControlName="motivo_consulta" id="motivo_consulta"  class="form-control" rows="3"></textarea>
-                            @if(form.get('motivo_consulta')?.invalid && form.get('motivo_consulta')?.touched){
-                                <div class="text-danger">
-                                    Debe indicar el motivo de su consulta
-                                </div>
-                            }
-                        </div>
-                        <br> <br> <br> <br>
-                        <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                            Enviar
-                        </button>
-                    </div>
-                </form>
+            <div class="mb-3">
+              <label for="day" class="form-label"
+                >Fecha de atención deseada:</label
+              >
+              <input
+                formControlName="date"
+                type="datetime-local"
+                class="form-control"
+              />
+
+              @if(form.get('date')?.hasError('required') &&
+              form.get('date')?.touched){
+              <div class="text-danger">Debe de solicitar una día</div>
+              } @if(form.get('date')?.hasError('invalidYear') &&
+              form.get('date')?.touched){
+              <div class="text-danger">Provea una fecha en este año</div>
+              } @if(form.get('date')?.hasError('invalidHour') &&
+              form.get('date')?.touched){
+              <div class="text-danger">
+                Por favor, provea una hora mayor a las 8:00am
+              </div>
+              }
             </div>
-        </div>
+            <div class="mb-3">
+              <label for="motivo_consulta" class="form-label"
+                >Motivo de la consulta:</label
+              >
+              <textarea
+                placeholder="Motivo de la consulta"
+                type="text"
+                formControlName="reason"
+                id="motivo_consulta"
+                class="form-control"
+                rows="3"
+              ></textarea>
+              @if(form.get('reason')?.invalid && form.get('reason')?.touched){
+              <div class="text-danger">
+                Debe indicar el motivo de su consulta
+              </div>
+              }
+            </div>
+            <div class="w-100">
+              <button class="btn btn-success w-100" type="submit">
+                Enviar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 <!-- Especialidades medicas -->
 <header class="especialidad" id="Especialidades">
-    <div class="container text-center"> <!-- Agregamos text-center aquí -->
-        <div class="row">
-            <div class="col-lg-6 align-self-baseline">
-                <img src="/imagenes/fondo-especialidad.jpeg" class="img-fluid" alt="Fondo especialidad">
-            </div>
-            <div class="col">
-                <br><br><br><br>
-                <h1 class="texto-inicio font-weight-bold">Especialidades Medicas.
-                </h1>
-                <br>
-                <p class="text-white-75 mb-5">Contamos con una amplia gama de especialistas en diversas
-                    areas como Cardiología, Oncología, Pediatría, Neurología, Ginecología y más.
-                    <br><br>
-                    Nuestra prioridad es tu salud y bienestar.
-                    <br>
-                    Nos aseguramos de que cada paso de tu tratamiento sea lo mas cómodo y eficaz posible.
-                </p>
-            </div>
-        </div>
+  <div class="container text-center">
+    <!-- Agregamos text-center aquí -->
+    <div class="row">
+      <div class="col-lg-6 align-self-baseline">
+        <img
+          src="/imagenes/fondo-especialidad.jpeg"
+          class="img-fluid"
+          alt="Fondo especialidad"
+        />
+      </div>
+      <div class="col">
+        <br /><br /><br /><br />
+        <h1 class="texto-inicio font-weight-bold">Especialidades Medicas.</h1>
+        <br />
+        <p class="text-white-75 mb-5">
+          Contamos con una amplia gama de especialistas en diversas areas como
+          Cardiología, Oncología, Pediatría, Neurología, Ginecología y más.
+          <br /><br />
+          Nuestra prioridad es tu salud y bienestar.
+          <br />
+          Nos aseguramos de que cada paso de tu tratamiento sea lo mas cómodo y
+          eficaz posible.
+        </p>
+      </div>
     </div>
-    <br><br>
+  </div>
+  <br /><br />
 </header>
 <!-- Cards de  Planes de alimentación, salud y enfermedades -->
 <header class="especialidad" id="Especialidades">
-    <div class="container text-center"> <!-- Agregamos text-center aquí -->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col ">
-                <div class="card h-100 especialidad">
-                    <img src="/imagenes/card-dieta.png" class="card-img-top imagen-card" alt="Dieta imagen">
-                    <div class="card-body">
-                        <h5 class="card-title">Planes de alimentación y dieta</h5>
-                        <br>
-                        <p class="card-text">Implementación y seguimiento de una alimentación saludable y estable
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 especialidad">
-                    <img src="/imagenes/card-salud.png" class="card-img-top imagen-card " alt="Salud">
-                    <div class="card-body">
-                        <h5 class="card-title">Planes de salud compatibles</h5>
-                        <br>
-                        <p class="card-text">Información sobre seguros medicos y planes de salud compatibles con el
-                            sitio web.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 especialidad">
-                    <img src="/imagenes/card-enfermedades.png" class="card-img-top imagen-card" alt="Enfermedades">
-                    <div class="card-body">
-                        <h5 class="card-title">Enfermedades</h5>
-                        <br>
-                        <p class="card-text">Las enfermedades son mortales para la sociedad, por eso debemos
-                            informarnos mas.</p>
-                    </div>
-                </div>
-            </div>
+  <div class="container text-center">
+    <!-- Agregamos text-center aquí -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card h-100 especialidad">
+          <img
+            src="/imagenes/card-dieta.png"
+            class="card-img-top imagen-card"
+            alt="Dieta imagen"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Planes de alimentación y dieta</h5>
+            <br />
+            <p class="card-text">
+              Implementación y seguimiento de una alimentación saludable y
+              estable
+            </p>
+          </div>
         </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 especialidad">
+          <img
+            src="/imagenes/card-salud.png"
+            class="card-img-top imagen-card"
+            alt="Salud"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Planes de salud compatibles</h5>
+            <br />
+            <p class="card-text">
+              Información sobre seguros medicos y planes de salud compatibles
+              con el sitio web.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 especialidad">
+          <img
+            src="/imagenes/card-enfermedades.png"
+            class="card-img-top imagen-card"
+            alt="Enfermedades"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Enfermedades</h5>
+            <br />
+            <p class="card-text">
+              Las enfermedades son mortales para la sociedad, por eso debemos
+              informarnos mas.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
+  </div>
+  <br />
 </header>

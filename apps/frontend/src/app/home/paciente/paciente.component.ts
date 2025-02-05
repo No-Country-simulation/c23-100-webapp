@@ -1,14 +1,17 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
   FormControl,
   Validators,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
-import { User } from '../../shared';
+import { DoctorSpecialization, User } from '../../shared';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
 import Swal from 'sweetalert2';
+import { AppointmentService } from '../../core/services/appointment.service';
 
 @Component({
   selector: 'app-home-paciente',
@@ -16,110 +19,80 @@ import Swal from 'sweetalert2';
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css'],
 })
-export class PacienteComponent implements OnInit {
-  @Input() user!: User;
-  isSidebarOpen = true;
-  isSidebarHalfOpen = false;
+export class PacienteComponent {
+  private readonly appointmentService = inject(AppointmentService);
+
+  user = input.required<User>();
 
   form = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    especialidad: new FormControl(null, [Validators.required]),
-    motivo_consulta: new FormControl(null, [Validators.required]),
-    date: new FormControl<Date | null>(null),
+    specialization: new FormControl('', [Validators.required]),
+    reason: new FormControl('', [Validators.required]),
+    date: new FormControl('', [
+      Validators.required,
+      this.invalidHourValidator(),
+      this.invalidYearValidator(),
+    ]),
   });
 
-  constructor(private userService: UserService) {}
+  private invalidYearValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const date = new Date(control.value);
+      const year = date.getFullYear();
 
-  ngOnInit() {
-    this.checkScreenWidth();
-    this.loadSidebarState();
-    this.loadUserProfile();
+      if (year < new Date().getFullYear()) {
+        return { invalidYear: true };
+      }
+
+      return null;
+    };
   }
 
-  loadSidebarState() {
-    const sidebarState = localStorage.getItem('sidebarState');
-    if (sidebarState === 'open') {
-      this.isSidebarOpen = true;
-      this.isSidebarHalfOpen = false;
-    } else {
-      this.isSidebarOpen = false;
-      this.isSidebarHalfOpen = true;
-    }
+  private invalidHourValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const date = new Date(control.value);
+      const hour = date.getHours();
+
+      if (hour < 8) {
+        return {
+          invalidHour: true,
+        };
+      }
+
+      return null;
+    };
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.checkScreenWidth();
-  }
-
-  checkScreenWidth() {
-    if (window.innerWidth <= 768) {
-      this.isSidebarOpen = false;
-      this.isSidebarHalfOpen = false;
-    }
-  }
-
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    this.isSidebarHalfOpen = !this.isSidebarOpen;
-    localStorage.setItem(
-      'sidebarState',
-      this.isSidebarOpen ? 'open' : 'closed'
-    );
-  }
-
-  loadUserProfile() {
-    this.userService.user$.subscribe({
-      next: (user) => {
-        this.user = user;
-        this.form.patchValue({
-          
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-        });
-      },
-      error: (err) => {
-        console.error('Error al cargar el perfil del usuario:', err);
-      },
-    });
-  }
-  
   onSubmit() {
     if (this.form.valid) {
+      const { date, specialization, reason } = this.form.value;
 
-      const formattedDate = new Date(this.form.value.date).toISOString();
+      this.appointmentService
+        .create({
+          date: new Date(date),
+          reason,
+          specialization: specialization as DoctorSpecialization,
+        })
+        .subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Solicitud enviada',
+              text: 'Tu solicitud ha sido enviada con éxito. Nos pondremos en contacto con usted en cuanto se le asigne un doctor.',
+              icon: 'success',
+              confirmButtonText: 'Aceptar',
+            });
+            this.form.reset();
+          },
+          error: (err) => {
+            console.log(err);
 
-      const appointmentData = {
-        date: formattedDate,
-        patientId: this.user._id,
-        specialization: this.form.value.especialidad, // Renombrar según la API
-        reason: this.form.value.motivo_consulta || '', // Asegurar que el campo `reason` exista como string
-      };
-  
-      this.userService.createAppointment(appointmentData).subscribe({
-        next: (response) => {
-          Swal.fire({
-            title: 'Solicitud enviada',
-            text: 'Tu solicitud ha sido enviada con éxito.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar',
-          });
-          this.form.reset();
-        },
-        error: (err) => {
-          console.error('Error al enviar la solicitud:', err);
-          Swal.fire({
-            title: 'Error',
-            text: 'No se pudo enviar la solicitud. Inténtalo nuevamente.',
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-          });
-        },
-      });
+            Swal.fire({
+              title: 'Error',
+              text: 'No se pudo enviar la solicitud. Inténtalo nuevamente.',
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
+            });
+          },
+        });
     } else {
       this.form.markAllAsTouched();
     }

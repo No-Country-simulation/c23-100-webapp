@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DoctorSpecialization, User } from '../../shared';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,14 +33,6 @@ export class UserService {
     return this.http.get<User[]>(`${this.baseUrl}/doctors/${specialization}`, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // Usar token de localStorage
-      },
-    });
-  }
-
-  createAppointment(appointmentData: any): Observable<any> {
-    return this.http.post(this.appointmentUrl, appointmentData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('userToken')}`,
       },
     });
   }

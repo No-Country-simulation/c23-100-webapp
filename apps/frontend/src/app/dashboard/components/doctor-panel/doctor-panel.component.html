@@ -6,6 +6,7 @@
       <br /><br /><br /><br /><br />
       <h1 class="texto-amarillo">Pacientes con cita</h1>
       <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (appointment of appointments(); track $index) {
         <div class="col">
           <div class="card h-100 especialidad">
             <svg
@@ -44,120 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100 especialidad">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-fill card-img-top imagen-card"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-              />
-            </svg>
-            <div class="card-body centrar">
-              <p>Paciente: Jacinto Perez</p>
-              <p>Motivo: Bipolaridad</p>
-              <div class="button-group">
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#historialModal"
-                >
-                  Historial
-                </button>
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#indicacionesModal"
-                >
-                  Indicaciones
-                </button>
-              </div>
-              <br />
-              <button class="boton1 btn btn-success">Realizar consulta</button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 especialidad">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-fill card-img-top imagen-card"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-              />
-            </svg>
-            <div class="card-body centrar">
-              <p>Paciente: Miguel Angel</p>
-              <p>Motivo: Depresion</p>
-              <div class="button-group">
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#historialModal"
-                >
-                  Historial
-                </button>
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#indicacionesModal"
-                >
-                  Indicaciones
-                </button>
-              </div>
-              <br />
-              <button class="boton1 btn btn-success">Realizar consulta</button>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100 especialidad">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-person-fill card-img-top imagen-card"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
-              />
-            </svg>
-            <div class="card-body centrar">
-              <p>Paciente: Jose Luis</p>
-              <p>Motivo: Ansiedad</p>
-              <div class="button-group">
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#historialModal"
-                >
-                  Historial
-                </button>
-                <button
-                  class="boton1 btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#indicacionesModal"
-                >
-                  Indicaciones
-                </button>
-              </div>
-              <br />
-              <button class="boton1 btn btn-success">Realizar consulta</button>
-            </div>
-          </div>
-        </div>
+        }
       </div>
     </div>
   </div>
