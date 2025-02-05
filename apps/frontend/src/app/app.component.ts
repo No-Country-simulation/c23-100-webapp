@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './footer-nav/footer/footer.component';
 import { NavComponent } from './footer-nav/nav/nav.component';
@@ -11,23 +11,13 @@ import { UserService } from './core/services/user.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  protected user?: User;
-
-  constructor(private userService: UserService) {}
+export class AppComponent implements OnInit {
+  private readonly userService = inject(UserService);
+  user?: User;
 
   ngOnInit(): void {
-    this.loadUserProfile();
-  }
-
-  loadUserProfile() {
-    this.userService.getProfile().subscribe({
-      next: (user) => {
-        this.user = user;
-      },
-      error: (err) => {
-        console.error('Error al cargar el perfil del usuario:', err);
-      },
+    this.userService.user$.subscribe((user) => {
+      this.user = user;
     });
   }
 }

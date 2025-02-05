@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
       next: (user) => {
         this.user = user;
       },
-      error: (err) => {
-        console.error('Error al cargar el perfil del usuario:', err);
+      error: () => {
+        localStorage.clear();
       },
     });
   }
