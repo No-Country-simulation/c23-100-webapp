@@ -1,15 +1,15 @@
 <div
   class="modal fade"
-  id="assignDoctorModal"
+  id="editarDoctorModal"
   tabindex="-1"
-  aria-labelledby="assignDoctorModalLabel"
+  aria-labelledby="editarDoctorModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="assignDoctorModalLabel">
-          Asignar Doctor
+        <h1 class="modal-title fs-5" id="editarDoctorModalLabel">
+          Editar Doctor
         </h1>
         <button
           type="button"
@@ -26,7 +26,7 @@
           <thead>
             <tr>
               <th></th>
-              <th>Nombre</th>
+              <th>Nombre del Doctor</th>
             </tr>
           </thead>
           <tbody>
@@ -47,8 +47,11 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button (click)="assignDoctor()" type="button" class="btn btn-primary">
-          Asignar
+        <button (click)="editarDoctor()" type="button" class="btn btn-primary">
+          Actualizar
+        </button>
+        <button (click)="cancelAppointment()" type="button" class="btn btn-danger">
+          Cancelar Consulta
         </button>
       </div>
     </div>

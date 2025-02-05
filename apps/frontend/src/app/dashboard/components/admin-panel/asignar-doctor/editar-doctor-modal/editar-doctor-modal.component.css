@@ -1,0 +1,44 @@
+#editarDoctorModal .modal-header {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  #editarDoctorModal .modal-body {
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  #editarDoctorModal table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+  }
+  
+  #editarDoctorModal table th,
+  #editarDoctorModal table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #editarDoctorModal table th {
+    background-color: #f0f0f0;
+  }
+  
+  #editarDoctorModal .form-check-input {
+    transform: scale(1.5);
+    cursor: pointer;
+  }
+  
+  #editarDoctorModal .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  
+  #editarDoctorModal .btn-primary:hover {
+    background-color: #218838;
+  }
+  
