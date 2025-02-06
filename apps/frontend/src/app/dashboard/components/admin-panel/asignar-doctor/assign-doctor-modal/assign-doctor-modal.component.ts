@@ -37,7 +37,7 @@ export class AssignDoctorModal {
       .subscribe((doctors) => {
         this.availableDoctors.set(doctors);
       });
-  }
+  } 
 
   assignDoctor() {
     if (!this.doctorId()) {
