@@ -12,7 +12,7 @@ export class AppointmentService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/appointments';
   private readonly headers = {
-    Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+    Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
   };
 
   create(data: {
@@ -42,6 +42,12 @@ export class AppointmentService {
     });
   }
 
+  getByDoctor() {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/doctor`, {
+      headers: this.headers,
+    });
+  }
+
   assignDoctor(appointmentId: string, doctorId: string) {
     return this.http.patch<Appointment>(
       `${this.baseUrl}/${appointmentId}/assign-doctor`,
@@ -53,6 +59,13 @@ export class AppointmentService {
       }
     );
   }
+  getPatientName(patientId: string) {
+    return this.http.get<{ name: string }>(`http://localhost:3000/api/user/patient/${patientId}`, {
+      headers: this.headers,
+    });
+  }
+
+
 
   cancel(appointmentId: string) {
     return this.http.patch<Appointment>(
@@ -78,4 +91,5 @@ export class AppointmentService {
       }
     );
   }
+  
 }

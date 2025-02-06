@@ -23,4 +23,9 @@ export class UserController {
   getProfile(@User('sub') userId: string) {
     return this.userService.getProfile(userId);
   }
+
+  @Get('patient/:id')
+  getPatientName(@Param('id') patientId: string) {
+  return this.userService.getPatientName(patientId);
+  }
 }

@@ -8,10 +8,10 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Especialidad Buscada</th>
-            <th scope="col">Hora de la cita</th>
-            <th scope="col">Estado de la cita</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Hora de la consulta</th>
+            <th scope="col">Motivo de la consulta</th>
+            <th scope="col">Estado de la consulta</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -21,35 +21,23 @@
             <td>{{ appointment.date }}</td>
             <td>{{ appointment.reason }}</td>
             <td>
-              <span
-                [class.text-bg-success]="appointment.status === 'Confirmed'"
+              <span [class.text-bg-success]="appointment.status === 'Confirmed'"
                 [class.text-bg-danger]="appointment.status === 'Cancelled'"
-                [class.text-bg-warning]="appointment.status === 'Pending'"
-                class="badge custom-badge"
-                >{{ appointment.status }}</span
-              >
+                [class.text-bg-warning]="appointment.status === 'Pending'" class="badge custom-badge">{{
+                appointment.status }}</span>
             </td>
             @if (appointment.status === "Pending" || appointment.status === "Cancelled"){
             <td>
-              <button
-                (click)="assignDoctorModal.setAppointment(appointment)"
-                data-bs-toggle="modal"
-                data-bs-target="#assignDoctorModal"
-                class="btn btn-primary btn-sm"
-              >
+              <button (click)="assignDoctorModal.setAppointment(appointment)" data-bs-toggle="modal"
+                data-bs-target="#assignDoctorModal" class="btn btn-primary btn-sm">
                 Asignar Doctor
               </button>
             </td>
             }@else {
-              <td>
-                <a
-                  (click)="editarDoctorModal.setAppointment(appointment)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editarDoctorModal"
-                  class="btn btn-warning btn-sm"
-                  >Editar consulta</a
-                >
-              </td>
+            <td>
+              <a (click)="editarDoctorModal.setAppointment(appointment)" data-bs-toggle="modal"
+                data-bs-target="#editarDoctorModal" class="btn btn-warning btn-sm">Editar consulta</a>
+            </td>
             }
           </tr>
           }
@@ -58,11 +46,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">
-            <button
-              (click)="loadPage(page() - 1)"
-              class="page-link"
-              aria-label="Previous"
-            >
+            <button (click)="loadPage(page() - 1)" class="page-link" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
@@ -71,26 +55,16 @@
           </li>
           <li class="page-item">
             <!-- Botón de paginación -->
-<button
-(click)="loadPage(page() + 1)"
-class="page-link"
-[disabled]="page() >= paginationMetadata()?.totalPages"
-aria-label="Next"
->
-<span aria-hidden="true">&raquo;</span>
-</button>
+            <button (click)="loadPage(page() + 1)" class="page-link"
+              [disabled]="page() >= paginationMetadata()?.totalPages" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
           </li>
         </ul>
       </nav>
     </div>
   </div>
 </section>
-<app-assign-doctor-modal
-  (doctorAssignedEvent)="onDoctorAssignedEvent($event)"
-  #assignDoctorModal
-/>
+<app-assign-doctor-modal (doctorAssignedEvent)="onDoctorAssignedEvent($event)" #assignDoctorModal />
 
-<app-editar-doctor-modal
-  (editarAssignedEvent)="onDoctorEditedEvent($event)"
-  #editarDoctorModal
-/>
+<app-editar-doctor-modal (editarAssignedEvent)="onDoctorEditedEvent($event)" #editarDoctorModal />

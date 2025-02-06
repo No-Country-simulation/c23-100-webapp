@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./auth/login/login.component').then((c) => c.LoginComponent),
-      canActivate: [authGuard],
+    //  canActivate: [authGuard],
   },
   {
     path: 'register',
@@ -28,7 +28,7 @@ export const appRoutes: Routes = [
       import('./dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
       ),
-    canActivate: [noauthGuard],
+   // canActivate: [noauthGuard],
   },
   {
     path: 'asignar-doctor',

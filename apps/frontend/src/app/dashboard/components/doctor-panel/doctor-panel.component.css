@@ -103,6 +103,7 @@ form#contactForm .form-control {
   /* El primer porcentaje indica que tanto a la izquierda o derecha
       pero no funciona por el background-size, solamente  */
   /* Altura de la sección */
+  height: 500px;
 }
 /*Especialides*/
 
@@ -124,6 +125,17 @@ header.especialidad {
   /* Mantiene la proporción de la imagen */
   margin: 0 auto;
   /* Centra la imagen horizontalmente */
+}
+.card-responsive {
+  width: 350px; /* Ajusta el ancho de la tarjeta */
+  height: auto; /* Mantiene la proporción */
+  margin: 0 auto; /* Centra las tarjetas en el diseño desktop */
+}
+
+@media (max-width: 992px) {
+  .card-responsive {
+    width: 100%; /* Hace que la tarjeta sea responsiva en pantallas más pequeñas */
+  }
 }
 
 /*Responsabilidad para pantallas pequeñas es decir las que no pasen los 768px*/

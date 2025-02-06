@@ -92,6 +92,23 @@ export class AppointmentService {
     return appointments;
   }
 
+  async findByDoctor(userId: string) {
+    const appointments = await this.appointmentModel
+      .find({
+        doctorId: userId,
+      })
+      .select('-__v')
+      .exec();
+
+    if (appointments.length === 0) {
+      throw new NotFoundException(
+        'El usuario médico no tiene citas con pacientes agendadas'
+      );
+    }
+
+    return appointments;
+  }
+
   async findByStatus(status: AppointmentStatus) {
     const appointments = await this.appointmentModel
       .find({ status })

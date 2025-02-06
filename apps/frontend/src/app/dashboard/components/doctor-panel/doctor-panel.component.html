@@ -8,7 +8,7 @@
       <div class="row row-cols-1 row-cols-md-3 g-4">
         @for (appointment of appointments(); track $index) {
         <div class="col">
-          <div class="card h-100 especialidad">
+          <div class="card h-100 especialidad card-responsive">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -22,8 +22,8 @@
               />
             </svg>
             <div class="card-body centrar">
-              <p>Paciente: Jesus</p>
-              <p>Motivo: Ansiedad</p>
+              <p>Paciente: {{ getPatientName(appointment.patientId) }}</p>
+              <p>Motivo: {{ appointment.reason }}</p>
               <div class="button-group">
                 <button
                   class="boton1 btn btn-success"
@@ -73,22 +73,6 @@
         ></button>
       </div>
       <div class="modal-body">
-        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
-                    <div class="row">
-                        <div class="">
-                            <label for="name" class="formbold-form-label">Fecha de la cita:</label>
-                            <input type="text" value="15-01-2025" formControlName="name" id="name" class="form-control">
-                        </div>
-                        <br><br>
-
-                        <div class="mb-3">
-                            <label for="indicacion" class="form-label">Indicaciones</label>
-                            <textarea class="form-control" id="indicacion" rows="3">Descansar mas</textarea>
-                        </div>
-
-                        <br> <br> <br> <br>
-                    </div>
-                </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -124,23 +108,6 @@
         ></button>
       </div>
       <div class="modal-body">
-        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" id="contactForm">
-          <div class="row">
-            <div class="mb-3">
-              <label for="indicacion" class="form-label">Indicaciones</label>
-              <textarea
-                class="form-control no-resize"
-                id="indicacion"
-                rows="7"
-              ></textarea>
-            </div>
-
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
-        </form> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
