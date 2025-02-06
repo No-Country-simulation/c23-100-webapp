@@ -103,6 +103,7 @@ form#contactForm .form-control {
   /* El primer porcentaje indica que tanto a la izquierda o derecha
       pero no funciona por el background-size, solamente  */
   /* Altura de la sección */
+  height: 500px;
 }
 /*Especialides*/
 

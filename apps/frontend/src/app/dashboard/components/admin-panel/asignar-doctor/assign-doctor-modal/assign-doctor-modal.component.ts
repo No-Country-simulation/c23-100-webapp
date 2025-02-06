@@ -49,12 +49,20 @@ export class AssignDoctorModal {
       });
       return;
     }
-
+    
     this.appointmentService
       .assignDoctor(this.appointment._id, this.doctorId())
       .subscribe((updatedAppointment) => {
         this.doctorAssignedEvent.emit(updatedAppointment);
         this.closeModalButton().nativeElement.click();
+        
+        // Mensaje de éxito
+        Swal.fire({
+          title: '¡Felicidades!',
+          text: 'Se asignó la cita correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        });
       });
   }
 }

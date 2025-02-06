@@ -9,7 +9,6 @@ import { BehaviorSubject, map } from 'rxjs';
 export class UserService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/user';
-  private readonly appointmentUrl = 'http://localhost:3000/api/appointments';
   private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 
@@ -32,7 +31,7 @@ export class UserService {
   getDoctors(specialization: DoctorSpecialization) {
     return this.http.get<User[]>(`${this.baseUrl}/doctors/${specialization}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('userToken')}`, // Usar token de localStorage
+        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // Usar token de localStorage
       },
     });
   }

@@ -12,7 +12,7 @@ export class AppointmentService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/appointments';
   private readonly headers = {
-    Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+    Authorization: `Bearer ${sessionStorage.getItem('userToken')}`,
   };
 
   create(data: {
@@ -91,4 +91,5 @@ export class AppointmentService {
       }
     );
   }
+  
 }

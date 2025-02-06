@@ -23,11 +23,10 @@
         <!-- Si el usuario NO está autenticado, mostrar botones de login y registro -->
         @if (!isAuthenticated) {
         <div class="button-group">
-          <a class="boton1 btn btn-warning" (click)="sessionexpirada()" routerLink="/login"
-          >Iniciar sesión</a
-        >
-        <a class="boton2 btn btn-warning" (click)="sessionexpiradaregister()" routerLink="/register">Registro</a>
-      
+          <a class="boton1 btn btn-warning" routerLink="/login"
+            >Iniciar sesión</a
+          >
+          <a class="boton2 btn btn-warning" routerLink="/register">Registro</a>
         </div>
         }@else {
         <!-- Si el usuario está autenticado, mostrar su nombre y botón de cerrar sesión -->

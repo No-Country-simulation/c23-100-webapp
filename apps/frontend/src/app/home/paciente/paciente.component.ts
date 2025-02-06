@@ -12,11 +12,10 @@ import { DoctorSpecialization, User } from '../../shared';
 import { RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AppointmentService } from '../../core/services/appointment.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-paciente',
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css'],
 })
@@ -24,23 +23,16 @@ export class PacienteComponent {
   private readonly appointmentService = inject(AppointmentService);
 
   user = input.required<User>();
-  minDate: string;
 
   form = new FormGroup({
     specialization: new FormControl('', [Validators.required]),
-    reason: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    reason: new FormControl('', [Validators.required]),
     date: new FormControl('', [
       Validators.required,
       this.invalidHourValidator(),
       this.invalidYearValidator(),
     ]),
   });
-
-  constructor() {
-    const today = new Date();
-    // Formatear la fecha como 'YYYY-MM-DDTHH:MM' para el input datetime-local
-    this.minDate = today.toISOString().slice(0, 16); // Esto establece la fecha y hora actual
-  }
 
   private invalidYearValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
