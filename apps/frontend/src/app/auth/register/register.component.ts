@@ -101,7 +101,7 @@ export class RegisterComponent {
         })
         .subscribe({
           next: ({ userToken }) => {
-            localStorage.setItem('userToken', userToken);
+            sessionStorage.setItem('userToken', userToken);
             Swal.fire({
               title: 'Registro Exitoso!',
               text: 'Te has registrado correctamente.',

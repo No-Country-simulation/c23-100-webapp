@@ -19,9 +19,25 @@ export class AuthService {
     return this.http.post<{ userToken: string }>(
       `${this.baseUrl}/signup`,
       data
+    ).pipe(
+      tap(response => {
+        // Almacenar el token en localStorage
+        localStorage.setItem('userToken', response.userToken);
+        // Obtener el perfil del usuario después de registrarse
+        this.userService.getProfile().subscribe({
+          next: (user) => {
+            // Aquí puedes manejar el usuario registrado, si es necesario
+            // Por ejemplo, redirigir al dashboard
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            console.error('Error al obtener el perfil después del registro:', err);
+            // Manejar el error si es necesario
+          }
+        });
+      })
     );
   }
-
   login(email: string, password: string) {
     return this.http.post<{ userToken: string }>(`${this.baseUrl}/login`, {
       email,

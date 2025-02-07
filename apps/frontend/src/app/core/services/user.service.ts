@@ -12,6 +12,22 @@ export class UserService {
   private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 
+  getProfileDashboard() {
+    const token = localStorage.getItem('userToken'); // Obtener token de localStorage
+    return this.http
+      .get<User>(`${this.baseUrl}/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Usar token de localStorage
+        },
+      })
+      .pipe(
+        map((user) => {
+          this.userSubject.next(user);
+          return user;
+        })
+      );
+  }
+
   getProfile() {
     const token = localStorage.getItem('userToken'); // Obtener token de localStorage
     return this.http
@@ -31,7 +47,7 @@ export class UserService {
   getDoctors(specialization: DoctorSpecialization) {
     return this.http.get<User[]>(`${this.baseUrl}/doctors/${specialization}`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('userToken')}`, // Usar token de localStorage
+        Authorization: `Bearer ${localStorage.getItem('userToken')}`, // Usar token de localStorage
       },
     });
   }
