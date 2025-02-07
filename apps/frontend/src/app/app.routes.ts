@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./auth/login/login.component').then((c) => c.LoginComponent),
-    //  canActivate: [authGuard],
+     canActivate: [authGuard],
   },
   {
     path: 'register',

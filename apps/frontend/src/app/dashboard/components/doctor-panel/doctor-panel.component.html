@@ -4,7 +4,9 @@
       class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center"
     >
       <br /><br /><br /><br /><br />
-      <h1 class="texto-amarillo">Pacientes con cita</h1>
+      <h1 class="texto-amarillo">
+        {{ appointments().length > 0 ? 'Pacientes con cita' : 'No tienes pacientes asignados' }}
+      </h1>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         @for (appointment of appointments(); track $index) {
         <div class="col">
@@ -24,7 +26,10 @@
             <div class="card-body centrar">
               <p>Paciente: {{ getPatientName(appointment.patientId) }}</p>
               <p>Motivo: {{ appointment.reason }}</p>
-              <div class="button-group">
+              <!--
+              
+              
+               <div class="button-group">
                 <button
                   class="boton1 btn btn-success"
                   data-bs-toggle="modal"
@@ -40,6 +45,9 @@
                   Indicaciones
                 </button>
               </div>
+              
+              -->
+             
               <br />
               <button class="boton1 btn btn-success">Realizar consulta</button>
             </div>
