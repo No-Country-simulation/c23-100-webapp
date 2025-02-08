@@ -8,6 +8,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  min-height: 100vh; /* Altura mínima del 100% de la ventana */
 }
 
 /* Contenedor para hacer la tabla responsive */
