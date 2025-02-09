@@ -9,6 +9,8 @@ import { BehaviorSubject, map } from 'rxjs';
 export class UserService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/user';
+
+  //private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/api/user';
   private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 

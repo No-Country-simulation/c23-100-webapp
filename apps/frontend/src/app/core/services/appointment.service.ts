@@ -11,6 +11,7 @@ import { AppointmentStatus } from '../../shared/enums/appointment-status.enum';
 export class AppointmentService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'http://localhost:3000/api/appointments';
+  // private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/api/appointments';
   private readonly headers = {
     Authorization: `Bearer ${localStorage.getItem('userToken')}`,
   };
@@ -60,7 +61,11 @@ export class AppointmentService {
     );
   }
   getPatientName(patientId: string) {
-    return this.http.get<{ name: string }>(`http://localhost:3000/api/user/patient/${patientId}`, {
+    return this.http.get<{ name: string }>(`http://localhost:3000/api/user/patient/${patientId}`, 
+
+    //return this.http.get<{ name: string }>(`https://c23-100-webapp-production.up.railway.app/api/user/patient/${patientId}`, 
+
+    {
       headers: this.headers,
     });
   }

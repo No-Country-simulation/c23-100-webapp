@@ -17,19 +17,25 @@
           <td>{{ appointment.specialization }}</td>
           <td>{{ appointment.reason }}</td>
           <td>
-            <span
-              [class.text-bg-success]="appointment.status === 'Confirmed'"
+            <span [class.text-bg-success]="appointment.status === 'Confirmed'"
               [class.text-bg-danger]="appointment.status === 'Cancelled'"
-              [class.text-bg-warning]="appointment.status === 'Pending'"
-              class="badge custom-badge"
-              >{{ appointment.status }}</span
-            >
+              [class.text-bg-warning]="appointment.status === 'Pending'" class="badge custom-badge">{{
+              appointment.status }}</span>
           </td>
-          <td
-            class="d-flex justify-content-center gap-4"
-            style="min-height: 100%"
-          >
-            @if (appointment.status === 'Confirmed') {
+          <td class="d-flex justify-content-center gap-4" style="min-height: 100%">
+            @if (appointment.status === 'Cancelled') {
+              <a href="/#about" class="btn btn-info btn-sm">Solicitar cita</a>
+            }
+            @if (appointment.status === "Pending" || appointment.status === "Confirmed"){
+            <button class="btn btn-danger btn-sm" (click)="cancelAppointment(appointment)">
+              Cancelar
+            </button>
+            }
+
+            <!-- 
+             CODIGO DE CARLOS 
+            
+             @if (appointment.status === 'Confirmed') {
             <button
               class="btn btn-info btn-sm"
               data-bs-toggle="offcanvas"
@@ -38,14 +44,9 @@
             >
               Ver Indicaciones
             </button>
-            } @if (appointment.status === 'Pending') {
-            <button
-              class="btn btn-danger btn-sm"
-              (click)="cancelAppointment(appointment)"
-            >
-              Cancelar
-            </button>
-            }
+
+            -->
+
           </td>
         </tr>
         } @empty {
@@ -53,13 +54,7 @@
           <td></td>
           <td></td>
           <td class="d-flex flex-column gap-1">
-            <img
-              style="margin: 0 auto"
-              src="/no-appointments.png"
-              width="128"
-              height="128"
-              alt="..."
-            />
+            <img style="margin: 0 auto" src="/no-appointments.png" width="128" height="128" alt="..." />
             <p class="text-center text-secondary">
               No has agendado ninguna cita médica aún
             </p>
@@ -73,22 +68,12 @@
   </div>
 </div>
 
-<div
-  class="offcanvas offcanvas-end"
-  tabindex="-1"
-  id="appointmentDrawer"
-  aria-labelledby="appointmentDrawerLabel"
->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="appointmentDrawer" aria-labelledby="appointmentDrawerLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="appointmentDrawerLabel">
       Indicaciones Médicas
     </h5>
-    <button
-      type="button"
-      class="btn-close text-reset"
-      data-bs-dismiss="offcanvas"
-      aria-label="Cerrar"
-    ></button>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
   </div>
 
   <div class="offcanvas-body">
@@ -120,13 +105,7 @@
         </div>
         } @empty {
         <div class="d-flex flex-column gap-1 p-2">
-          <img
-            style="margin: 0 auto"
-            src="/no-records.png"
-            width="256"
-            height="256"
-            alt="..."
-          />
+          <img style="margin: 0 auto" src="/no-records.png" width="256" height="256" alt="..." />
           <p class="text-center text-secondary">
             Aún no hay indicaciones médicas realizadas por tu doctor.
           </p>

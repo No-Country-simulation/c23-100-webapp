@@ -7,6 +7,8 @@ import { MedicalRecord } from '../../shared/interfaces/medical-record';
 })
 export class MedicalRecordsService {
   private readonly baseUrl = 'http://localhost:3000/medical-records';
+
+  // private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/medical-records';
   private readonly http = inject(HttpClient);
 
   create() {}

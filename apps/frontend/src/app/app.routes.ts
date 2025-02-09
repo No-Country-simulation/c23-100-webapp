@@ -28,7 +28,7 @@ export const appRoutes: Routes = [
       import('./dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
       ),
-   // canActivate: [noauthGuard],
+    canActivate: [noauthGuard],
   },
   {
     path: 'asignar-doctor',
