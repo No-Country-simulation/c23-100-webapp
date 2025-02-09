@@ -26,6 +26,10 @@
             <div class="card-body centrar">
               <p>Paciente: {{ getPatientName(appointment.patientId) }}</p>
               <p>Motivo: {{ appointment.reason }}</p>
+              <p>Hora: {{ formatDate(appointment.date) }}</p>
+             
+            
+            </div>
               <!--
               
               
@@ -46,11 +50,11 @@
                 </button>
               </div>
               
-              -->
-             
-              <br />
-              <button class="boton1 btn btn-success">Realizar consulta</button>
-            </div>
+   
+                 -->
+            <button class="boton btn btn-success">Realizar consulta</button>
+
+       
           </div>
         </div>
         }

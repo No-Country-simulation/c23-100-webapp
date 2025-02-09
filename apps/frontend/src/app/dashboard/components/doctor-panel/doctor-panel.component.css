@@ -5,28 +5,16 @@
 }
 /*Estilos botones*/
  
-/*Separacion entre el boton de iniciar sesion y registro*/
-.button-group {
-  display: flex;
-  /* Para alinear los botones horizontalmente */
-  gap: 10px;
-  /* Espacio entre los botones */
-}
-
-.boton1:hover {
-  transform: scale(1.05);
-  /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
-
-.boton2:hover {
-  transform: scale(1.05);
-  /* Aumenta el tamaño ligeramente al pasar el mouse */
-}
 .centrar {
-    display: flex;
-    flex-direction: column; /* Alinea los elementos en columna */
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  gap: 10px; /* Espaciado uniforme entre elementos */
+}
+
+.boton {
+  margin-top: auto; /* Asegura que el botón se mantenga al final del contenedor */
 }
 
 /**Estilos para el formulario***/

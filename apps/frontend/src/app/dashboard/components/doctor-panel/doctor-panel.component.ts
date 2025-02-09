@@ -8,12 +8,15 @@ import { Appointment } from '../../../shared/interfaces/appointment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MedicalRecordsService } from '../../../core/services/medical-records.service';
 import { MedicalRecord } from '../../../shared/interfaces/medical-record';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es'; // Importar el locale de español
 
 @Component({
   selector: 'app-doctor-panel',
   imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './doctor-panel.component.html',
   styleUrl: './doctor-panel.component.css',
+  providers: [DatePipe]
 })
 export class DoctorPanelComponent implements OnInit {
   private readonly appointmentService = inject(AppointmentService);
@@ -33,7 +36,15 @@ export class DoctorPanelComponent implements OnInit {
         this.medicalRecords.set(records);
       });
     }
-  
+    constructor(private datePipe: DatePipe) {
+      registerLocaleData(localeEs); // Registrar el locale de español
+    }
+    
+    // Método para formatear la fecha con el locale explícito
+    formatDate(date: Date): string {
+      return this.datePipe.transform(date, "d 'de' MMMM 'del' y 'a las' h:mm a", undefined, 'es-ES') || '';
+    }
+    
     ngOnInit(): void {
       this.appointmentService.getByDoctor().subscribe({
         next: (appointments) => {

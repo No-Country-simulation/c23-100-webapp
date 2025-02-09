@@ -18,7 +18,7 @@
           @for (appointment of appointments(); track $index) {
           <tr>
             <td>{{ appointment.specialization }}</td>
-            <td>{{ appointment.date }}</td>
+            <td>{{ formatDate(appointment.date) }}</td>
             <td>{{ appointment.reason }}</td>
             <td>
               <span [class.text-bg-success]="appointment.status === 'Confirmed'"

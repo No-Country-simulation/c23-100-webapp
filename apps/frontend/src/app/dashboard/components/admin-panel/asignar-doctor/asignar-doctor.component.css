@@ -68,6 +68,11 @@ header.especialidad {
     font-size: 1.5rem;
   }
 
+  .page-section{
+
+  height: 150vh;
+  }
+
   /*Formularios*/
   .table th,
   .table td {
