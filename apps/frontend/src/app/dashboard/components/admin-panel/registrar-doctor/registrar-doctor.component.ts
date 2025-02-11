@@ -88,18 +88,16 @@ export class RegistrarDoctorComponent {
   onSubmit(): void {
     const { name, email, password, role, specialization, phone } =
       this.registerForm.value;
-
     if (role == Role.DOCTOR && !specialization) {
       this.registerForm.setErrors({
         specializationRequired: true,
       });
       return;
     }
-
     // Si el formulario es válido, proceder a registrar
     if (this.registerForm.valid) {
       this.authService
-        .signup({
+        .registrodoctor({
           name,
           email,
           role: role as Role,
@@ -123,9 +121,7 @@ export class RegistrarDoctorComponent {
             });
           },
           error: (err: HttpErrorResponse) => {
-            if (err.status === 401) {
-              this.router.navigate(['/login']);
-            } else if (err.status === 409) {
+            if (err.status === 409) {
               Swal.fire({
                 title: 'Email en uso!',
                 text: 'Ya existe un usuario registrado con este email.',

@@ -39,6 +39,11 @@ export class AuthService {
       })
     );
   }
+
+  registrodoctor(data: User) {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/signup`, data);
+  }
+
   login(email: string, password: string) {
     return this.http.post<{ userToken: string }>(`${this.baseUrl}/login`, {
       email,
