@@ -10,8 +10,8 @@ import { AppointmentStatus } from '../../shared/enums/appointment-status.enum';
 })
 export class AppointmentService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000/api/appointments';
-  // private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/api/appointments';
+ // private readonly baseUrl = 'http://localhost:3000/api/appointments';
+  private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/api/appointments';
   private readonly headers = {
     Authorization: `Bearer ${localStorage.getItem('userToken')}`,
   };
