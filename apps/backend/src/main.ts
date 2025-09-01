@@ -17,9 +17,12 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
 
+  // Convertir el string de URLs a array
+  const allowedOrigins = envs.frontend_url.split(',').map(url => url.trim());
+
   app.enableCors({
     credentials: true,
-    origin: envs.frontend_url,
+    origin: allowedOrigins, // Ahora es un array
   });
 
   app.useGlobalPipes(

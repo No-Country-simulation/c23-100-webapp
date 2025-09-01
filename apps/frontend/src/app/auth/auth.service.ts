@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators'; // Importar tap
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly baseUrl = 'http://localhost:3000/api/auth';
+  private readonly baseUrl = 'https://nocountrymedical.onrender.com/api/auth';
   //private readonly baseUrl = 'https://c23-100-webapp-production.up.railway.app/api/auth';
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
