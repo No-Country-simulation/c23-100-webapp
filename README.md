@@ -188,9 +188,9 @@ Estos tres comandos `deberían` ser suficientes para solucionar ese error.
 <h3 align="center">¡Listo! Has terminado de configurar el proyecto 🥳</h3>
 
 
-Sitio web desplegado del proyecto 
+Sitio web desplegado del proyecto (frontend)
 
-[https://barbelink.vercel.app/](https://nocountrymedical1.web.app/)
+https://nocountrymedical1.web.app/
 
 Aplicacion Movil Android:
 
