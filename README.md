@@ -186,3 +186,21 @@ npm audit fix
 Estos tres comandos `deberían` ser suficientes para solucionar ese error.
 
 <h3 align="center">¡Listo! Has terminado de configurar el proyecto 🥳</h3>
+
+
+Sitio web desplegado del proyecto 
+
+[https://barbelink.vercel.app/](https://nocountrymedical1.web.app/)
+
+Aplicacion Movil Android:
+
+https://drive.google.com/file/d/1lsW8q42FD-yKWE9LFzePH60tSR5QwMx7/view?usp=drive_link
+
+🐞 Evidencia Backend:
+
+Api desplegada
+
+https://nocountrymedical-mhe9.onrender.com/api/
+
+
+
